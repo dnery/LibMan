@@ -3,14 +3,24 @@ package br.usp.icmc.ssc0103;
 import java.util.Date;
 import java.util.List;
 
-abstract class User {
+class User {
 	
 	String name;
 	int maxBooks;
 	int currentBooks;
 	boolean academic;
 	long loanDuration;
-	Date SuspendedTill;
+	Date suspendedTill;
+	
+	public User(String name, int maxBooks, int currentBooks, boolean academic,
+			long loanDuration, Date suspendedTill)
+	{
+		this.name = name
+		this.maxBooks = maxBooks;
+		this.currentBooks = currentBooks
+		this.academic = academic
+		this.loanDuration = loanDuration;
+		this.SuspendedTill = suspendedTill;
 	
 	public String GetName() {
 		return name;
@@ -30,60 +40,31 @@ abstract class User {
 class Student extends User {
 	
 	public Student(String name) {
-		super.name = name
-		super.maxBooks = 4;
-		super.currentBooks = 0
-		super.academic = true;
-		super.loanDuration = 1.296e+9;
-		super.SuspendedTill = new Date();
+		super(name, 4, 0, true,  1.296e+9, new Date() )
 	}
 	public Student(String name, int currentBooks, long date) {
-		super.name = name
-		super.maxBooks = 4;
-		super.currentBooks = currentBooks;
-		super.academic = true;
-		super.loanDuration = 1.296e+9;
-		super.SuspendedTill = new(date);
+		super(name, 4, currentBooks, true,  1.296e+9, new Date(date))
 	}
 }
 
 class Tutor extends User {
 	public Tutor(String name) {
-		super.name = name
-		super.maxBooks = 6;
-		super.currentBooks = 0
-		super.academic = true;
-		super.loanDuration = 5.184e+9;
-		super.SuspendedTill = new Date();
+		super(name, 6, 0, true,  5.184e+9, new Date() )
 	}
 	public Tutor(String name, int currentBooks, long date) {
-		super.name = name
-		super.maxBooks = 6;
-		super.currentBooks = currentBooks;
-		super.academic = true;
-		super.loanDuration = 5.184e+9;
-		super.SuspendedTill = new(date);
+		super(name, 6, currentBooks, true,  5.184e+9, new Date(date))
 	}
 }
 
 class Comunity extends User {
 	
 	public Comunity(String name) {
-		super.name = name
-		super.maxBooks = 2;
-		super.currentBooks = 0
-		super.academic = false;
-		super.loanDuration = 1.296e+9;
-		super.SuspendedTill = new Date();
+		super(name, 4, 0, false,  1.296e+9, new Date() )
 	}
 	public Comunity(String name, int currentBooks, long date) {
-		super.name = name
-		super.maxBooks = 2;
-		super.currentBooks = currentBooks;
-		super.academic = false;
-		super.loanDuration = 1.296e+9;
-		super.SuspendedTill = new(date);
+		super(name, 4, currentBooks, false,  1.296e+9, new Date(date))
 	}
+	
 	
 }
 
