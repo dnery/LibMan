@@ -6,28 +6,22 @@ import java.util.regex.Pattern;
 
 enum UserType
 {
-    TUTOR,
-    STUDENT,
-    COMMUNITY
-};
+    TUTOR, STUDENT, COMMUNITY
+}
 
 enum BookType
 {
-    TEXT,
-    GENERAL
-};
+    TEXT, GENERAL
+}
 
 public class Shell
 {
     enum Command
     {
-        NOOP,
-        USERADD,
-        CATALOGADD,
-        CHECKOUT,
-        CHECKIN,
-        EXIT
-    };
+        USERADD, CATALOGADD,
+        CHECKOUT, CHECKIN,
+        LIST, EXIT, NOOP
+    }
 
     private String line;
     private Command command;
@@ -106,6 +100,9 @@ public class Shell
                     System.out.println("> Invalid syntax...");
                 }
                 break;
+
+            case LIST:
+
         }
     }
 };

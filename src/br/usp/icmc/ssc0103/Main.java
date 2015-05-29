@@ -36,10 +36,6 @@ public class Main
     {
         //shell = new Shell();
         //shell.runCommand();
-
-        Test test = new Test(args[0], Boolean.parseBoolean(args[2]), Integer.parseInt(args[1]));
-
-        System.out.println(test.hashCode());
     }
 }
 

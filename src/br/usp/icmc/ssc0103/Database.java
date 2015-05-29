@@ -3,69 +3,113 @@ package br.usp.icmc.ssc0103;
 import java.util.Date;
 import java.util.List;
 
-class User {
-	
-	String name;
-	int maxBooks;
-	int currentBooks;
-	boolean academic;
-	long loanDuration;
-	Date suspendedTill;
-	
-	public User(String name, int maxBooks, int currentBooks, boolean academic,
-			long loanDuration, Date suspendedTill)
-	{
-		this.name = name
-		this.maxBooks = maxBooks;
-		this.currentBooks = currentBooks
-		this.academic = academic
-		this.loanDuration = loanDuration;
-		this.SuspendedTill = suspendedTill;
-	
-	public String GetName() {
-		return name;
-	}
-	public int getMaxBooks() {
-		return maxBooks;
-	}
-	public int getCurrentBooks() {
-	}
-	public long getLoanDuration() {
-	}
-	public void setSuspendTill(Date date){	
-	}
-	
+class User
+{
+
+    String name;
+    int maxBooks;
+    int currentBooks;
+    boolean academic;
+    long loanDuration;
+    Date suspendedTill;
+
+    public User(String name,
+                int maxBooks,
+                int currentBooks,
+                boolean academic,
+                long loanDuration,
+                Date suspendedTill)
+    {
+        this.name = name;
+        this.maxBooks = maxBooks;
+        this.currentBooks = currentBooks;
+        this.academic = academic;
+        this.loanDuration = loanDuration;
+        this.suspendedTill = suspendedTill;
+    }
+
+    public String getName()
+    {
+        return name;
+    }
+
+    public int getMaxBooks()
+    {
+        return maxBooks;
+    }
+
+    public int getCurrentBooks()
+    {
+        return currentBooks;
+    }
+
+    public boolean isAcademic()
+    {
+        return academic;
+    }
+
+    public long getLoanDuration()
+    {
+        return loanDuration;
+    }
+
+    public Date getSuspendedTill()
+    {
+        return suspendedTill;
+    }
+
+    public void setCurrentBooks(int currentBooks)
+    {
+        this.currentBooks = currentBooks;
+    }
+
+    public void setSuspendedTill(Date suspendedTill)
+    {
+        this.suspendedTill = suspendedTill;
+    }
 }
 
-class Student extends User {
-	
-	public Student(String name) {
-		super(name, 4, 0, true,  1.296e+9, new Date() )
-	}
-	public Student(String name, int currentBooks, long date) {
-		super(name, 4, currentBooks, true,  1.296e+9, new Date(date))
-	}
+class Student extends User
+{
+
+    public Student(String name)
+    {
+        super(name, 4, 0, true, (long) 1.296e+9, new Date());
+    }
+
+    public Student(String name, int currentBooks, long date)
+    {
+        super(name, 4, currentBooks, true, (long) 1.296e+9, new Date(date));
+    }
 }
 
-class Tutor extends User {
-	public Tutor(String name) {
-		super(name, 6, 0, true,  5.184e+9, new Date() )
-	}
-	public Tutor(String name, int currentBooks, long date) {
-		super(name, 6, currentBooks, true,  5.184e+9, new Date(date))
-	}
+class Tutor extends User
+{
+    public Tutor(String name)
+    {
+        super(name, 6, 0, true, (long) 5.184e+9, new Date());
+    }
+
+    public Tutor(String name, int currentBooks, long date)
+    {
+        super(name, 6, currentBooks, true, (long) 5.184e+9, new Date(date));
+    }
 }
 
-class Comunity extends User {
-	
-	public Comunity(String name) {
-		super(name, 4, 0, false,  1.296e+9, new Date() )
-	}
-	public Comunity(String name, int currentBooks, long date) {
-		super(name, 4, currentBooks, false,  1.296e+9, new Date(date))
-	}
-	
-	
+class Comunity extends User
+{
+
+    public Comunity(String name)
+    {
+        super(name, 4, 0, false, (long) 1.296e+9, new Date());
+    }
+
+    public Comunity(String name, int currentBooks, long date)
+    {
+        super(name, 4, currentBooks, false, (long) 1.296e+9, new Date(date));
+    }
+
+
 }
 
 class Book
