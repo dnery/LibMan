@@ -3,9 +3,88 @@ package br.usp.icmc.ssc0103;
 import java.util.Date;
 import java.util.List;
 
-class User
-{
+abstract class User {
+	
+	String name;
+	int maxBooks;
+	int currentBooks;
+	boolean academic;
+	long loanDuration;
+	Date SuspendedTill;
+	
+	public String GetName() {
+		return name;
+	}
+	public int getMaxBooks() {
+		return maxBooks;
+	}
+	public int getCurrentBooks() {
+	}
+	public long getLoanDuration() {
+	}
+	public void setSuspendTill(Date date){	
+	}
+	
+}
 
+class Student extends User {
+	
+	public Student(String name) {
+		super.name = name
+		super.maxBooks = 4;
+		super.currentBooks = 0
+		super.academic = true;
+		super.loanDuration = 1.296e+9;
+		super.SuspendedTill = new Date();
+	}
+	public Student(String name, int currentBooks, long date) {
+		super.name = name
+		super.maxBooks = 4;
+		super.currentBooks = currentBooks;
+		super.academic = true;
+		super.loanDuration = 1.296e+9;
+		super.SuspendedTill = new(date);
+	}
+}
+
+class Tutor extends User {
+	public Tutor(String name) {
+		super.name = name
+		super.maxBooks = 6;
+		super.currentBooks = 0
+		super.academic = true;
+		super.loanDuration = 5.184e+9;
+		super.SuspendedTill = new Date();
+	}
+	public Tutor(String name, int currentBooks, long date) {
+		super.name = name
+		super.maxBooks = 6;
+		super.currentBooks = currentBooks;
+		super.academic = true;
+		super.loanDuration = 5.184e+9;
+		super.SuspendedTill = new(date);
+	}
+}
+
+class Comunity extends User {
+	
+	public Comunity(String name) {
+		super.name = name
+		super.maxBooks = 2;
+		super.currentBooks = 0
+		super.academic = false;
+		super.loanDuration = 1.296e+9;
+		super.SuspendedTill = new Date();
+	}
+	public Comunity(String name, int currentBooks, long date) {
+		super.name = name
+		super.maxBooks = 2;
+		super.currentBooks = currentBooks;
+		super.academic = false;
+		super.loanDuration = 1.296e+9;
+		super.SuspendedTill = new(date);
+	}
+	
 }
 
 class Book
