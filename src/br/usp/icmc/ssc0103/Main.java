@@ -1,6 +1,32 @@
 package br.usp.icmc.ssc0103;
 
-import java.util.Date;
+class Test{
+    private String string;
+    private boolean bool;
+    private int integer1;
+
+    public Test(String string, boolean bool, int integer1)
+    {
+        this.string = string;
+        this.bool = bool;
+        this.integer1 = integer1;
+    }
+
+    public String getString()
+    {
+        return string;
+    }
+
+    public boolean isBool()
+    {
+        return bool;
+    }
+
+    public int getInteger1()
+    {
+        return integer1;
+    }
+}
 
 public class Main
 {
@@ -8,11 +34,12 @@ public class Main
 
     public static void main(String[] args)
     {
-        shell = new Shell();
-        shell.runCommand();
+        //shell = new Shell();
+        //shell.runCommand();
 
-        Date date  = new Date(0);
-        System.out.println(date.toString());
+        Test test = new Test(args[0], Boolean.parseBoolean(args[2]), Integer.parseInt(args[1]));
+
+        System.out.println(test.hashCode());
     }
 }
 

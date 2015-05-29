@@ -101,6 +101,7 @@ public class Shell
                                                + "\"");
 
                     //MANIPULATE DATABASE
+                    //database.UserAdd(String group(1), int group(2))
                 } else {
                     System.out.println("> Invalid syntax...");
                 }
