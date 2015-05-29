@@ -10,6 +10,9 @@ public class Main
     {
         shell = new Shell();
         shell.runCommand();
+
+        Date date  = new Date(0);
+        System.out.println(date.toString());
     }
 }
 

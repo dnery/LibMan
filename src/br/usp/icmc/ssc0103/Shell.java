@@ -17,18 +17,18 @@ enum BookType
     GENERAL
 };
 
-enum Command
-{
-    NOOP,
-    USERADD,
-    CATALOGADD,
-    CHECKOUT,
-    CHECKIN,
-    EXIT
-};
-
 public class Shell
 {
+    enum Command
+    {
+        NOOP,
+        USERADD,
+        CATALOGADD,
+        CHECKOUT,
+        CHECKIN,
+        EXIT
+    };
+
     private String line;
     private Command command;
 
@@ -74,15 +74,16 @@ public class Shell
     public void triggerCommand()
     {
         switch (command) {
-            //catalog add command
+
             case CATALOGADD:
+                //https://regex101.com/r/cZ7lK1/2
                 pattern = Pattern.compile(
                         "^\\s*catalog\\s+add\\s+\"\\s*([a-zA-Z][a-zA-Z\\s]+[a-zA-Z])\\s*\"\\s*;"
                                 + "\\s*$");
 
                 if ((matcher = pattern.matcher(line)).find()) {
-                    System.out.println("> Command: \"catalog add\" Captures: \"" + matcher.group
-                            (1) + "\"");
+                    System.out.println("> Command: \"catalog add\" Captures: \"" + matcher.group(1)
+                                               + "\"");
 
                     //MANIPULATE DATABASE
                 } else {
@@ -90,8 +91,8 @@ public class Shell
                 }
                 break;
 
-            //user add command
             case USERADD:
+                //https://regex101.com/r/cZ7lK1/1
                 pattern = Pattern.compile(
                         "^\\s*user\\s+add\\s+\"\\s*([a-zA-Z][a-zA-Z\\s]+[a-zA-Z])\\s*\"\\s*;\\s*$");
 
