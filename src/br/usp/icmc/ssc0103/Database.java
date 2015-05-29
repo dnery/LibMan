@@ -69,26 +69,9 @@ class User
     }
 }
 
-class Student extends User
-{
-
-    public Student(String name)
-    {
-        super(name, 4, 0, true, (long) 1.296e+9, new Date());
-    }
-
-    public Student(String name, int currentBooks, long date)
-    {
-        super(name, 4, currentBooks, true, (long) 1.296e+9, new Date(date));
-    }
-}
-
 class Tutor extends User
 {
-    public Tutor(String name)
-    {
-        super(name, 6, 0, true, (long) 5.184e+9, new Date());
-    }
+    public Tutor(String name) { super(name, 6, 0, true, (long) 5.184e+9, new Date()); }
 
     public Tutor(String name, int currentBooks, long date)
     {
@@ -96,13 +79,21 @@ class Tutor extends User
     }
 }
 
+class Student extends User
+{
+
+    public Student(String name) { super(name, 4, 0, true, (long) 1.296e+9, new Date()); }
+
+    public Student(String name, int currentBooks, long date)
+    {
+        super(name, 4, currentBooks, true, (long) 1.296e+9, new Date(date));
+    }
+}
+
 class Comunity extends User
 {
 
-    public Comunity(String name)
-    {
-        super(name, 4, 0, false, (long) 1.296e+9, new Date());
-    }
+    public Comunity(String name) { super(name, 4, 0, false, (long) 1.296e+9, new Date()); }
 
     public Comunity(String name, int currentBooks, long date)
     {
