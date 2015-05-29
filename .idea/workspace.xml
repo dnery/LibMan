@@ -50,11 +50,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Database.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Database.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/br/usp/icmc/ssc0103/Database.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.026041666">
+              <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -70,10 +70,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Shell.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Shell.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/br/usp/icmc/ssc0103/Shell.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.9635417">
+            <state vertical-scroll-proportion="0.0">
               <caret line="110" column="0" selection-start-line="110" selection-start-column="0" selection-end-line="110" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -109,9 +109,9 @@
       <list>
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/src/br/usp/icmc/ssc0103/Cron.java" />
-        <option value="$PROJECT_DIR$/src/br/usp/icmc/ssc0103/Database.java" />
         <option value="$PROJECT_DIR$/src/br/usp/icmc/ssc0103/Main.java" />
         <option value="$PROJECT_DIR$/src/br/usp/icmc/ssc0103/Shell.java" />
+        <option value="$PROJECT_DIR$/src/br/usp/icmc/ssc0103/Database.java" />
       </list>
     </option>
   </component>
@@ -638,12 +638,12 @@
       <workItem from="1432737378968" duration="599000" />
       <workItem from="1432744631842" duration="10475000" />
       <workItem from="1432784545285" duration="10244000" />
-      <workItem from="1432919358384" duration="5075000" />
+      <workItem from="1432919358384" duration="5243000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="28513000" />
+    <option name="totallyTimeSpent" value="28681000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1456" height="876" extended-state="6" />
@@ -790,14 +790,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/br/usp/icmc/ssc0103/Database.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/br/usp/icmc/ssc0103/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -815,11 +807,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/br/usp/icmc/ssc0103/Shell.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.9635417">
+        <state vertical-scroll-proportion="0.0">
           <caret line="110" column="0" selection-start-line="110" selection-start-column="0" selection-end-line="110" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/br/usp/icmc/ssc0103/Database.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.026041666">
+          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
