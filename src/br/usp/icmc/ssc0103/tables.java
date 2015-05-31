@@ -109,6 +109,14 @@ class Book
 
     public boolean isAvail() { return avail; }
 
+    public boolean isAllowed(boolean academic) {
+       if (type == BookType.TEXT) {
+           return academic;
+       }
+        else return true;
+    }
+
+
     public void setAvail(boolean avail) { this.avail = avail; }
 
     public String serialize() { return name + "," + type.toString() + "," + avail; }
@@ -116,8 +124,8 @@ class Book
 
 class Loan
 {
-    private int  userID;
-    private int  bookID;
+    private String  user;
+    private String  book;
     private Date checkOutDate;
     private Date checkInDate;
     private Date realCID;
@@ -127,20 +135,28 @@ class Loan
     {
         String[] split = csv.split(",");
 
-        this.userID = Integer.parseInt(split[0]);
-        this.bookID = Integer.parseInt(split[1]);
+        this.user = split[0];
+        this.book = split[1];
         this.checkOutDate = new Date(Long.parseLong(split[2]));
         this.checkInDate = new Date(Long.parseLong(split[3]));
         this.realCID = new Date(Long.parseLong(split[4]));
     }
+    public Loan(String user, String book, Date checkOutDate, long duration) {
+        this.user = user;
+        this.book = book;
+        this.checkOutDate = checkOutDate;
+        this.checkInDate = new Date(checkOutDate.getTime() + duration);
+        this.realCID = checkOutDate;
+    }
 
-    public int getUserID() { return userID; }
+    public String getUserID() { return user; }
 
-    public int getBookID() { return bookID; }
+    public String getBookID() { return book; }
 
     public Date getCheckOutDate() { return checkOutDate; }
 
     public Date getCheckInDate() { return checkInDate; }
+
 
     public Date getRealCID() { return realCID; }
 
@@ -148,8 +164,8 @@ class Loan
 
     public String serialize()
     {
-        return userID + "," +
-               bookID + "," +
+        return user + "," +
+               book + "," +
                checkOutDate.getTime() + "," +
                checkInDate.getTime() + "," +
                realCID.getTime();
