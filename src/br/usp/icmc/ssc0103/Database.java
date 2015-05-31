@@ -49,6 +49,7 @@ public class Database
         helper = new DatabaseFileHandler();
         users = new ArrayList<User>();
         books = new ArrayList<Book>();
+        loans = new ArrayList<Loan>();
 
 
         this.userFileName = userFileName;
@@ -66,9 +67,7 @@ public class Database
     // "user add (...)" command backend
     public void userAdd(String username, UserType usertype)
     {
-        // TODO!!!
-        // Adiciona novo elemento usuario na lista users
-        // Atualiza o arquivo users.csv com o metodo append()
+
         User user = new User(username, usertype);
         users.add(user);
         helper.append(userFileName, user.serialize());
@@ -85,8 +84,10 @@ public class Database
     // "catalog add (...)" command backend
     public void catalogAdd(String bookname, BookType booktype)
     {
-        // TODO!!!
-        // Semelhante ao userAdd(), porem com lista books e arquivo books.csv
+        // TODO!!
+        Book book = new Book (bookname, booktype);
+        books.add(book);
+        helper.append(bookFileName, book.serialize());
 
         //DEBUG
         if (booktype == BookType.TEXT)
@@ -118,14 +119,23 @@ public class Database
                                                            AvailException
     {
         // TODO!!!
-        // Checa pela existencia do livro na database
+        for (Book book : books) {
+            if (book.getName().equals(bookname)) {
+                if (book.isAvail()) {
+                    throw new AvailException();
+                } else {
+
+                }
+            }
+        }
+        throw new DatabaseException();
         // Checa se o livro ja nao esta disponivel
         // MODIFICA o elemento certo na lista loans
         // MODIFICA a linha certa no arquivo loans.csv com snipe()
         // Ou simplesmente o reescreve inteiro com o metodo dump()
 
         //DEBUG
-        System.out.println(date.toString() + ": \"" + bookname + "\" has been returned!");
+        //System.out.println(date.toString() + ": \"" + bookname + "\" has been returned!");
     }
 
     // File handlers:
@@ -230,6 +240,8 @@ public class Database
             // reescrever uma string "replaceable"
             // com uma string "replacer" recebida
             // http://stackoverflow.com/questions/4505818/in-java-how-do-i-edit-1-line-of-a-text-file
+
+
         }
 
         // Recover users stream rather than list itself
