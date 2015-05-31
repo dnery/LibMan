@@ -12,8 +12,8 @@ public class Shell
         NOOP, USERADD, CATALOGADD, CHECKOUT, CHECKIN, LIST, EXIT
     }
 
-    private Command command = Command.NOOP;
     private String line;
+    private Command command = Command.NOOP;
 
     public void runCommand()
     {
