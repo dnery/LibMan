@@ -50,13 +50,19 @@ public class Shell
     {
         if (line.matches("^(.*[^\\\\];)$")) {
 
-            if (line.matches("^\\s*catalog\\s+add\\s+\\\"(.*[^\\\\])\\\"\\s*;\\s*$"))
+            if (line.matches("^\\s*catalog\\s+add\\s+(.*[^\\\\,])\\s*;\\s*$")) {
                 command = Command.CATALOGADD;
-            else if (line.matches("^\\s*user\\s+add\\s+\\\"(.*[^\\\\])\\\"\\s*;\\s*$"))
+                System.out.println("catalogaddcmd premise...");
+            } else if (line.matches("^\\s*user\\s+add\\s+(.*[^\\\\,])\\s*;\\s*$")) {
+                System.out.println("useraddcmd premise...");
                 command = Command.USERADD;
-            else if (line.matches("^\\s*exit\\s*;\\s*$"))
+            } else if (line.matches("^\\s*list\\s+(.*[^\\\\,])\\s*;\\s*$")) {
+                System.out.println("listcmd premise...");
+                command = Command.LIST;
+            } else if (line.matches("^\\s*exit\\s*;\\s*$")) {
+                System.out.println("exitcmd premise...");
                 command = Command.EXIT;
-
+            }
             return true;
         } else {
             System.out.println("> Invalid command...");
@@ -70,39 +76,65 @@ public class Shell
         switch (command) {
 
             case CATALOGADD:
-                //https://regex101.com/r/cZ7lK1/2
+                //https://regex101.com/r/cZ7lK1/5
                 pattern = Pattern.compile(
-                        "^\\s*catalog\\s+add\\s+\"\\s*([a-zA-Z][a-zA-Z\\s]+[a-zA-Z])\\s*\"\\s*;"
-                                + "\\s*$");
+                        "^(?i)\\s*catalog\\s+add\\s+\"\\s*([a-zA-Z][a-zA-Z\\s]+[a-zA-Z])" +
+                                "\\s*\"\\s*(text|general|)\\s*;\\s*$");
 
                 if ((matcher = pattern.matcher(line)).find()) {
-                    System.out.println("> Command: \"catalog add\" Captures: \"" + matcher.group(1)
-                                               + "\"");
+                    System.out.print("> Command: 'catalog add' Captures: '" + matcher.group(1) +
+                                             "'");
+                    if (!matcher.group(2).matches(""))
+                        System.out.print(" '" + matcher.group(2) + "'");
+                    System.out.print("\n");
 
                     //MANIPULATE DATABASE
-                } else {
-                    System.out.println("> Invalid syntax...");
-                }
+                } else System.out.println("> Invalid syntax...");
+
                 break;
 
             case USERADD:
-                //https://regex101.com/r/cZ7lK1/1
+                //https://regex101.com/r/cZ7lK1/6
                 pattern = Pattern.compile(
-                        "^\\s*user\\s+add\\s+\"\\s*([a-zA-Z][a-zA-Z\\s]+[a-zA-Z])\\s*\"\\s*;\\s*$");
+                        "^(?i)\\s*user\\s+add\\s+\"\\s*([a-zA-Z][a-zA-Z\\s]+[a-zA-Z])\\s*\"\\s*" +
+                                "(tutor|student|community|)\\s*;\\s*$");
 
                 if ((matcher = pattern.matcher(line)).find()) {
-                    System.out.println("> Command: \"user add\" Captures: \"" + matcher.group(1)
-                                               + "\"");
+                    System.out.print("> Command: 'user add' Captures: '" + matcher.group(1) + "'");
+                    if (!matcher.group(2).matches(""))
+                        System.out.print(" '" + matcher.group(2) + "'");
+                    System.out.print("\n");
 
                     //MANIPULATE DATABASE
-                    //database.UserAdd(String group(1), int group(2))
-                } else {
-                    System.out.println("> Invalid syntax...");
-                }
+                } else System.out.println("> Invalid syntax...");
+
                 break;
 
+            case CHECKOUT:
+                break;
+            case CHECKIN:
+                break;
             case LIST:
+                //https://regex101.com/r/qI7wF9/8
+                pattern = Pattern.compile("^(?i)\\s*list\\s+(users|books|loans)(?:\\s+(users|books|loans))?(?:\\s+(users|books|loans))?\\s*;\\s*$");
 
+                if ((matcher = pattern.matcher(line)).find()) {
+                    System.out.print("> Command: 'list' Captures: '" + matcher.group(1) + "'");
+                    if (matcher.group(2)!=null)
+                        System.out.print(" '" + matcher.group(2) + "'");
+                    if (matcher.group(3)!=null)
+                        System.out.print(" '" + matcher.group(3) + "'");
+                    System.out.print("\n");
+
+                    //MANIPULATE DATABASE
+                } else System.out.println("> Invalid syntax...");
+
+                break;
+
+            case EXIT:
+                break;
+            case NOOP:
+                break;
         }
     }
 };

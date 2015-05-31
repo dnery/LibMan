@@ -1,3 +1,5 @@
+//DEPRECATED
+
 package br.usp.icmc.ssc0103;
 
 import java.util.Date;

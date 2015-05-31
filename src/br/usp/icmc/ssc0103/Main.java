@@ -6,7 +6,7 @@ public class Main
 
     public static void main(String[] args)
     {
-        //shell = new Shell();
-        //shell.runCommand();
+        shell = new Shell();
+        shell.runCommand();
     }
 }
