@@ -10,7 +10,12 @@
 ### Example user template
 
 # IntelliJ project files
-#.idea
+.idea
 #*.iml
 out
 gen
+
+### Locally generated
+users.csv
+books.csv
+loans.csv
