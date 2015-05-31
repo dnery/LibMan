@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c54e7de6-63fc-4607-9bb7-f131ff5b78c9" name="Default" comment="More changes.">
+    <list default="true" id="c54e7de6-63fc-4607-9bb7-f131ff5b78c9" name="Default" comment="Will use &quot;Formatter&quot; for listing. Database still needs implementing.">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/br/usp/icmc/ssc0103/Database.java" afterPath="$PROJECT_DIR$/src/br/usp/icmc/ssc0103/Database.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/br/usp/icmc/ssc0103/Shell.java" afterPath="$PROJECT_DIR$/src/br/usp/icmc/ssc0103/Shell.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MOVED" beforePath="F:\Documents\Production\201501-SSC0103\trabalho3\src\br\usp\icmc\ssc0103\Cron.java" afterPath="$PROJECT_DIR$/src/br/usp/icmc/ssc0103/Formatter.java" />
     </list>
     <ignored path="trabalho3.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -38,11 +37,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Database.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Database.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/br/usp/icmc/ssc0103/Database.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="198" column="0" selection-start-line="198" selection-start-column="0" selection-end-line="198" selection-end-column="0" />
+              <caret line="90" column="0" selection-start-line="90" selection-start-column="0" selection-end-line="90" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -54,7 +53,7 @@
         <entry file="file://$PROJECT_DIR$/src/br/usp/icmc/ssc0103/Formatter.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="7" column="3" selection-start-line="7" selection-start-column="3" selection-end-line="7" selection-end-column="3" />
+              <caret line="9" column="3" selection-start-line="9" selection-start-column="3" selection-end-line="9" selection-end-column="3" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -62,11 +61,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Shell.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Shell.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/br/usp/icmc/ssc0103/Shell.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.32214764">
-              <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -105,8 +104,8 @@
         <option value="$PROJECT_DIR$/src/br/usp/icmc/ssc0103/Main.java" />
         <option value="$PROJECT_DIR$/src/br/usp/icmc/ssc0103/Cron.java" />
         <option value="$PROJECT_DIR$/src/br/usp/icmc/ssc0103/Formatter.java" />
-        <option value="$PROJECT_DIR$/src/br/usp/icmc/ssc0103/Database.java" />
         <option value="$PROJECT_DIR$/src/br/usp/icmc/ssc0103/Shell.java" />
+        <option value="$PROJECT_DIR$/src/br/usp/icmc/ssc0103/Database.java" />
       </list>
     </option>
   </component>
@@ -219,6 +218,28 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="trabalho3" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="trabalho3" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="trabalho3" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ssc0103" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Shell.java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -608,7 +629,7 @@
       <workItem from="1432784545285" duration="10244000" />
       <workItem from="1432919358384" duration="10067000" />
       <workItem from="1432934095289" duration="4511000" />
-      <workItem from="1433028334898" duration="33317000" />
+      <workItem from="1433028334898" duration="35215000" />
     </task>
     <task id="LOCAL-00001" summary="More changes.">
       <created>1432936909232</created>
@@ -616,11 +637,17 @@
       <option name="project" value="LOCAL" />
       <updated>1432936909232</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Will use &quot;Formatter&quot; for listing. Database still needs implementing.">
+      <created>1433065933322</created>
+      <option name="number" value="00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1433065933322</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="71333000" />
+    <option name="totallyTimeSpent" value="73231000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1456" height="876" extended-state="6" />
@@ -667,7 +694,8 @@
     </ignored-roots>
     <MESSAGE value="Initial commit. Setting ground." />
     <MESSAGE value="More changes." />
-    <option name="LAST_COMMIT_MESSAGE" value="More changes." />
+    <MESSAGE value="Will use &quot;Formatter&quot; for listing. Database still needs implementing." />
+    <option name="LAST_COMMIT_MESSAGE" value="Will use &quot;Formatter&quot; for listing. Database still needs implementing." />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -828,7 +856,17 @@
     <entry file="file://$PROJECT_DIR$/src/br/usp/icmc/ssc0103/Formatter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="7" column="3" selection-start-line="7" selection-start-column="3" selection-end-line="7" selection-end-column="3" />
+          <caret line="9" column="3" selection-start-line="9" selection-start-column="3" selection-end-line="9" selection-end-column="3" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/br/usp/icmc/ssc0103/Shell.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -838,17 +876,7 @@
     <entry file="file://$PROJECT_DIR$/src/br/usp/icmc/ssc0103/Database.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="198" column="0" selection-start-line="198" selection-start-column="0" selection-end-line="198" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/br/usp/icmc/ssc0103/Shell.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.32214764">
-          <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+          <caret line="90" column="0" selection-start-line="90" selection-start-column="0" selection-end-line="90" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

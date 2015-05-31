@@ -200,7 +200,7 @@ public class Database
     // Static initializer is always run before class is used by any thread
     private static final Database database = new Database("users.csv", "books.csv", "loans.csv");
 
-    // Private constructor in according to Singleton standards
+    // Private constructor according to Singleton standards
     private Database(String userFileName, String bookFileName, String loanFileName)
     {
         this.userFileName = userFileName;
@@ -213,6 +213,7 @@ public class Database
     // The only existing instance is obtained always
     public static Database getInstance() { return database; }
 
+    // "user add (...)" command backend
     public void userAdd(String username, UserType usertype)
     {
         // TODO!!!
@@ -228,6 +229,7 @@ public class Database
             System.out.println("Community member " + username + " has been added!");
     }
 
+    // "catalog add (...)" command backend
     public void catalogAdd(String bookname, BookType booktype)
     {
         // TODO!!!
@@ -240,6 +242,7 @@ public class Database
             System.out.println("Literary book " + bookname + " has been catalogued!");
     }
 
+    // "user (...) checkout (...)" command backend
     public void checkOut(String username, String bookname, Date date) throws
                                                                       DatabaseException,
                                                                       AccessException,
@@ -257,6 +260,7 @@ public class Database
         System.out.println(date.toString() + ": loaning \"" + bookname + "\" to " + username + ".");
     }
 
+    // "checkin (...)" command backend
     public void checkIn(String bookname, Date date) throws DatabaseException,
                                                            AvailException
     {
@@ -271,6 +275,7 @@ public class Database
         System.out.println(date.toString() + ": \"" + bookname + "\" has been returned!");
     }
 
+    // File handlers: writer
     private void append(String filename, String data)
     {
         // TODO!!!

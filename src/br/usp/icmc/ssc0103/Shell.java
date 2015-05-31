@@ -5,16 +5,18 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+enum Command
+{
+    NOOP, USERADD, CATALOGADD, CHECKOUT, CHECKIN, LIST, EXIT
+}
+
 public class Shell
 {
-    private enum Command
-    {
-        NOOP, USERADD, CATALOGADD, CHECKOUT, CHECKIN, LIST, EXIT
-    }
-
+    // Eager start
     private String line;
     private Command command = Command.NOOP;
 
+    // Watches for inputs
     public void runCommand()
     {
         Scanner userInput = new Scanner(System.in);
@@ -31,7 +33,7 @@ public class Shell
         }
     }
 
-    // No capture groups when simply validating
+    // Pre-validates commands
     public boolean checkCommand()
     {
         if (line.matches("^(.*[^\\\\];)$")) {
@@ -63,11 +65,14 @@ public class Shell
         }
     }
 
+    // Fully launches commands
     public void triggerCommand()
     {
+        // Make it local
         Pattern pattern;
         Matcher matcher;
 
+        // Simple switch
         switch (command) {
 
             case USERADD:
