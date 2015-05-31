@@ -109,9 +109,25 @@ public class Database
         // Checa se o livro ja nao esta alugado
         // Adiciona novo elemento na lista loans
         // Atualiza o arquivo loans.csv com append()
+        for (User user : users) {
+            if (user.getName().equals(username)) {
+                for (Book book : books) {
+                    if (book.getName().equals(bookname)) {
+                        if (book.isAvail()) {
+                            if (book.isAllowed(user.isAcademic())) {
+                                Loan loan = new Loan(username, bookname , new Date(), user.getLoanDuration());
+                                loans.add(loan);
+                                helper.append(loanFileName, loan.serialize());
+                                System.out.println(date.toString() + ": loaning \"" + bookname + "\" to " + username + ".");
+                            }else throw new AccessException();
+                        }else throw new AvailException();
+                    }
+                }throw new DatabaseException();
+            }
+        }throw new DatabaseException();
 
         //DEBUG
-        System.out.println(date.toString() + ": loaning \"" + bookname + "\" to " + username + ".");
+        //System.out.println(date.toString() + ": loaning \"" + bookname + "\" to " + username + ".");
     }
 
     // "checkin (...)" command backend
