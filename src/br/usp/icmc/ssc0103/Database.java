@@ -158,7 +158,7 @@ public class Database
             catch(FileNotFoundException e) {
                 try (Writer writer = new BufferedWriter(new OutputStreamWriter(
                         new FileOutputStream(userFileName), "utf-8"))) {
-                    writer.write("Registred users:");
+                    writer.write("Registred users:\n");
                     writer.close();
                 }
                 catch (IOException er) {
@@ -183,7 +183,7 @@ public class Database
             catch(FileNotFoundException e) {
                 try (Writer writer = new BufferedWriter(new OutputStreamWriter(
                         new FileOutputStream(bookFileName), "utf-8"))) {
-                    writer.write("Registred books:");
+                    writer.write("Registred books:\n");
                     writer.close();
                 }
                 catch (IOException er) {
@@ -208,7 +208,7 @@ public class Database
             catch(FileNotFoundException e) {
                 try (Writer writer = new BufferedWriter(new OutputStreamWriter(
                         new FileOutputStream(loanFileName), "utf-8"))) {
-                    writer.write("Registred Loans:");
+                    writer.write("Registred Loans:\n");
                     writer.close();
                 }
                 catch (IOException er) {
