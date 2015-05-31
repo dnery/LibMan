@@ -86,7 +86,7 @@ class User
 class Book
 {
     private String  name;
-    private boolean type;
+    private BookType type;
     private boolean avail;
 
     public Book(String csv)
@@ -94,19 +94,25 @@ class Book
         String[] splited = csv.split(",");
 
         this.name = splited[0];
-        this.type = Boolean.getBoolean(splited[1]);
+        this.type.valueOf(splited[1]);
         this.avail = Boolean.getBoolean(splited[2]);
+    }
+
+    public Book (String Bookname, BookType booktype) {
+        this.name = Bookname;
+        this.type = booktype;
+        this.avail = true;
     }
 
     public String getName() { return name; }
 
-    public boolean isType() { return type; }
+    public BookType isType() { return type; }
 
     public boolean isAvail() { return avail; }
 
     public void setAvail(boolean avail) { this.avail = avail; }
 
-    public String serialize() { return name + "," + type + "," + avail; }
+    public String serialize() { return name + "," + type.toString() + "," + avail; }
 }
 
 class Loan
