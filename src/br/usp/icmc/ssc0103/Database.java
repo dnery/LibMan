@@ -217,7 +217,7 @@ public class Database
         private void append(String filename, String data)
         {
             try(PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(filename, true)))) {
-                out.println("\n" + data);
+                out.println(data);
             }catch (IOException e) {
                 System.err.println(e);
             }
@@ -238,8 +238,7 @@ public class Database
             // TODO!!!
             // Se implementado, esse metodo deve
             // reescrever uma string "replaceable"
-            // com uma string "replacer" recebida
-            // http://stackoverflow.com/questions/4505818/in-java-how-do-i-edit-1-line-of-a-text-file
+            // com uma string "replacer" recebide
 
 
         }
