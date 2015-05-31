@@ -102,7 +102,6 @@ public class Database
                                                                       AccessException,
                                                                       AvailException
     {
-        // TODO!!!
         // Checa pela existencia do usuario na database
         // Checa pela existencia do livro na database
         // Checa se o usuario tem acesso ao livro
@@ -134,16 +133,7 @@ public class Database
     public void checkIn(String bookname, Date date) throws DatabaseException,
                                                            AvailException
     {
-        // TODO!!!
-        for (Book book : books) {
-            if (book.getName().equals(bookname)) {
-                if (book.isAvail()) {
-                    throw new AvailException();
-                } else {
 
-                }
-            }
-        }
         throw new DatabaseException();
         // Checa se o livro ja nao esta disponivel
         // MODIFICA o elemento certo na lista loans
