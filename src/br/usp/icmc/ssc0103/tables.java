@@ -19,18 +19,19 @@ class User
     private int      curBooks;
     private Date     suspendedTill;
 
-    User(String csv)  {
+    User(String csv)
+    {
 
-        String[] splited = csv.split(",");
+        String[] split = csv.split(",");
 
-        this.name = splited[0];
-        this.type.valueOf(splited[1]);
-        this.curBooks = Integer.parseInt(splited[2]);
-        this.suspendedTill = new Date(Long.parseLong(splited[3]));
-
+        this.name = split[0];
+        this.type = UserType.valueOf(split[1]);
+        this.curBooks = Integer.parseInt(split[2]);
+        this.suspendedTill = new Date(Long.parseLong(split[3]));
     }
 
-    User (String userName, UserType usertype) {
+    User(String userName, UserType usertype)
+    {
         this.name = userName;
         this.type = usertype;
         this.curBooks = 0;
@@ -40,32 +41,24 @@ class User
 
     public String getName() { return name; }
 
-    public int getMaxBooks() {
-        if (type == UserType.COMMUNITY) {
-            return 2;
-        }
-        else if (type == UserType.STUDENT) {
+    public int getMaxBooks()
+    {
+        if (type == UserType.TUTOR)
+            return 6;
+        else if (type == UserType.STUDENT)
             return 4;
-        }
-        else return 6;
+        else
+            return 2;
     }
 
     public int getCurBooks() { return curBooks; }
 
-    public boolean isAcademic()
+    public long getLoanDuration()
     {
-        if (type == UserType.COMMUNITY) {
-            return false;
-        }
-        else return true;
-    }
-
-    public long getLoanDuration() {
-        if (type == UserType.TUTOR) {
+        if (type == UserType.TUTOR)
             return (long) 5.184e+9;
-        }
-        else return (long) 1.296e+9;
-
+        else
+            return (long) 1.296e+9;
     }
 
     public Date getSuspendedTill() { return suspendedTill; }
@@ -74,12 +67,17 @@ class User
 
     public void setSuspendedTill(Date suspendedTill) { this.suspendedTill = suspendedTill; }
 
+    public boolean isAcademic()
+    {
+        return type != UserType.COMMUNITY;
+    }
+
     public String serialize()
     {
         return this.name + "," +
-                this.type.toString() + "," +
-                this.curBooks + "," +
-                this.suspendedTill.getTime();
+               this.type.toString() + "," +
+               this.curBooks + "," +
+               this.suspendedTill.getTime();
     }
 }
 
@@ -91,11 +89,11 @@ class Book
 
     public Book(String csv)
     {
-        String[] splited = csv.split(",");
+        String[] split = csv.split(",");
 
-        this.name = splited[0];
-        this.type = Boolean.getBoolean(splited[1]);
-        this.avail = Boolean.getBoolean(splited[2]);
+        this.name = split[0];
+        this.type = Boolean.getBoolean(split[1]);
+        this.avail = Boolean.getBoolean(split[2]);
     }
 
     public String getName() { return name; }
@@ -124,7 +122,7 @@ class Loan
         this.userID = Integer.parseInt(splited[0]);
         this.bookID = Integer.parseInt(splited[1]);
         this.checkOutDate = new Date(Long.parseLong(splited[2]));
-        this.checkInDate =  new Date(Long.parseLong(splited[3]));
+        this.checkInDate = new Date(Long.parseLong(splited[3]));
         this.realCID = new Date(Long.parseLong(splited[4]));
     }
 
@@ -143,9 +141,9 @@ class Loan
     public String serialize()
     {
         return userID + "," +
-                bookID + "," +
-                checkOutDate.getTime() + "," +
-                checkInDate.getTime() + "," +
-                realCID.getTime();
+               bookID + "," +
+               checkOutDate.getTime() + "," +
+               checkInDate.getTime() + "," +
+               realCID.getTime();
     }
 }
