@@ -1,6 +1,6 @@
-# SCC0103 - Trabaho 3 - Aplicativo de Biblioteca
+<h1>SCC0103 - Trabaho 3 - Aplicativo de Biblioteca</h1>
 
-# Sumario
+<h2>Sumario</h2>
 
 * [Introducao](#introducao)
 * [Comandos e Execucao](#comando)
@@ -21,14 +21,12 @@
     + Verifica os atrasos: analisa os emprestimos e procura os emprestimos que estao em atraso.
 
 * * *
-
 <h2 id="comando">Comandos</h2>
 
 <h3>Lista de comando</h3>
-
-**Os comandos sao case insensitive**
-
-**Em todo comando e preciso inserir o ; (ponto e virgula) no final**
+<h5> ATENCAO </h5>
+**Os comandos sao case insensitive**.
+**Em todo comando e preciso inserir o ; (ponto e virgula) no final**.
 
 + Execucao:
 
@@ -37,7 +35,8 @@
    - Adicionar Usuario:
 
             user add  "nomedousuario"  tipo;
-    "nomedousuario" tendo caracteres alfanumericos (exceto \\, / e ,(virgula)).
+    *"nomedousuario" pode ter caracteres alfanumericos (exceto \\, / e ,(virgula)).*
+
     Onde o tipo pode ser:
      + tutor(professor)
      + student(estudante)
@@ -47,7 +46,7 @@
   - Adicionar Livro:
 
             catalog add "nomedolivro" tipo;
-    "nomedolivro" tendo caracteres alfanumericos (exceto \\, / e ,(virgula)).
+    *"nomedolivro" pode ter caracteres alfanumericos (exceto \\, / e ,(virgula)).*
     Onde o tipo pode ser:
     + general (comunitario)
     + text(texto)
@@ -57,17 +56,27 @@
 
    - Cadastrar Emprestimo:
 
+            load "nomedolivro" to "nomeusuario";
+    *Onde "nomedolivro" e "nomeusuario" pode ter caracteres alfanumericos(exceto \, / e , (virgula)).*
 
    - Cadastrar Devolucao:
+            return "nomedolivro";
+    *Onde "nomedolivro" pode ter caracteres alfanumericos(exceto \, | e , (virgula)).*
 
 
 + Listas:
 
-    - Listagem de Usuarios:
+    - Listagem de Usuarios
+        *Ira mostrar uma lista de livros, classificados por disponibilidade.*
             list books;
-    - Listagem de Emprestimos:
 
-    - Listagem de Livros:
+    - Listagem de Emprestimos
+        *Ira mostrar uma lista de usuarios, classificados por emprestimos.*
+            list users;
+
+    - Listagem de Livros
+    *Ira mostrar uma lista de emprestismos, classificados por status.*
+            list loans;
 
 + Viagem do Tempo:
 
