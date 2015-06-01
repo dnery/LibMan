@@ -14,6 +14,7 @@
  Aplicativo de Biblioteca, implementado no formato de uma shell interativa.
 
  Funcionalidades:
+ 
     + __Cadastro de Usuarios e Livros__: pelo nome e titulo, respectivamente.
     + __Cadastro de Emprestimo__: associa um titulo ao nome de um usuario e faz o emprestimo.
     + __Validacao de Emprestimo__: verifica se o usuario pode fazer o emprestimo e se o livro
