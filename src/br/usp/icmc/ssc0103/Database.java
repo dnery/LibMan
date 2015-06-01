@@ -170,15 +170,13 @@ public class Database
 
             // Only if unavailable...
             if (!bookObject.isAvail()) {
-                // I know the loan exists, so get it
+                // Get the last occurrence of the book loan
                 Loan loanObject = loans.stream()
                                        .filter(loan -> loan.getBookName()
                                                            .equals(bookObject.getName()))
-                                       .limit(2)
-                                       .collect(Collectors.toList())
-                                       .get(0);
-
-                // I know the user exists, so get it
+                                       .reduce((previous, current) -> current)
+                                       .get();
+                // And the respective user it was lent to
                 User userObject = users.stream()
                                        .filter(user -> user.getName()
                                                            .equals(loanObject.getUserName()))

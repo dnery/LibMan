@@ -53,9 +53,9 @@ public class Shell
                 command = Command.USERADD;
             else if (line.matches("^\\s*catalog\\s+add\\s+(?:[^\\\\,]*);\\s*$"))
                 command = Command.CATALOGADD;
-            else if (line.matches("^(?:[^\\\\,]*)checkout(?:[^\\\\,]*);\\s*$"))
+            else if (line.matches("^\\s*lend(?:[^\\\\,]*)to(?:[^\\\\,]*);\\s*$"))
                 command = Command.CHECKOUT;
-            else if (line.matches("^\\s*checkin\\s+(?:[^\\\\,]*);\\s*$"))
+            else if (line.matches("^\\s*return\\s+(?:[^\\\\,]*);\\s*$"))
                 command = Command.CHECKIN;
             else if (line.matches("^\\s*list\\s+(?:[^\\\\,]*);\\s*$"))
                 command = Command.LIST;
@@ -63,7 +63,7 @@ public class Shell
                 command = Command.EXIT;
             else {
                 command = Command.NOOP;
-                Formatter.outputError("No-Op command...");
+                Formatter.outputError("Could not be parsed...");
             }
             return true;
         } else {
@@ -123,15 +123,15 @@ public class Shell
                 return true;
 
             case CHECKOUT:
-                //https://regex101.com/r/lV3vI3/1
-                pattern = Pattern.compile("^(?i)\\s*user\\s+\\\"\\s*" +
-                                          "([a-zA-Z][a-zA-Z\\s]+[a-zA-Z])" +
-                                          "\\s*\\\"\\s+checkout\\s+\\\"\\s*" +
-                                          "([a-zA-Z][a-zA-Z\\s]+[a-zA-Z])\\s*\\\"\\s*;\\s*$");
+                //https://regex101.com/r/lV3vI3/2
+                pattern = Pattern.compile(
+                        "^(?i)\\s*lend\\s+\\\"\\s*([a-zA-Z0-9][a-zA-Z0-9\\s]+[a-zA-Z0-9])" +
+                        "\\s*\\\"\\s+to\\s+\\\"\\s*([a-zA-Z0-9][a-zA-Z0-9\\s]+[a-zA-Z0-9])" +
+                        "\\s*\\\"\\s*;\\s*$");
 
                 if ((matcher = pattern.matcher(line)).find()) {
                     try {
-                        Database.getInstance().checkOut(matcher.group(1), matcher.group(2), date);
+                        Database.getInstance().checkOut(matcher.group(2), matcher.group(1), date);
                     } catch (Exception e) {
                         Formatter.outputError(e.getMessage());
                     }
@@ -140,9 +140,10 @@ public class Shell
                 return true;
 
             case CHECKIN:
-                //https://regex101.com/r/rT4hC9/2
-                pattern = Pattern.compile("^(?i)\\s*checkin\\s+\\\"\\s*" +
-                                          "([a-zA-Z][a-zA-Z\\s]+[a-zA-Z])\\s*\\\"\\s*;\\s*$");
+                //https://regex101.com/r/rT4hC9/3
+                pattern = Pattern.compile(
+                        "^(?i)\\s*return\\s+\\\"\\s*([a-zA-Z0-9][a-zA-Z0-9\\s]+[a-zA-Z0-9])" +
+                        "\\s*\\\"\\s*;\\s*$");
 
                 if ((matcher = pattern.matcher(line)).find()) {
                     try {
