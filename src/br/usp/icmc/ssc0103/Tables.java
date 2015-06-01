@@ -2,24 +2,41 @@ package br.usp.icmc.ssc0103;
 
 import java.util.Date;
 
+/**
+ * Tables.java: source of classes which represents the database(files) used in the program.
+ */
+
+// types of user
 enum UserType
 {
     COMMUNITY, STUDENT, TUTOR
 }
 
+//types of book
 enum BookType
 {
     TEXT, GENERAL
 }
 
+
+/**
+ * Class user: represent the user (could be tutor, community or student see: enum UserType)
+ */
 class User
 {
+    ///
+    /// fields
+    ///
     private String   name;
     private UserType type;
     private int      curBooks;
     private Date     suspendedTill;
 
-    // To restore...
+    ///
+    /// constructors
+    ///
+
+    // To restore from CSV format...
     User(String csv)
     {
         String[] split = csv.split(",");
@@ -30,6 +47,8 @@ class User
         this.suspendedTill = new Date(Long.parseLong(split[3]));
     }
 
+
+
     // To create a new...
     User(String userName, UserType userType)
     {
@@ -39,6 +58,9 @@ class User
         this.suspendedTill = new Date(0);
     }
 
+    ///
+    /// getters
+    ///
     public String getName() { return name; }
 
     public UserType getType() { return type; }
@@ -64,10 +86,18 @@ class User
 
     public Date getSuspendedTill() { return suspendedTill; }
 
+
+    ///
+    /// setters
+    ///
     public void setCurBooks(int curBooks) { this.curBooks = curBooks; }
 
     public void setSuspendedTill(Date suspendedTill) { this.suspendedTill = suspendedTill; }
 
+    /**
+     * Serialize(): serialize all the field of current object to CSV format
+     * @return string serialized
+     */
     public String serialize()
     {
         return this.name + "," +
@@ -77,13 +107,23 @@ class User
     }
 }
 
+/**
+ * Class Book: represent the book in the program (could be text or general)
+ */
 class Book
 {
+    //
+    //fields
+    //
     private String   name;
     private BookType type;
     private boolean  avail;
 
-    // To restore...
+    ///
+    /// constructors
+    ///
+
+    // To restore from CSV format
     public Book(String csv)
     {
         String[] split = csv.split(",");
@@ -101,26 +141,43 @@ class Book
         this.avail = true;
     }
 
+    ///
+    /// getters
+    ///
     public String getName() { return name; }
 
     public BookType getType() { return type; }
 
-    public boolean isAvail() { return avail; }
-
+    ///
+    /// setter
+    ///
     public void setAvail(boolean avail) { this.avail = avail; }
 
+    public boolean isAvail() { return avail; }
+
+
+    /**
+     * Serialize(): serialize all the field of current object to CSV format
+     * @return string serialized
+     */
     public String serialize() { return name + "," + type.toString() + "," + avail; }
 }
 
+/**
+ * Loan: represents the Loan done by user and with a book
+ */
 class Loan
 {
+    ///
+    /// fields
+    ///
     private String userName;
     private String bookName;
     private Date   checkOutDate;
     private Date   checkInDate;
     private Date   realCID;
 
-    // To restore...
+    // To restore from CSV format...
     public Loan(String csv)
     {
         String[] split = csv.split(",");
@@ -142,6 +199,9 @@ class Loan
         this.realCID = checkOutDate;
     }
 
+    ///
+    /// getters
+    ///
     public String getUserName() { return userName; }
 
     public String getBookName() { return bookName; }

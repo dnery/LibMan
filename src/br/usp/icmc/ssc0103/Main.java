@@ -7,6 +7,10 @@ public class Main
 {
     static Shell shell;
 
+    /**
+     * Main, calls Shell.run.Commands()
+     * @param args arguments from console
+     */
     public static void main(String[] args)
     {
         try {
