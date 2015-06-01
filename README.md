@@ -3,7 +3,7 @@
 # Sumario
 
 * [Introducao](#introducao)
-* [Comandos](#comando)
+* [Comandos e Execucao](#comando)
 * [Contribuidores](#contribuidores)
 * [Copyright](#copyright)
 
@@ -11,27 +11,46 @@
 
 <h2 id="introducao">Introducao</h2>
 
- Aplicativo de Biblioteca, implementado no formato de uma shell interativa.
+ Aplicativo de Biblioteca implementado no formato de uma Shell interativa.
 
  Funcionalidades:
  
-    + __Cadastro de Usuarios e Livros__: pelo nome e titulo, respectivamente.
-    + __Cadastro de Emprestimo__: associa um titulo ao nome de um usuario e faz o emprestimo.
-    + __Validacao de Emprestimo__: verifica se o usuario pode fazer o emprestimo e se o livro
-    esta em estoque.
-    + __Verifica os atrasos__: analisa os emprestimos e procura os emprestimos que estao em atraso.
-
+    + Cadastro de Usuarios e Livros: pelo nome e titulo, respectivamente.
+    + Cadastro de Emprestimo: associa um titulo ao nome de um usuario e faz o emprestimo.
+    + Validacao de Emprestimo: verifica se o usuario e livro sao validos para emprestimo
+    + Verifica os atrasos: analisa os emprestimos e procura os emprestimos que estao em atraso.
+    
 * * *
 
 <h2 id="comando">Comandos</h2>
 
-Lista de comando:
+**Lista de comando:**
 
- + Cadastros:
- + Emprestimos:
- + Listas:
++ Execucao:
 
 
++ Cadastros:
+
+   - Adicionar Usuario:
+    
+   - Adicionar Livro:
+
++ Emprestimos:
+   - Cadastrar Emprestimo:
+
+   - Cadastrar Devolucao:
+
+
++ Listas:
+
+    - Listagem de Usuarios:
+    
+    - Listagem de Emprestimos:
+    
+    - Listagem de Livros:
+
++ Viagem do Tempo:
+    
 * * *
 
 <h2 id="contribuidores">Contribuidores</h2>
