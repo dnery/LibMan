@@ -3,26 +3,35 @@ package br.usp.icmc.ssc0103;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.text.Normalizer;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+// comandos da shell
 enum Command
 {
     NOOP, USERADD, CATALOGADD, CHECKOUT, CHECKIN, LIST, EXIT
 }
 
+/**
+ * Shell: object which represent the Shell of application
+ */
 public class Shell
 {
+    /**
+     * Fields
+     */
     private Date    date;
     private String  line;
     private Command command;
 
-    // Constructor tries to parse arguments
+    /**
+     * Constructor which tries to parse arguments
+     * @param args arguments
+     * @throws ParseException exception for wrong args
+     */
     public Shell(String[] args) throws ParseException
     {
         SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
@@ -32,7 +41,10 @@ public class Shell
         System.out.println(date.toString());
     }
 
-    // Watches for command inputs
+    /**
+     * Watches for command inputs
+     * @throws IOException
+     */
     public void runCommand() throws IOException
     {
         BufferedReader userInput = new BufferedReader(new InputStreamReader(System.in));
@@ -44,7 +56,10 @@ public class Shell
         }
     }
 
-    // Pre-validates inputs
+    /**
+     * Check the command from input
+     * @return boolean true for right command or false for wrong
+     */
     private boolean checkCommand()
     {
         if (line.matches("^(.*[^\\\\];)$")) {
@@ -72,6 +87,10 @@ public class Shell
         }
     }
 
+    /**
+     * Triggers the correspondent respectively
+     * @return
+     */
     // Fully launches the commands
     private boolean triggerCommand()
     {
@@ -82,6 +101,7 @@ public class Shell
         // Simple switch
         switch (command) {
 
+            // add user
             case USERADD:
                 //https://regex101.com/r/cZ7lK1/7
                 pattern = Pattern.compile("^(?i)\\s*user\\s+add\\s+\\\"\\s*" +
@@ -103,6 +123,7 @@ public class Shell
                     Formatter.outputError("Invalid syntax...");
                 return true;
 
+            // catalog book
             case CATALOGADD:
                 //https://regex101.com/r/nU9qD4/1
                 pattern = Pattern.compile("^(?i)\\s*catalog\\s+add\\s+\\\"\\s*" +
@@ -122,6 +143,7 @@ public class Shell
                     Formatter.outputError("Invalid syntax...");
                 return true;
 
+            // do a checkout
             case CHECKOUT:
                 //https://regex101.com/r/lV3vI3/2
                 pattern = Pattern.compile(
@@ -138,7 +160,7 @@ public class Shell
                 } else
                     Formatter.outputError("Invalid syntax...");
                 return true;
-
+            // do a checkin
             case CHECKIN:
                 //https://regex101.com/r/rT4hC9/3
                 pattern = Pattern.compile(
@@ -155,6 +177,7 @@ public class Shell
                     Formatter.outputError("Invalid syntax...");
                 return true;
 
+            // list data(book|user|loan)
             case LIST:
                 //https://regex101.com/r/qI7wF9/10
                 if (line.matches("^(?i)\\s*list(?:\\s+(?:users|books|loans))+\\s*;\\s*$")) {

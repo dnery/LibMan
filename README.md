@@ -26,9 +26,9 @@
 
 <h3>Lista de comando</h3>
 
- **Os comandos sao case insensitive**
+**Os comandos sao case insensitive**
 
-**Em todo comando e preciso inserir o ; (ponto e virgual) no final**
+**Em todo comando e preciso inserir o ; (ponto e virgula) no final**
 
 + Execucao:
 
@@ -37,6 +37,7 @@
    - Adicionar Usuario:
 
             user add  "nomedousuario"  tipo;
+    "nomedousuario" tendo caracteres alfanumericos (exceto \\, / e ,(virgula)).
     Onde o tipo pode ser:
      + tutor(professor)
      + student(estudante)
@@ -46,13 +47,16 @@
   - Adicionar Livro:
 
             catalog add "nomedolivro" tipo;
+    "nomedolivro" tendo caracteres alfanumericos (exceto \\, / e ,(virgula)).
     Onde o tipo pode ser:
     + general (comunitario)
     + text(texto)
     + Omitir o tipo: assume-se general
 
 + Emprestimos
+
    - Cadastrar Emprestimo:
+
 
    - Cadastrar Devolucao:
 
