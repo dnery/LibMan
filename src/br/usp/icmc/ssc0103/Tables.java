@@ -36,7 +36,7 @@ class User
         this.name = userName;
         this.type = userType;
         this.curBooks = 0;
-        this.suspendedTill = new Date();
+        this.suspendedTill = new Date(0);
     }
 
     public String getName() { return name; }

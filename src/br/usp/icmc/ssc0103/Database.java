@@ -121,8 +121,15 @@ public class Database
             System.out.println("Book found: " + bookObject.toString());
 
             // Permission check, 1st step
-            if (userObject.getSuspendedTill().after(new Date()))
+            if (userObject.getSuspendedTill().after(date))
                 throw new AccessException("User is still suspended!");
+
+            // Permission check, 1st step (intrusive)
+            if (userObject.getCurBooks() > 0 &&
+                loans.stream()
+                     .filter(loan -> loan.getUserName().equals(userObject.getName()))
+                     .anyMatch(loan -> date.after(loan.getCheckInDate())))
+                throw new AccessException("Unlogged user suspension!");
 
             // Permission check, 2nd step
             if (userObject.getType() == UserType.COMMUNITY &&
@@ -183,15 +190,21 @@ public class Database
                 System.out.println("User found: " + userObject.toString());
 
                 // Actual processing
-                Date today = new Date();
                 bookObject.setAvail(true);
-                loanObject.setRealCID(today);
+                loanObject.setRealCID(date);
                 userObject.setCurBooks(userObject.getCurBooks() - 1);
 
                 // Set suspension date if needed
-                if (today.after(loanObject.getCheckInDate())) {
-                    long difference = today.getTime() - loanObject.getCheckInDate().getTime();
-                    userObject.setSuspendedTill(new Date(today.getTime() + difference));
+                if (date.after(loanObject.getCheckInDate())) {
+                    long difference = date.getTime() - loanObject.getCheckInDate().getTime();
+
+                    // If not yet suspended, set to present plus difference
+                    if (date.after(userObject.getSuspendedTill()))
+                        userObject.setSuspendedTill(new Date(difference + date.getTime()));
+                        // Otherwise, add difference to current suspension date
+                    else userObject.setSuspendedTill(new Date(difference + userObject
+                            .getSuspendedTill()
+                            .getTime()));
                 }
             } else throw new AvailException("Book is not in use!");
         } else throw new DatabaseException("Book not found in database!");

@@ -18,27 +18,36 @@ public class Formatter
     public static final String ANSI_CYAN   = "\u001B[36m";
     public static final String ANSI_WHITE  = "\u001B[37m";
 
-    public static void outputUsers(List<User> users)
+    public static void outputUsers(List<User> users, List<Loan> loans, Date date)
     {
-        // Get a fixed time
-        Date today = new Date();
-
         // Print out tutors
         System.out.println(ANSI_YELLOW + "--University tutors--" + ANSI_RESET);
         users.stream().filter(user -> user.getType() == UserType.TUTOR)
              .sorted(Comparator.comparing(User::getName))
              .forEach(user -> {
                  // Is currently suspended?
-                 if (user.getSuspendedTill().after(today))
+                 if (user.getSuspendedTill().after(date))
                      System.out.print("# " + ANSI_RED + user.getName() + " (" +
-                                      getDateDiff(user.getSuspendedTill(), today, TimeUnit.DAYS) +
+                                      getDateDiff(date, user.getSuspendedTill(), TimeUnit.DAYS) +
                                       " days suspended)" + ANSI_RESET);
+
+                     // Has any pending suspensions?
+                 else if (user.getCurBooks() > 0 &&
+                          loans.stream()
+                               .filter(loan -> loan.getUserName().equals(user.getName()))
+                               .anyMatch(loan -> date.after(loan.getCheckInDate())))
+                     System.out.print("# " + ANSI_RED + user.getName() + " (Pending suspension)");
+
+                     // If not just print username
                  else System.out.print("# " + user.getName());
 
                  // Is loaning any books?
                  if (user.getCurBooks() > 0)
-                     System.out.print(" - Currently loaning " + user.getCurBooks() + " books\n");
-                 else System.out.print("\n");
+                     System.out.print(ANSI_CYAN + " - Currently loaning " + user.getCurBooks() +
+                                      " books");
+
+                 // Append linebreak
+                 System.out.print(ANSI_RESET + "\n");
              });
 
         // Print out students
@@ -47,16 +56,28 @@ public class Formatter
              .sorted(Comparator.comparing(User::getName))
              .forEach(user -> {
                  // Is currently suspended?
-                 if (user.getSuspendedTill().after(today))
+                 if (user.getSuspendedTill().after(date))
                      System.out.print("# " + ANSI_RED + user.getName() + " (" +
-                                      getDateDiff(user.getSuspendedTill(), today, TimeUnit.DAYS) +
+                                      getDateDiff(date, user.getSuspendedTill(), TimeUnit.DAYS) +
                                       " days suspended)" + ANSI_RESET);
+
+                     // Has any pending suspensions?
+                 else if (user.getCurBooks() > 0 &&
+                          loans.stream()
+                               .filter(loan -> loan.getUserName().equals(user.getName()))
+                               .anyMatch(loan -> date.after(loan.getCheckInDate())))
+                     System.out.print("# " + ANSI_RED + user.getName() + " (Pending suspension)");
+
+                     // If not just print username
                  else System.out.print("# " + user.getName());
 
                  // Is loaning any books?
                  if (user.getCurBooks() > 0)
-                     System.out.print(" - Currently loaning " + user.getCurBooks() + " books\n");
-                 else System.out.print("\n");
+                     System.out.print(ANSI_CYAN + " - Currently loaning " + user.getCurBooks() +
+                                      " books");
+
+                 // Append linebreak
+                 System.out.print(ANSI_RESET + "\n");
              });
 
         // Print out community users
@@ -65,16 +86,28 @@ public class Formatter
              .sorted(Comparator.comparing(User::getName))
              .forEach(user -> {
                  // Is currently suspended?
-                 if (user.getSuspendedTill().after(today))
+                 if (user.getSuspendedTill().after(date))
                      System.out.print("# " + ANSI_RED + user.getName() + " (" +
-                                      getDateDiff(user.getSuspendedTill(), today, TimeUnit.DAYS) +
+                                      getDateDiff(date, user.getSuspendedTill(), TimeUnit.DAYS) +
                                       " days suspended)" + ANSI_RESET);
+
+                     // Has any pending suspensions?
+                 else if (user.getCurBooks() > 0 &&
+                          loans.stream()
+                               .filter(loan -> loan.getUserName().equals(user.getName()))
+                               .anyMatch(loan -> date.after(loan.getCheckInDate())))
+                     System.out.print("# " + ANSI_RED + user.getName() + " (Pending suspension)");
+
+                     // If not just print username
                  else System.out.print("# " + user.getName());
 
                  // Is loaning any books?
                  if (user.getCurBooks() > 0)
-                     System.out.print(" - Currently loaning " + user.getCurBooks() + " books\n");
-                 else System.out.print("\n");
+                     System.out.print(ANSI_CYAN + " - Currently loaning " + user.getCurBooks() +
+                                      " books");
+
+                 // Append linebreak
+                 System.out.print(ANSI_RESET + "\n");
              });
     }
 
