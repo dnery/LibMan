@@ -4,10 +4,15 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-import java.util.stream.Stream;
 
+/**
+ * Formatter: Class used to handle the output and list the data to terminal
+ */
 public class Formatter
 {
+    /**
+     * const values for colors used
+     */
     public static final String ANSI_RESET  = "\u001B[0m";
     public static final String ANSI_BLACK  = "\u001B[30m";
     public static final String ANSI_RED    = "\u001B[31m";
@@ -18,6 +23,12 @@ public class Formatter
     public static final String ANSI_CYAN   = "\u001B[36m";
     public static final String ANSI_WHITE  = "\u001B[37m";
 
+    /**
+     * outputUsers: show all users in the database
+     * @param users List<user> which will be printed
+     * @param loans List<loan> for validation of loans
+     * @param date Date used for validation of loan
+     */
     public static void outputUsers(List<User> users, List<Loan> loans, Date date)
     {
         // Print out tutors
@@ -111,6 +122,10 @@ public class Formatter
              });
     }
 
+    /**
+     * outputBooks(): show all the books in the database
+     * @param books List<Book> which will be printed
+     */
     public static void outputBooks(List<Book> books)
     {
         // Print out general books
@@ -138,13 +153,28 @@ public class Formatter
              });
     }
 
+    /**
+     * outputLoans(): show all the loans in the database
+     * @param loans List<Loans> which will be printed
+     */
     public static void outputLoans(List<Loan> loans) { }
 
+    /**
+     * Show a error message
+     * @param message error message
+     */
     public static void outputError(String message)
     {
         System.out.println("> " + ANSI_RED + message + ANSI_RESET);
     }
 
+    /**
+     * Diff between two date
+     * @param date1 first date
+     * @param date2 second date
+     * @param timeUnit unit of time
+     * @return difference between the first and second date
+     */
     public static long getDateDiff(Date date1, Date date2, TimeUnit timeUnit)
     {
         long diffInMillis = date2.getTime() - date1.getTime();

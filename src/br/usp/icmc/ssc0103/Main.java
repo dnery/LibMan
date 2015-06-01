@@ -15,7 +15,7 @@ public class Main
     {
         try {
             if (args.length != 1) {
-                Formatter.outputError("Missing the date argument, please see UTILIZACAO");
+                Formatter.outputError("Missing the date argument, please see UTILIZACAO in the README.md, halting main routine..");
                 System.exit(1);
             }
             shell = new Shell(args);
