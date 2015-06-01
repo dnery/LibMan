@@ -14,28 +14,44 @@
  Aplicativo de Biblioteca implementado no formato de uma Shell interativa.
 
  Funcionalidades:
- 
+
     + Cadastro de Usuarios e Livros: pelo nome e titulo, respectivamente.
     + Cadastro de Emprestimo: associa um titulo ao nome de um usuario e faz o emprestimo.
     + Validacao de Emprestimo: verifica se o usuario e livro sao validos para emprestimo
     + Verifica os atrasos: analisa os emprestimos e procura os emprestimos que estao em atraso.
-    
+
 * * *
 
 <h2 id="comando">Comandos</h2>
 
-**Lista de comando:**
+<h3>Lista de comando</h3>
+
+ **Os comandos sao case insensitive**
+
+**Em todo comando e preciso inserir o ; (ponto e virgual) no final**
 
 + Execucao:
 
 
 + Cadastros:
-
    - Adicionar Usuario:
-    
-   - Adicionar Livro:
 
-+ Emprestimos:
+            user add  "nomedousuario"  tipo;
+    Onde o tipo pode ser:
+     + tutor(professor)
+     + student(estudante)
+     + community(comunidade)
+     + omitir o tipo: assume-se comnunity como default.
+
+  - Adicionar Livro:
+
+            catalog add "nomedolivro" tipo;
+    Onde o tipo pode ser:
+    + general (comunitario)
+    + text(texto)
+    + Omitir o tipo: assume-se general
+
++ Emprestimos
    - Cadastrar Emprestimo:
 
    - Cadastrar Devolucao:
@@ -44,13 +60,13 @@
 + Listas:
 
     - Listagem de Usuarios:
-    
+            list books;
     - Listagem de Emprestimos:
-    
+
     - Listagem de Livros:
 
 + Viagem do Tempo:
-    
+
 * * *
 
 <h2 id="contribuidores">Contribuidores</h2>
@@ -85,3 +101,4 @@
 * Propagate naming convention from *Shell* commands to attributes and methods
 
 **Actual README file with command grammar instructions!**
+
