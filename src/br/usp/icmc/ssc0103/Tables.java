@@ -3,7 +3,7 @@ package br.usp.icmc.ssc0103;
 import java.util.Date;
 
 /**
- * Tables.java: source of classes which represents the database(files) used in the program.
+ * Tables.java: source of classes which represents the tables used of database in the program.
  */
 
 // types of user
@@ -212,8 +212,14 @@ class Loan
 
     public Date getRealCID() { return realCID; }
 
+    ///setters
     public void setRealCID(Date realCID) { this.realCID = realCID; }
 
+
+    /**
+     * Serialize(): serialize all the field of current object to CSV format
+     * @return string serialized
+     */
     public String serialize()
     {
         return userName + "," +
