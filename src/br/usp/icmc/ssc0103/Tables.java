@@ -16,9 +16,7 @@ class User
 {
     private String   name;
     private UserType type;
-    //maxBooks: int
     private int      curBooks;
-    //loanDuration: long
     private Date     suspendedTill;
 
     // To restore...
@@ -33,10 +31,10 @@ class User
     }
 
     // To create a new...
-    User(String userName, UserType usertype)
+    User(String userName, UserType userType)
     {
         this.name = userName;
-        this.type = usertype;
+        this.type = userType;
         this.curBooks = 0;
         this.suspendedTill = new Date();
     }
@@ -45,6 +43,9 @@ class User
 
     public UserType getType() { return type; }
 
+    public int getCurBooks() { return curBooks; }
+
+    // Fake getter to reduce attribute count
     public int getMaxBooks()
     {
         if (type == UserType.TUTOR)
@@ -55,8 +56,7 @@ class User
             return 2;
     }
 
-    public int getCurBooks() { return curBooks; }
-
+    // Fake getter to reduce attribute count
     public long getLoanDuration()
     {
         return type == UserType.TUTOR ? (long) 5.184e+9 : (long) 1.296e+9;
@@ -67,8 +67,6 @@ class User
     public void setCurBooks(int curBooks) { this.curBooks = curBooks; }
 
     public void setSuspendedTill(Date suspendedTill) { this.suspendedTill = suspendedTill; }
-
-    public boolean isAcademic() { return type != UserType.COMMUNITY; }
 
     public String serialize()
     {
@@ -92,14 +90,14 @@ class Book
 
         this.name = split[0];
         this.type = BookType.valueOf(split[1]);
-        this.avail = Boolean.getBoolean(split[2]);
+        this.avail = Boolean.parseBoolean(split[2]);
     }
 
     // To create a new one...
-    public Book(String bookname, BookType booktype)
+    public Book(String bookName, BookType bookType)
     {
-        this.name = bookname;
-        this.type = booktype;
+        this.name = bookName;
+        this.type = bookType;
         this.avail = true;
     }
 
@@ -109,14 +107,6 @@ class Book
 
     public boolean isAvail() { return avail; }
 
-    public boolean isAllowed(boolean academic) {
-       if (type == BookType.TEXT) {
-           return academic;
-       }
-        else return true;
-    }
-
-
     public void setAvail(boolean avail) { this.avail = avail; }
 
     public String serialize() { return name + "," + type.toString() + "," + avail; }
@@ -124,39 +114,41 @@ class Book
 
 class Loan
 {
-    private String  user;
-    private String  book;
-    private Date checkOutDate;
-    private Date checkInDate;
-    private Date realCID;
+    private String userName;
+    private String bookName;
+    private Date   checkOutDate;
+    private Date   checkInDate;
+    private Date   realCID;
 
     // To restore...
     public Loan(String csv)
     {
         String[] split = csv.split(",");
 
-        this.user = split[0];
-        this.book = split[1];
+        this.userName = split[0];
+        this.bookName = split[1];
         this.checkOutDate = new Date(Long.parseLong(split[2]));
         this.checkInDate = new Date(Long.parseLong(split[3]));
         this.realCID = new Date(Long.parseLong(split[4]));
     }
-    public Loan(String user, String book, Date checkOutDate, long duration) {
-        this.user = user;
-        this.book = book;
+
+    // To create a new...
+    public Loan(String userName, String bookName, Date checkOutDate, long loanDuration)
+    {
+        this.userName = userName;
+        this.bookName = bookName;
         this.checkOutDate = checkOutDate;
-        this.checkInDate = new Date(checkOutDate.getTime() + duration);
+        this.checkInDate = new Date(checkOutDate.getTime() + loanDuration);
         this.realCID = checkOutDate;
     }
 
-    public String getUserID() { return user; }
+    public String getUserName() { return userName; }
 
-    public String getBookID() { return book; }
+    public String getBookName() { return bookName; }
 
     public Date getCheckOutDate() { return checkOutDate; }
 
     public Date getCheckInDate() { return checkInDate; }
-
 
     public Date getRealCID() { return realCID; }
 
@@ -164,8 +156,8 @@ class Loan
 
     public String serialize()
     {
-        return user + "," +
-               book + "," +
+        return userName + "," +
+               bookName + "," +
                checkOutDate.getTime() + "," +
                checkInDate.getTime() + "," +
                realCID.getTime();

@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Stream;
+import java.util.stream.Collectors;
 
 // Database level attribute validity
 class DatabaseException extends Exception
@@ -35,7 +35,6 @@ public class Database
     private List<User> users;
     private List<Book> books;
     private List<Loan> loans;
-    private DatabaseFileHandler helper;
     private String     userFileName;
     private String     bookFileName;
     private String     loanFileName;
@@ -44,220 +43,238 @@ public class Database
     private static final Database database = new Database("users.csv", "books.csv", "loans.csv");
 
     // Private constructor according to Singleton standards
-    private Database(String userFileName, String bookFileName, String loanFileName) {
-
-        helper = new DatabaseFileHandler();
+    private Database(String userFileName, String bookFileName, String loanFileName)
+    {
         users = new ArrayList<User>();
         books = new ArrayList<Book>();
         loans = new ArrayList<Loan>();
-
 
         this.userFileName = userFileName;
         this.bookFileName = bookFileName;
         this.loanFileName = loanFileName;
 
-        helper.loadUsers();
-        helper.loadBooks();
-        helper.loadLoans();
-
+        loadUsers();
+        loadBooks();
+        loadLoans();
     }
-    // The only existing instance is obtained always
+
+    // The only existing instance is obtained
     public static Database getInstance() { return database; }
 
     // "user add (...)" command backend
-    public void userAdd(String username, UserType usertype)
+    public void userAdd(String userName, UserType userType) throws DatabaseException
     {
+        // Only add if user doesn't already exist
+        if (users.stream().noneMatch(user -> user.getName().equals(userName))) {
+            users.add(new User(userName, userType));
 
-        User user = new User(username, usertype);
-        users.add(user);
-        helper.append(userFileName, user.serialize());
-
-        //DEBUG
-        if (usertype == UserType.TUTOR)
-            System.out.println("Tutor " + username + " has been added!");
-        else if (usertype == UserType.STUDENT)
-            System.out.println("Student " + username + " has been added!");
-        else if (usertype == UserType.COMMUNITY)
-            System.out.println("Community member " + username + " has been added!");
+            //Todo: erase debugs...
+            if (userType == UserType.TUTOR)
+                System.out.println("Tutor " + userName + " has been added!");
+            else if (userType == UserType.STUDENT)
+                System.out.println("Student " + userName + " has been added!");
+            else
+                System.out.println("Community " + userName + " has been added!");
+        } else throw new DatabaseException("User has already been registered!");
     }
 
     // "catalog add (...)" command backend
-    public void catalogAdd(String bookname, BookType booktype)
+    public void catalogAdd(String bookName, BookType bookType) throws DatabaseException
     {
-        // TODO!!
-        Book book = new Book (bookname, booktype);
-        books.add(book);
-        helper.append(bookFileName, book.serialize());
+        // Only add if book doesn't already exist
+        if (books.stream().noneMatch(book -> book.getName().equals(bookName))) {
+            books.add(new Book(bookName, bookType));
 
-        //DEBUG
-        if (booktype == BookType.TEXT)
-            System.out.println("Textbook " + bookname + " has been catalogued!");
-        else if (booktype == BookType.GENERAL)
-            System.out.println("Literary book " + bookname + " has been catalogued!");
+            //Todo: erase debugs...
+            if (bookType == BookType.TEXT)
+                System.out.println("Textbook " + bookName + " has been catalogued!");
+            else
+                System.out.println("Literary " + bookName + " has been catalogued!");
+        } else throw new DatabaseException("Book has already been catalogued!");
     }
 
     // "user (...) checkout (...)" command backend
-    public void checkOut(String username, String bookname, Date date) throws
+    public void checkOut(String userName, String bookName, Date date) throws
                                                                       DatabaseException,
                                                                       AccessException,
                                                                       AvailException
     {
-        // Checa pela existencia do usuario na database
-        // Checa pela existencia do livro na database
-        // Checa se o usuario tem acesso ao livro
-        // Checa se o livro ja nao esta alugado
-        // Adiciona novo elemento na lista loans
-        // Atualiza o arquivo loans.csv com append()
-        for (User user : users) {
-            if (user.getName().equals(username)) {
-                for (Book book : books) {
-                    if (book.getName().equals(bookname)) {
-                        if (book.isAvail()) {
-                            if (book.isAllowed(user.isAcademic())) {
-                                Loan loan = new Loan(username, bookname , new Date(), user.getLoanDuration());
-                                loans.add(loan);
-                                helper.append(loanFileName, loan.serialize());
-                                System.out.println(date.toString() + ": loaning \"" + bookname + "\" to " + username + ".");
-                            }else throw new AccessException();
-                        }else throw new AvailException();
-                    }
-                }throw new DatabaseException();
-            }
-        }throw new DatabaseException();
+        // Only process if both user and book exist in database
+        if (users.stream().anyMatch(user -> user.getName().equals(userName)) &&
+            books.stream().anyMatch(book -> book.getName().equals(bookName))) {
+            // User is always unique, so just get it
+            User userObject = users.stream()
+                                   .filter(user -> user.getName().equals(userName))
+                                   .limit(2)
+                                   .collect(Collectors.toList())
+                                   .get(0);
 
-        //DEBUG
-        //System.out.println(date.toString() + ": loaning \"" + bookname + "\" to " + username + ".");
+            // Book is always unique, so just get it
+            Book bookObject = books.stream()
+                                   .filter(book -> book.getName().equals(bookName))
+                                   .limit(2)
+                                   .collect(Collectors.toList())
+                                   .get(0);
+
+            // Evaluate the collection result
+            System.out.println("User found: " + userObject.toString());
+            System.out.println("Book found: " + bookObject.toString());
+
+            // Permission check, 1st step
+            if (userObject.getSuspendedTill().after(new Date()))
+                throw new AccessException("User is still suspended!");
+
+            // Permission check, 2nd step
+            if (userObject.getType() == UserType.COMMUNITY &&
+                bookObject.getType() == BookType.TEXT)
+                throw new AccessException("Loan is not authorized!");
+
+            // Permission check, 3rd step
+            if (userObject.getCurBooks() >= userObject.getMaxBooks())
+                throw new AccessException("Loan limit maxed-out!");
+
+            // Check if book is in use
+            if (!bookObject.isAvail())
+                throw new AvailException("Book is already in use!");
+
+            // Actual processing
+            loans.add(new Loan(userName, bookName, date, userObject.getLoanDuration()));
+            userObject.setCurBooks(userObject.getCurBooks() + 1);
+            bookObject.setAvail(false);
+
+        } else throw new DatabaseException("User or book not found!");
     }
 
     // "checkin (...)" command backend
-    public void checkIn(String bookname, Date date) throws DatabaseException,
+    public void checkIn(String bookName, Date date) throws DatabaseException,
                                                            AvailException
     {
+        // Only process book actually exists in database
+        if (books.stream().anyMatch(book -> book.getName().equals(bookName))) {
+            // Book is always unique, so just get it
+            Book bookObject = books.stream()
+                                   .filter(book -> book.getName().equals(bookName))
+                                   .limit(2)
+                                   .collect(Collectors.toList())
+                                   .get(0);
 
-        throw new DatabaseException();
-        // Checa se o livro ja nao esta disponivel
-        // MODIFICA o elemento certo na lista loans
-        // MODIFICA a linha certa no arquivo loans.csv com snipe()
-        // Ou simplesmente o reescreve inteiro com o metodo dump()
+            // Evaluate the collection result
+            System.out.println("Book found: " + bookObject.toString());
 
-        //DEBUG
-        //System.out.println(date.toString() + ": \"" + bookname + "\" has been returned!");
+            // Only if unavailable...
+            if (!bookObject.isAvail()) {
+                // I know the loan exists, so get it
+                Loan loanObject = loans.stream()
+                                       .filter(loan -> loan.getBookName()
+                                                           .equals(bookObject.getName()))
+                                       .limit(2)
+                                       .collect(Collectors.toList())
+                                       .get(0);
+
+                // I know the user exists, so get it
+                User userObject = users.stream()
+                                       .filter(user -> user.getName()
+                                                           .equals(loanObject.getUserName()))
+                                       .limit(2)
+                                       .collect(Collectors.toList())
+                                       .get(0);
+                // Evaluate the collection result
+                System.out.println("Loan found: " + loanObject.toString());
+                System.out.println("User found: " + userObject.toString());
+
+                // Actual processing
+                Date today = new Date();
+                bookObject.setAvail(true);
+                loanObject.setRealCID(today);
+                userObject.setCurBooks(userObject.getCurBooks() - 1);
+
+                // Set suspension date if needed
+                if (today.after(loanObject.getCheckInDate())) {
+                    long difference = today.getTime() - loanObject.getCheckInDate().getTime();
+                    userObject.setSuspendedTill(new Date(today.getTime() + difference));
+                }
+            } else throw new AvailException("Book is not in use!");
+        } else throw new DatabaseException("Book not found in database!");
     }
 
-    // File handlers:
-    class DatabaseFileHandler {
-        public void loadUsers() {
-            try {
-                BufferedReader in = new BufferedReader(new FileReader(userFileName));
-                String csv;
-                in.readLine(); // Pula a primeira linha (cabeÁalho)
-                while((csv = in.readLine()) != null) {
-                    users.add(new User(csv));
-                }
+    // users list loader
+    private void loadUsers()
+    {
+        try {
+            if (!(new File(userFileName)).createNewFile()) {
+                BufferedReader fileReader = new BufferedReader(new FileReader(userFileName));
+                String buffer;
+
+                while ((buffer = fileReader.readLine()) != null)
+                    users.add(new User(buffer));
             }
-            catch(FileNotFoundException e) {
-                try (Writer writer = new BufferedWriter(new OutputStreamWriter(
-                        new FileOutputStream(userFileName), "utf-8"))) {
-                    writer.write("Registred users:\n");
-                    writer.close();
-                }
-                catch (IOException er) {
-                    System.out.println("Error creating users file!");
-                }
-            }
-            catch(IOException e) {
-                System.out.println("Error reading Users file!");
-            }
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
         }
-
-        public void loadBooks(){
-            try {
-                BufferedReader in = new BufferedReader(new FileReader(bookFileName));
-                String csv;
-                in.readLine(); // Pula a primeira linha (cabeÁalho)
-                while((csv = in.readLine()) != null) {
-                    books.add(new Book(csv));
-                }
-                in.close();
-            }
-            catch(FileNotFoundException e) {
-                try (Writer writer = new BufferedWriter(new OutputStreamWriter(
-                        new FileOutputStream(bookFileName), "utf-8"))) {
-                    writer.write("Registred books:\n");
-                    writer.close();
-                }
-                catch (IOException er) {
-                    System.out.println("Error creating books file!");
-                }
-            }
-            catch(IOException e) {
-                System.out.println("Error reading books file!");
-            }
-        }
-
-        public void loadLoans() {
-            try {
-                BufferedReader in = new BufferedReader(new FileReader(loanFileName));
-                String csv;
-                in.readLine(); // Pula a primeira linha (cabeÁalho)
-                while((csv = in.readLine()) != null) {
-                    loans.add(new Loan(csv));
-                }
-                in.close();
-            }
-            catch(FileNotFoundException e) {
-                try (Writer writer = new BufferedWriter(new OutputStreamWriter(
-                        new FileOutputStream(loanFileName), "utf-8"))) {
-                    writer.write("Registred Loans:\n");
-                    writer.close();
-                }
-                catch (IOException er) {
-                    System.out.println("Error creating loans file!");
-                }
-            }
-            catch(IOException e) {
-                System.out.println("Error reading loans file!");
-            }
-        }
-
-        private void append(String filename, String data)
-        {
-            try(PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(filename, true)))) {
-                out.println(data);
-            }catch (IOException e) {
-                System.err.println(e);
-            }
-        }
-
-        // Esse metodo e opcional (vide snipe())
-        private void dump(String filename, String[] data)
-        {
-            // TODO!!!
-            // Se implementado, esse metodo deve
-            // reescrever o .csv inteiro usando
-            // o array de strings "data" recebido
-        }
-
-        // Esse metodo e opcional (vide dump())
-        private void snipe(String filename, String replaceable, String replacer)
-        {
-            // TODO!!!
-            // Se implementado, esse metodo deve
-            // reescrever uma string "replaceable"
-            // com uma string "replacer" recebide
-
-
-        }
-
-        // Recover users stream rather than list itself
-        public Stream<User> getUserStream() { return users.stream(); }
-
-        // Recover books stream rather than list itself
-        public Stream<Book> getBookStream() { return books.stream(); }
-
-        // Recover loans stream rather than list itself
-        public Stream<Loan> getLoanStream() { return loans.stream(); }
     }
 
+    // books list loader
+    private void loadBooks()
+    {
+        try {
+            if (!(new File(bookFileName)).createNewFile()) {
+                BufferedReader fileReader = new BufferedReader(new FileReader(bookFileName));
+                String buffer;
 
+                while ((buffer = fileReader.readLine()) != null)
+                    books.add(new Book(buffer));
+            }
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    // loans list loader
+    private void loadLoans()
+    {
+        try {
+            if (!(new File(loanFileName)).createNewFile()) {
+                BufferedReader fileReader = new BufferedReader(new FileReader(loanFileName));
+                String buffer;
+
+                while ((buffer = fileReader.readLine()) != null)
+                    loans.add(new Loan(buffer));
+            }
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    // Serialize everything and update files
+    public void serializeAndUpdate() throws IOException
+    {
+        BufferedWriter fileWriter;
+
+        // Update users file
+        fileWriter = new BufferedWriter(new FileWriter(userFileName, false));
+        for (User user : users)
+            fileWriter.write(user.serialize() + "\n");
+        fileWriter.close();
+
+        // Update books file
+        fileWriter = new BufferedWriter(new FileWriter(bookFileName, false));
+        for (Book book : books)
+            fileWriter.write(book.serialize() + "\n");
+        fileWriter.close();
+
+        // Update loans file
+        fileWriter = new BufferedWriter(new FileWriter(loanFileName, false));
+        for (Loan loan : loans)
+            fileWriter.write(loan.serialize() + "\n");
+        fileWriter.close();
+    }
+
+    // Users list to be converted to stream by Formatter (Don't be naughty!)
+    public List<User> getUsers() { return users; }
+
+    // Books list to be converted to stream by Formatter (Don't be naughty!)
+    public List<Book> getBooks() { return books; }
+
+    // Loans list to be converted to stream by Formatter (Don't be naughty!)
+    public List<Loan> getLoans() { return loans; }
 }

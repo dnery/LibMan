@@ -1,5 +1,7 @@
 package br.usp.icmc.ssc0103;
 
+import java.io.IOException;
+import java.text.Normalizer;
 import java.util.Date;
 import java.util.Scanner;
 import java.util.regex.Matcher;
@@ -38,25 +40,18 @@ public class Shell
     {
         if (line.matches("^(.*[^\\\\];)$")) {
 
-            if (line.matches("^\\s*user\\s+add\\s+(?:[^\\\\,]*);\\s*$")) {
-                System.out.println("useraddcmd premise...");
+            if (line.matches("^\\s*user\\s+add\\s+(?:[^\\\\,]*);\\s*$"))
                 command = Command.USERADD;
-            } else if (line.matches("^\\s*catalog\\s+add\\s+(?:[^\\\\,]*);\\s*$")) {
+            else if (line.matches("^\\s*catalog\\s+add\\s+(?:[^\\\\,]*);\\s*$"))
                 command = Command.CATALOGADD;
-                System.out.println("catalogaddcmd premise...");
-            } else if (line.matches("^(?:[^\\\\,]*)checkout(?:[^\\\\,]*);\\s*$")) {
-                System.out.println("checkoutcmd premise...");
+            else if (line.matches("^(?:[^\\\\,]*)checkout(?:[^\\\\,]*);\\s*$"))
                 command = Command.CHECKOUT;
-            } else if (line.matches("^\\s*checkin\\s+(?:[^\\\\,]*);\\s*$")) {
-                System.out.println("checkin premise...");
+            else if (line.matches("^\\s*checkin\\s+(?:[^\\\\,]*);\\s*$"))
                 command = Command.CHECKIN;
-            } else if (line.matches("^\\s*list\\s+(?:[^\\\\,]*);\\s*$")) {
-                System.out.println("listcmd premise...");
+            else if (line.matches("^\\s*list\\s+(?:[^\\\\,]*);\\s*$"))
                 command = Command.LIST;
-            } else if (line.matches("^\\s*exit\\s*;\\s*$")) {
-                System.out.println("exitcmd premise...");
+            else if (line.matches("^\\s*exit\\s*;\\s*$"))
                 command = Command.EXIT;
-            }
             return true;
         } else {
             System.out.println("> Not a valid command...");
@@ -75,6 +70,8 @@ public class Shell
         // Simple switch
         switch (command) {
 
+            case NOOP:
+                break;
             case USERADD:
                 //https://regex101.com/r/cZ7lK1/7
                 pattern = Pattern.compile("^(?i)\\s*user\\s+add\\s+\\\"\\s*" +
@@ -82,14 +79,18 @@ public class Shell
                                           "(tutor|student|community))?\\s*;\\s*$");
 
                 if ((matcher = pattern.matcher(line)).find()) {
-                    if (matcher.group(2) != null && matcher.group(2).equals("tutor"))
-                        Database.getInstance().userAdd(matcher.group(1), UserType.TUTOR);
-                    else if (matcher.group(2) != null && matcher.group(2).equals("student"))
-                        Database.getInstance().userAdd(matcher.group(1), UserType.STUDENT);
-                    else if (matcher.group(2) == null || matcher.group(2).equals("community"))
-                        Database.getInstance().userAdd(matcher.group(1), UserType.COMMUNITY);
+                    try {
+                        if (matcher.group(2) != null && matcher.group(2).equals("tutor"))
+                            Database.getInstance().userAdd(matcher.group(1), UserType.TUTOR);
+                        else if (matcher.group(2) != null && matcher.group(2).equals("student"))
+                            Database.getInstance().userAdd(matcher.group(1), UserType.STUDENT);
+                        else if (matcher.group(2) == null || matcher.group(2).equals("community"))
+                            Database.getInstance().userAdd(matcher.group(1), UserType.COMMUNITY);
+                    } catch(DatabaseException e) {
+                        Formatter.outputError(e.getMessage());
+                    }
                 } else
-                    System.out.println("> Invalid syntax...");
+                    Formatter.outputError("Invalid syntax...");
                 break;
 
             case CATALOGADD:
@@ -99,12 +100,16 @@ public class Shell
                                           "(text|general))?\\s*;\\s*$");
 
                 if ((matcher = pattern.matcher(line)).find()) {
-                    if (matcher.group(2) != null && matcher.group(2).equals("text"))
-                        Database.getInstance().catalogAdd(matcher.group(1), BookType.TEXT);
-                    else if (matcher.group(2) == null || matcher.group(2).equals("general"))
-                        Database.getInstance().catalogAdd(matcher.group(1), BookType.GENERAL);
+                    try {
+                        if (matcher.group(2) != null && matcher.group(2).equals("text"))
+                            Database.getInstance().catalogAdd(matcher.group(1), BookType.TEXT);
+                        else if (matcher.group(2) == null || matcher.group(2).equals("general"))
+                            Database.getInstance().catalogAdd(matcher.group(1), BookType.GENERAL);
+                    } catch (DatabaseException e){
+                        Formatter.outputError(e.getMessage());
+                    }
                 } else
-                    System.out.println("> Invalid syntax...");
+                    Formatter.outputError("Invalid syntax...");
                 break;
 
             case CHECKOUT:
@@ -119,15 +124,11 @@ public class Shell
                         Database.getInstance().checkOut(matcher.group(1),
                                                         matcher.group(2),
                                                         new Date());
-                    } catch (DatabaseException e) {
-                        System.err.println("User or book does not exist!");
-                    } catch (AccessException e) {
-                        System.err.println("Loan is not authorized!");
-                    } catch (AvailException e) {
-                        System.err.println("Book already in use!");
+                    } catch (Exception e) {
+                        Formatter.outputError(e.getMessage());
                     }
                 } else
-                    System.out.println("> Invalid syntax...");
+                    Formatter.outputError("Invalid syntax...");
                 break;
 
             case CHECKIN:
@@ -138,13 +139,11 @@ public class Shell
                 if ((matcher = pattern.matcher(line)).find()) {
                     try {
                         Database.getInstance().checkIn(matcher.group(1), new Date());
-                    } catch (DatabaseException e) {
-                        System.err.println("Book certainly does not exist!");
-                    } catch (AvailException e) {
-                        System.err.println("Book is already available!");
+                    } catch (Exception e) {
+                        Formatter.outputError(e.getMessage());
                     }
                 } else
-                    System.out.println("> Invalid syntax...");
+                    Formatter.outputError("Invalid syntax...");
                 break;
 
             case LIST:
@@ -155,12 +154,20 @@ public class Shell
 
                     while (matcher.find()) {
                         if (matcher.group(1).equals("users"))
-                            System.out.println("Listing registered users!");
+                            Formatter.outputUsers(Database.getInstance().getUsers());
                         else if (matcher.group(1).equals("books"))
-                            System.out.println("Listing registered books!");
+                            Formatter.outputBooks(Database.getInstance().getBooks());
                         else if (matcher.group(1).equals("loans"))
                             System.out.println("Listing registered loans!");
                     }
+                }
+                break;
+
+            case EXIT:
+                try {
+                    Database.getInstance().serializeAndUpdate();
+                } catch (IOException e) {
+                    Formatter.outputError(e.getMessage());
                 }
                 break;
 
