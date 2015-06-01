@@ -20,44 +20,95 @@ public class Formatter
 
     public static void outputUsers(List<User> users)
     {
+        // Get a fixed time
+        Date today = new Date();
+
+        // Print out tutors
         System.out.println(ANSI_YELLOW + "--University tutors--" + ANSI_RESET);
         users.stream().filter(user -> user.getType() == UserType.TUTOR)
-             .forEach(user -> System.out.println("- " + user.getName()));
+             .sorted(Comparator.comparing(User::getName))
+             .forEach(user -> {
+                 // Is currently suspended?
+                 if (user.getSuspendedTill().after(today))
+                     System.out.print("# " + ANSI_RED + user.getName() + " (" +
+                                      getDateDiff(user.getSuspendedTill(), today, TimeUnit.DAYS) +
+                                      " days suspended)" + ANSI_RESET);
+                 else System.out.print("# " + user.getName());
+
+                 // Is loaning any books?
+                 if (user.getCurBooks() > 0)
+                     System.out.print(" - Currently loaning " + user.getCurBooks() + " books\n");
+                 else System.out.print("\n");
+             });
+
+        // Print out students
         System.out.println(ANSI_YELLOW + "--University students--" + ANSI_RESET);
         users.stream().filter(user -> user.getType() == UserType.STUDENT)
-             .forEach(user -> System.out.println("- " + user.getName()));
+             .sorted(Comparator.comparing(User::getName))
+             .forEach(user -> {
+                 // Is currently suspended?
+                 if (user.getSuspendedTill().after(today))
+                     System.out.print("# " + ANSI_RED + user.getName() + " (" +
+                                      getDateDiff(user.getSuspendedTill(), today, TimeUnit.DAYS) +
+                                      " days suspended)" + ANSI_RESET);
+                 else System.out.print("# " + user.getName());
+
+                 // Is loaning any books?
+                 if (user.getCurBooks() > 0)
+                     System.out.print(" - Currently loaning " + user.getCurBooks() + " books\n");
+                 else System.out.print("\n");
+             });
+
+        // Print out community users
         System.out.println(ANSI_YELLOW + "--Local community users--" + ANSI_RESET);
         users.stream().filter(user -> user.getType() == UserType.COMMUNITY)
-             .forEach(user -> System.out.println("- " + user.getName()));
+             .sorted(Comparator.comparing(User::getName))
+             .forEach(user -> {
+                 // Is currently suspended?
+                 if (user.getSuspendedTill().after(today))
+                     System.out.print("# " + ANSI_RED + user.getName() + " (" +
+                                      getDateDiff(user.getSuspendedTill(), today, TimeUnit.DAYS) +
+                                      " days suspended)" + ANSI_RESET);
+                 else System.out.print("# " + user.getName());
+
+                 // Is loaning any books?
+                 if (user.getCurBooks() > 0)
+                     System.out.print(" - Currently loaning " + user.getCurBooks() + " books\n");
+                 else System.out.print("\n");
+             });
     }
 
     public static void outputBooks(List<Book> books)
     {
+        // Print out general books
         System.out.println(ANSI_YELLOW + "--Literary open use books--" + ANSI_RESET);
         books.stream().filter(book -> book.getType() == BookType.GENERAL)
-             .sorted(Comparator.comparing(Book::isAvail))
-             .forEachOrdered(book -> {
+             .sorted(Comparator.comparing(Book::isAvail).reversed())
+             .forEach(book -> {
                  if (book.isAvail())
-                     System.out.print(ANSI_GREEN);
+                     System.out.print("# " + ANSI_GREEN);
                  else
-                     System.out.print(ANSI_RED);
+                     System.out.print("# " + ANSI_RED);
                  System.out.println(book.getName() + ANSI_RESET);
              });
+
+        // Print out academic books
         System.out.println(ANSI_YELLOW + "--Academic use only books--" + ANSI_RESET);
         books.stream().filter(book -> book.getType() == BookType.TEXT)
-             .sorted(Comparator.comparing(Book::isAvail))
-             .forEachOrdered(book -> {
+             .sorted(Comparator.comparing(Book::isAvail).reversed())
+             .forEach(book -> {
                  if (book.isAvail())
-                     System.out.print(ANSI_GREEN);
+                     System.out.print("# " + ANSI_GREEN);
                  else
-                     System.out.print(ANSI_RED);
+                     System.out.print("# " + ANSI_RED);
                  System.out.println(book.getName() + ANSI_RESET);
              });
     }
 
-    public static void outputLoans(List<Loan> loans) {  }
+    public static void outputLoans(List<Loan> loans) { }
 
-    public static void outputError(String message){
+    public static void outputError(String message)
+    {
         System.out.println("> " + ANSI_RED + message + ANSI_RESET);
     }
 

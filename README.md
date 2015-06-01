@@ -1,8 +1,6 @@
 ## Still to be done:
 
 ### *Formatter*
-* Tweak user listings
-* Tweak book listings
 * Loan listings
 
 ### *Shell*
