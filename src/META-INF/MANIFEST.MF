@@ -1,3 +1,0 @@
-Manifest-Version: 1.0
-Main-Class: br.usp.icmc.ssc0103.Main
-
