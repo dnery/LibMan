@@ -25,9 +25,9 @@
 
 <h3>Lista de comando</h3>
 <h5> ATENCAO </h5>
-**Os comandos sao case insensitive**.
-**Em todo comando e preciso inserir o ; (ponto e virgula) no final**.
-**Insira (aspas)
+**Os comandos sao case insensitive.**
+**Em todo comando e preciso inserir o ; (ponto e virgula) no final.**
+**Insira (aspas) em todos comandos, por ex: "nomelivro" aspas inclusas."**
 
 + Execucao:
 
@@ -97,8 +97,11 @@
 <h2 id="contribuidores">Contribuidores</h2>
 
 [Danilo Nery](https://github.com/dnery) - Num: 8602430
+
 [Cristiano Lacerda](https://github.com/Ibrahiim) - Num: 8531737
+
 [Marcos Vinicius Junqueira](https://github.com/mvjunq) - Num: 8922393
+
 
 * * *
 
