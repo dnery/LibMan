@@ -14,10 +14,7 @@ public class Main
     public static void main(String[] args)
     {
         try {
-            if (args.length != 1) {
-                Formatter.outputError("Missing the date argument, please see UTILIZACAO in the README.md, halting main routine..");
-                System.exit(1);
-            }
+
             shell = new Shell(args);
             shell.runCommand();
         } catch (ParseException e){
