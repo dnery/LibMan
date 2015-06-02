@@ -30,6 +30,10 @@
 
 + Execucao:
 
+   - Compilacao:
+
+   - Executar:
+
 
 + Cadastros:
    - Adicionar Usuario:
@@ -69,11 +73,11 @@
 
             list user;
         *Ira mostrar uma lista de usuarios, classificados pelo tipo.*
-        *Caso o usuario possua emprestismos ou esteja em atraso, mostrara mensagem *
+        *Caso o usuario possua emprestismos ou esteja em atraso, mostrara mensagem.*
     - Listagem de Livros:
 
             list books;
-        *Ira mostrar uma lista de livros, classificados pelo tipo*
+        *Ira mostrar uma lista de livros, classificados pelo tipo.*
         *Os livros com emprestimos estarao em vermelho*
     - Listagem de Emprestimos:
 
