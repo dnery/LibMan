@@ -27,6 +27,7 @@
 <h5> ATENCAO </h5>
 **Os comandos sao case insensitive**.
 **Em todo comando e preciso inserir o ; (ponto e virgula) no final**.
+**Insira (aspas)
 
 + Execucao:
 
@@ -85,6 +86,11 @@
             list loans;
         *Ira mostrar uma lista de emprestismos, classificados por status.*
 + Viagem do Tempo:
+
+    Passe uma data no formato MM/DD/YYYY como argumento no programa. Logo na sua execucao, ele ira imprimir essa data(confirme),
+    caso ele nao consiga analisar e pegar essa data, pega-se a data atual do sistema.
+
+    Assim, voce pode viajar ate o futuro e ver toda a magica acontecer
 
 * * *
 

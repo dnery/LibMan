@@ -88,7 +88,8 @@ public class Shell
             }
             return true;
         } else {
-            Formatter.outputError("\n\nHELP|COMMANDS: \n\n" +
+            Formatter.outputError("\n\nHELP|COMMANDS: \n" +
+                            ">Dont forget the dot-comma (;) at the end of command\n" +
                             "ADD USER:\n" +
                             "user add \"username\" type;" +
                             "\n\n" +
