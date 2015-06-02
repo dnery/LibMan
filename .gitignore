@@ -1,16 +1,10 @@
-# Created by .ignore support plugin (hsz.mobi)
-### Java template
-*.class
-
-# Package Files #
-#*.jar
-#*.war
-#*.ear
-
-### Example user template
-
-# IntelliJ project files
+### IntelliJ structural
 .idea
 #*.iml
 out
-gen
+#gen
+src/META-INF
+
+### Locally generated
+database
+package

@@ -38,8 +38,13 @@ public class Database
     private String     bookFileName;
     private String     loanFileName;
 
+    // Fix root directory name and build it atomically
+    private static final File databaseDir = new File("database");
+
     // Static initializer is always run before class is used by any thread
-    private static final Database database = new Database("users.csv", "books.csv", "loans.csv");
+    private static final Database database = new Database("database/users.csv",
+                                                          "database/books.csv",
+                                                          "database/loans.csv");
 
     // Private constructor according to Singleton standards
     private Database(String userFileName, String bookFileName, String loanFileName)
@@ -47,6 +52,9 @@ public class Database
         users = new ArrayList<User>();
         books = new ArrayList<Book>();
         loans = new ArrayList<Loan>();
+
+        if (!databaseDir.exists())
+            databaseDir.mkdir();
 
         this.userFileName = userFileName;
         this.bookFileName = bookFileName;
