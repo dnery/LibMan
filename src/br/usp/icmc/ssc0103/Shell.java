@@ -88,21 +88,21 @@ public class Shell
             }
             return true;
         } else {
-            Formatter.outputError("\n\nHELP|COMMANDS: \n" +
-                            ">Dont forget the dot-comma (;) at the end of command\n" +
-                            "ADD USER:\n" +
-                            "user add \"username\" type;" +
-                            "\n\n" +
-                            "ADD BOOK:\n" +
-                            "catalog add \"bookname\" type;" +
-                            "\n\n" +
-                            "LEND A BOOK:\n" +
-                            "lend \"bookname\" to \"username;" +
-                            "\n\n" +
-                            "RETURN A BOOK: \n"+
-                            "return \"bookname\" type"
-                    + "\n"
-            );
+            System.out.println("\n\n> Try one of the following syntaxes: \n" +
+                               "ADD USER:\n" +
+                               "user add \"username\" type;" +
+                               "\n\n" +
+                               "ADD BOOK:\n" +
+                               "catalog add \"bookname\" type;" +
+                               "\n\n" +
+                               "LEND BOOK:\n" +
+                               "lend \"bookname\" to \"username;" +
+                               "\n\n" +
+                               "RETURN BOOK:\n" +
+                               "return \"bookname\" type;" +
+                               "\n\n" +
+                               "EXIT:\n" +
+                               "exit;");
             return false;
         }
     }
@@ -233,4 +233,4 @@ public class Shell
                 return false;
         }
     }
-};
+}
