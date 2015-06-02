@@ -29,6 +29,7 @@ public class Shell
 
     /**
      * Constructor which tries to parse arguments
+     *
      * @param args arguments
      * @throws ParseException exception for wrong args
      */
@@ -43,6 +44,7 @@ public class Shell
 
     /**
      * Watches for command inputs
+     *
      * @throws IOException
      */
     public void runCommand() throws IOException
@@ -58,6 +60,7 @@ public class Shell
 
     /**
      * Check the command from input
+     *
      * @return boolean true for right command or false for wrong
      */
     private boolean checkCommand()
@@ -89,6 +92,7 @@ public class Shell
 
     /**
      * Triggers the correspondent respectively
+     *
      * @return
      */
     // Fully launches the commands
@@ -103,9 +107,9 @@ public class Shell
 
             // add user
             case USERADD:
-                //https://regex101.com/r/cZ7lK1/7
+                //https://regex101.com/r/cZ7lK1/8
                 pattern = Pattern.compile("^(?i)\\s*user\\s+add\\s+\\\"\\s*" +
-                                          "([a-zA-Z][a-zA-Z\\s]+[a-zA-Z])\\s*\\\"(?:\\s+" +
+                                          "([a-zA-Z0-9][a-zA-Z0-9\\s]+[a-zA-Z0-9])\\s*\\\"(?:\\s+" +
                                           "(tutor|student|community))?\\s*;\\s*$");
 
                 if ((matcher = pattern.matcher(line)).find()) {
@@ -125,9 +129,9 @@ public class Shell
 
             // catalog book
             case CATALOGADD:
-                //https://regex101.com/r/nU9qD4/1
+                //https://regex101.com/r/nU9qD4/2
                 pattern = Pattern.compile("^(?i)\\s*catalog\\s+add\\s+\\\"\\s*" +
-                                          "([a-zA-Z][a-zA-Z\\s]+[a-zA-Z])\\s*\\\"(?:\\s+" +
+                                          "([a-zA-Z0-9][a-zA-Z0-9\\s]+[a-zA-Z0-9])\\s*\\\"(?:\\s+" +
                                           "(text|general))?\\s*;\\s*$");
 
                 if ((matcher = pattern.matcher(line)).find()) {
@@ -192,11 +196,12 @@ public class Shell
                         else if (matcher.group(1).equals("books"))
                             Formatter.outputBooks(Database.getInstance().getBooks());
                         else if (matcher.group(1).equals("loans"))
-                            System.out.println("Listing registered loans!");
+                            Formatter.outputLoans(Database.getInstance().getLoans(), date);
                     }
                 }
                 return true;
 
+            // flatten database and exit
             case EXIT:
                 try {
                     Database.getInstance().serializeAndUpdate();
