@@ -90,10 +90,13 @@
 
 <h2 id="contribuidores">Contribuidores</h2>
 
+[Danilo Nery](https://github.com/dnery) - Num: 8602430
+[Cristiano Lacerda](https://github.com/Ibrahiim) - Num: 8531737
+[Marcos Vinicius Junqueira](https://github.com/mvjunq) - Num: 8922393
+
 * * *
 
 <h2 id="copyright">Copyright</h2>
-
             DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
                     Version 2, December 2004
 
@@ -101,7 +104,6 @@
    TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
 
   0. You just DO WHAT THE FUCK YOU WANT TO.
-
 
 * * *
 
