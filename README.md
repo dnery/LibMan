@@ -41,7 +41,7 @@
      + tutor(professor)
      + student(estudante)
      + community(comunidade)
-     + omitir o tipo: assume-se comnunity como default.
+     + omitir o tipo: assume-se community como default.
 
   - Adicionar Livro:
 
@@ -50,7 +50,7 @@
     Onde o tipo pode ser:
     + general (comunitario)
     + text(texto)
-    + Omitir o tipo: assume-se general
+    + Omitir o tipo: assume-se comunitario
 
 + Emprestimos
 
@@ -66,18 +66,20 @@
 
 + Listas:
 
-    - Listagem de Usuarios
-        *Ira mostrar uma lista de livros, classificados por disponibilidade.*
+    - Listagem de Usuarios:
+
             list books;
+        *Ira mostrar uma lista de livros, classificados por disponibilidade.*
 
-    - Listagem de Emprestimos
-        *Ira mostrar uma lista de usuarios, classificados por emprestimos.*
+    - Listagem de Emprestimos:
+
             list users;
+        *Ira mostrar uma lista de usuarios, classificados por emprestimos.*
 
-    - Listagem de Livros
-    *Ira mostrar uma lista de emprestismos, classificados por status.*
+    - Listagem de Livros:
+
             list loans;
-
+        *Ira mostrar uma lista de emprestismos, classificados por status.*
 + Viagem do Tempo:
 
 * * *
@@ -114,4 +116,22 @@
 * Propagate naming convention from *Shell* commands to attributes and methods
 
 **Actual README file with command grammar instructions!**
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
