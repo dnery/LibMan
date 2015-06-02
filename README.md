@@ -1,6 +1,6 @@
-<h1>SCC0103 - Trabaho 3 - Aplicativo de Biblioteca</h1>
+# SCC0103 - Trabaho 3 - Aplicativo de Biblioteca
 
-<h2>Sumario</h2>
+## Sumario
 
 * [Introducao](#introducao)
 * [Comandos e Execucao](#comando)
@@ -11,32 +11,48 @@
 
 <h2 id="introducao">Introducao</h2>
 
- Aplicativo de Biblioteca implementado no formato de uma Shell interativa.
+Aplicativo de Biblioteca implementado no formato de uma Shell interativa.
 
- Funcionalidades:
+Suporte para as seguintes funcionalidades diretas e oferecido:
 
-    + Cadastro de Usuarios e Livros: pelo nome e titulo, respectivamente.
-    + Cadastro de Emprestimo: associa um titulo ao nome de um usuario e faz o emprestimo.
-    + Validacao de Emprestimo: verifica se o usuario e livro sao validos para emprestimo
-    + Verifica os atrasos: analisa os emprestimos e procura os emprestimos que estao em atraso.
+* Cadastramento de usuarios e livros
+* Cadastramento de emprestimo
+* Atualizacao de emprestimo (retorno)
+* Listagem de usuarios, livros e emprestimos
+* Finalizacao da *Shell*
+
+Adicionalmente, todas operacoes sao realizadas sob uma determinada data referencial, **que pode ser configurada**:
+A data e estabelecida com base no argumento de entrada unico que o programa recebe, no formato `MM/dd/yyyy`. **Se nenhum argumento e oferecido, o programa toma a data atual como a data referencia.**
 
 * * *
+
 <h2 id="comando">Comandos</h2>
 
 <h3>Lista de comandos</h3>
-<h5> ATENCAO </h5>
-**Os comandos sao case insensitive.**       
-**Em todo comando e preciso inserir o ; (ponto e virgula) no final.**        
-**Insira (aspas) em todos comandos, por ex: "nomelivro" aspas inclusas."**       
-**Sempre utilize o comando exit; para sair do programa, assim garante a gravacao das informacoes no arquivo**     
+##### ATENCAO
+**A validacao de entrada e _case insensitive_.**       
+**Ao final de todo comando e preciso inserir o `;` (ponto e virgula).**        
+**Insira `"` (aspas) nos comandos, onde indicado. por ex: a ocorrencia `"nomedolivro"` inclui as aspas literalmente.**
+**Sempre utilize o comando `exit;` para finalizar o programa, pois o mesmo garante a atualizacao das tabelas `.csv`.**
 
-+ Execucao:
+* Compilacao e execucao manual:
+	Do diretorio raiz do projeto, execute para compilar:
+```
+javac -d out src/br/usp/icmc/ssc0103/*.java 
+```
+	Supondo que o caminho para o `javac` esteja incluso na variavel `PATH` do seu sistema. Caso contrario, o caminho completo para o JDK tera que ser especificado no lugar.
+	Para rodar o programa, execute:
+```
+java -cp <caminho absoluto para o diretorio raiz do projeto>/out br.usp.icmc.ssc0103.Main <argumento>
+```
+	Tambem supondo caminho definido para `java`, onde <caminho absoluto para o diretorio raiz do projeto> e exatamente o que sugere e <argumento> idem (Se existir). **Observe a orientacao do caractere `/` (barra) que aqui e demonstrado no padrao de sistemas *NIX. Em Windows/DOS a mesma e invertida.**
 
-   - Compilacao:
-        javac -d out src/br/usp/icmc/ssc0103/*.java 
-
-   - Executar:
-        Diretorio onde esta o jar e faca "java -jar NomeDoJar.jar"
+* Execucao a partir do pacote:
+	Simplesmente va ate o diretorio do pacote `.jar` (`trabalho3_jar` no padrao do projeto) e execute:
+```
+java -jar trabalho3.jar
+```
+	Novamente, supondo que o caminho para jdk e definido e o nome do pacote jar seja de fato "trabalho3.jar", como no padrao do projeto.
 
 + Cadastros:
    - Adicionar Usuario:
