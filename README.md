@@ -25,10 +25,10 @@
 
 <h3>Lista de comandos</h3>
 <h5> ATENCAO </h5>
-**Os comandos sao case insensitive.**
-**Em todo comando e preciso inserir o ; (ponto e virgula) no final.**
-**Insira (aspas) em todos comandos, por ex: "nomelivro" aspas inclusas."**i
-**Sempre utilize o comando exit; para sair do programa, assim garante a gravacao das informacoes no arquivo**
+**Os comandos sao case insensitive.**       
+**Em todo comando e preciso inserir o ; (ponto e virgula) no final.**        
+**Insira (aspas) em todos comandos, por ex: "nomelivro" aspas inclusas."**       
+**Sempre utilize o comando exit; para sair do programa, assim garante a gravacao das informacoes no arquivo**     
 
 + Execucao:
 
