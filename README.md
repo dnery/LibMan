@@ -30,6 +30,10 @@
 
 + Execucao:
 
+   - Compilacao:
+
+   - Executar:
+
 
 + Cadastros:
    - Adicionar Usuario:
@@ -63,20 +67,19 @@
             return "nomedolivro";
     *Onde "nomedolivro" pode ter caracteres alfanumericos(exceto \, | e , (virgula)).*
 
-
 + Listas:
 
     - Listagem de Usuarios:
 
-            list books;
-        *Ira mostrar uma lista de livros, classificados por disponibilidade.*
-
-    - Listagem de Emprestimos:
-
-            list users;
-        *Ira mostrar uma lista de usuarios, classificados por emprestimos.*
-
+            list user;
+        *Ira mostrar uma lista de usuarios, classificados pelo tipo.*
+        *Caso o usuario possua emprestismos ou esteja em atraso, mostrara mensagem.*
     - Listagem de Livros:
+
+            list books;
+        *Ira mostrar uma lista de livros, classificados pelo tipo.*
+        *Os livros com emprestimos estarao em vermelho*
+    - Listagem de Emprestimos:
 
             list loans;
         *Ira mostrar uma lista de emprestismos, classificados por status.*
@@ -116,19 +119,6 @@
 * Propagate naming convention from *Shell* commands to attributes and methods
 
 **Actual README file with command grammar instructions!**
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

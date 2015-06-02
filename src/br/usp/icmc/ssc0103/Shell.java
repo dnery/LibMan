@@ -36,7 +36,11 @@ public class Shell
     public Shell(String[] args) throws ParseException
     {
         SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
-        date = dateFormat.parse(args[0]);
+        if (args.length != 1) {
+            date = new Date();
+        } else {
+            date = dateFormat.parse(args[0]);
+        }
         command = Command.NOOP;
 
         System.out.println(date.toString());
