@@ -62,7 +62,7 @@ data referencia.**
 
 <h2 id="comandos">Comandos</h2>
 **A validacao de entrada e _case insensitive_. Ao final de todo comando e preciso 
-inferir um `;`.Mantenha `"` nos comandos, onde indicado. por ex: a ocorrencia
+inferir um `;`. Mantenha `"` nos comandos, onde indicado. por ex: a ocorrencia
 `"<nomedolivro>"` inclui as aspas literalmente. Sempre utilize o comando `exit;` 
 para finalizar o programa, pois o mesmo garante a atualizacao das tabelas `.csv`.**
 
