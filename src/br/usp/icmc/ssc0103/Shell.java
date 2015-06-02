@@ -9,26 +9,25 @@ import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-// comandos da shell
 enum Command
 {
     NOOP, USERADD, CATALOGADD, CHECKOUT, CHECKIN, LIST, EXIT
 }
 
 /**
- * Shell: object which represent the Shell of application
+ * Shell: Instantiable command interpreter for application
  */
 public class Shell
 {
     /**
-     * Fields
+     * Scope attributes
      */
     private Date    date;
     private String  line;
     private Command command;
 
     /**
-     * Constructor which tries to parse arguments
+     * Constructor tries to parse input arguments
      *
      * @param args arguments
      * @throws ParseException exception for wrong args
@@ -47,7 +46,7 @@ public class Shell
     }
 
     /**
-     * Watches for command inputs
+     * Watches for user inputs
      *
      * @throws IOException
      */
@@ -63,9 +62,9 @@ public class Shell
     }
 
     /**
-     * Check the command from input
+     * Check user input for a valid command format
      *
-     * @return boolean true for right command or false for wrong
+     * @return boolean true for valid format, false otherwise
      */
     private boolean checkCommand()
     {
@@ -95,11 +94,10 @@ public class Shell
     }
 
     /**
-     * Triggers the correspondent respectively
+     * Tries to parse the command, triggers it if possible
      *
-     * @return
+     * @return true if trigger succeeds, false otherwise
      */
-    // Fully launches the commands
     private boolean triggerCommand()
     {
         // Make it local
@@ -109,7 +107,7 @@ public class Shell
         // Simple switch
         switch (command) {
 
-            // add user
+            // add a new user
             case USERADD:
                 //https://regex101.com/r/cZ7lK1/8
                 pattern = Pattern.compile("^(?i)\\s*user\\s+add\\s+\\\"\\s*" +
@@ -131,7 +129,7 @@ public class Shell
                     Formatter.outputError("Invalid syntax...");
                 return true;
 
-            // catalog book
+            // add a new book
             case CATALOGADD:
                 //https://regex101.com/r/nU9qD4/2
                 pattern = Pattern.compile("^(?i)\\s*catalog\\s+add\\s+\\\"\\s*" +
@@ -151,7 +149,7 @@ public class Shell
                     Formatter.outputError("Invalid syntax...");
                 return true;
 
-            // do a checkout
+            // register a loan
             case CHECKOUT:
                 //https://regex101.com/r/lV3vI3/2
                 pattern = Pattern.compile(
@@ -168,7 +166,8 @@ public class Shell
                 } else
                     Formatter.outputError("Invalid syntax...");
                 return true;
-            // do a checkin
+
+            // return a book
             case CHECKIN:
                 //https://regex101.com/r/rT4hC9/3
                 pattern = Pattern.compile(
@@ -185,7 +184,7 @@ public class Shell
                     Formatter.outputError("Invalid syntax...");
                 return true;
 
-            // list data(book|user|loan)
+            // list book|user|loan
             case LIST:
                 //https://regex101.com/r/qI7wF9/10
                 if (line.matches("^(?i)\\s*list(?:\\s+(?:users|books|loans))+\\s*;\\s*$")) {
@@ -205,7 +204,7 @@ public class Shell
                 }
                 return true;
 
-            // flatten database and exit
+            // flatten database
             case EXIT:
                 try {
                     Database.getInstance().serializeAndUpdate();
