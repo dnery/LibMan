@@ -1,5 +1,6 @@
 package br.usp.icmc.ssc0103;
 
+import java.text.SimpleDateFormat;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
@@ -25,9 +26,10 @@ public class Formatter
 
     /**
      * outputUsers: show all users in the database
+     *
      * @param users List<user> which will be printed
      * @param loans List<loan> for validation of loans
-     * @param date Date used for validation of loan
+     * @param date  Date used for validation of loan
      */
     public static void outputUsers(List<User> users, List<Loan> loans, Date date)
     {
@@ -124,6 +126,7 @@ public class Formatter
 
     /**
      * outputBooks(): show all the books in the database
+     *
      * @param books List<Book> which will be printed
      */
     public static void outputBooks(List<Book> books)
@@ -155,12 +158,34 @@ public class Formatter
 
     /**
      * outputLoans(): show all the loans in the database
+     *
      * @param loans List<Loans> which will be printed
      */
-    public static void outputLoans(List<Loan> loans) { }
+    public static void outputLoans(List<Loan> loans, Date date)
+    {
+        loans.stream()
+             .sorted(Comparator.comparing(loan -> loan.getCheckOutDate().getTime() ==
+                                                  loan.getRealCID().getTime()))
+             .forEach(loan -> {
+                 SimpleDateFormat format = new SimpleDateFormat("MMM d, yyyy HH:mm:ss");
+                 String standard = "\"" + loan.getBookName() + "\" lent to " + loan.getUserName() +
+                                   " on " + format.format(loan.getCheckOutDate());
+                 if (loan.getCheckOutDate().getTime() == loan.getRealCID().getTime()) {
+
+                     if (date.before(loan.getCheckInDate()))
+                         System.out.println(ANSI_CYAN + standard + " - To be returned on " +
+                                            format.format(loan.getCheckInDate()));
+                     else
+                         System.out.println(ANSI_RED + standard + " - Supposed to be returned on " +
+                                            format.format(loan.getCheckInDate()) + "(Overdue)");
+                 } else
+                     System.out.println(ANSI_GREEN + standard + " (Closed)");
+             });
+    }
 
     /**
      * Show a error message
+     *
      * @param message error message
      */
     public static void outputError(String message)
@@ -170,8 +195,9 @@ public class Formatter
 
     /**
      * Diff between two date
-     * @param date1 first date
-     * @param date2 second date
+     *
+     * @param date1    first date
+     * @param date2    second date
      * @param timeUnit unit of time
      * @return difference between the first and second date
      */

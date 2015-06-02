@@ -105,16 +105,14 @@ public class Database
             // User is always unique, so just get it
             User userObject = users.stream()
                                    .filter(user -> user.getName().equals(userName))
-                                   .limit(2)
-                                   .collect(Collectors.toList())
-                                   .get(0);
+                                   .findFirst()
+                                   .get();
 
             // Book is always unique, so just get it
             Book bookObject = books.stream()
                                    .filter(book -> book.getName().equals(bookName))
-                                   .limit(2)
-                                   .collect(Collectors.toList())
-                                   .get(0);
+                                   .findFirst()
+                                   .get();
 
             // Evaluate the collection result
             System.out.println("User found: " + userObject.toString());
@@ -161,10 +159,8 @@ public class Database
             // Book is always unique, so just get it
             Book bookObject = books.stream()
                                    .filter(book -> book.getName().equals(bookName))
-                                   .limit(2)
-                                   .collect(Collectors.toList())
-                                   .get(0);
-
+                                   .findFirst()
+                                   .get();
             // Evaluate the collection result
             System.out.println("Book found: " + bookObject.toString());
 
@@ -180,9 +176,8 @@ public class Database
                 User userObject = users.stream()
                                        .filter(user -> user.getName()
                                                            .equals(loanObject.getUserName()))
-                                       .limit(2)
-                                       .collect(Collectors.toList())
-                                       .get(0);
+                                       .findFirst()
+                                       .get();
                 // Evaluate the collection result
                 System.out.println("Loan found: " + loanObject.toString());
                 System.out.println("User found: " + userObject.toString());
