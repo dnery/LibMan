@@ -6,5 +6,5 @@ out
 src/META-INF
 
 ### Locally generated
-database
+/database
 #package
