@@ -33,9 +33,10 @@
 + Execucao:
 
    - Compilacao:
+        javac -d out src/br/usp/icmc/ssc0103/*.java 
 
    - Executar:
-
+        Diretorio onde esta o jar e faca "java -jar NomeDoJar.jar"
 
 + Cadastros:
    - Adicionar Usuario:
@@ -87,8 +88,8 @@
             list loans;
         *Ira mostrar uma lista de emprestismos, classificados por status.*
 
-+ Sair:   
-            exit;
++ Sair:     
+                                                          exit;
 
 + Viagem do Tempo:
 
