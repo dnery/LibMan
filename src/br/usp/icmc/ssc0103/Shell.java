@@ -88,7 +88,20 @@ public class Shell
             }
             return true;
         } else {
-            Formatter.outputError("Not a valid command...");
+            Formatter.outputError("\n\nHELP|COMMANDS: \n\n" +
+                            "ADD USER:\n" +
+                            "user add \"username\" type;" +
+                            "\n\n" +
+                            "ADD BOOK:\n" +
+                            "catalog add \"bookname\" type;" +
+                            "\n\n" +
+                            "LEND A BOOK:\n" +
+                            "lend \"bookname\" to \"username;" +
+                            "\n\n" +
+                            "RETURN A BOOK: \n"+
+                            "return \"bookname\" type"
+                    + "\n"
+            );
             return false;
         }
     }
