@@ -174,11 +174,11 @@ para finalizar o programa, pois o mesmo garante a atualizacao das tabelas `.csv`
     
     Veja as expressoes regulares usadas para validacao final dos comandos usados:
     
-        - [Cadastra usuario](https://regex101.com/r/cZ7lK1/8)
-        - [Cadastra livro](https://regex101.com/r/nU9qD4/2)
-        - [Registra emprestimo](https://regex101.com/r/lV3vI3/2)
-        - [Registra devolucao](https://regex101.com/r/rT4hC9/3)
-        - [Lista tabela](https://regex101.com/r/qI7wF9/10)
+    - [Cadastra usuario](https://regex101.com/r/cZ7lK1/8)
+    - [Cadastra livro](https://regex101.com/r/nU9qD4/2)
+    - [Registra emprestimo](https://regex101.com/r/lV3vI3/2)
+    - [Registra devolucao](https://regex101.com/r/rT4hC9/3)
+    - [Lista tabela](https://regex101.com/r/qI7wF9/10)
 
 + Viagem no tempo:
 
@@ -227,8 +227,5 @@ para finalizar o programa, pois o mesmo garante a atualizacao das tabelas `.csv`
                     Version 2, December 2004
 
             DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
-   TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
-
-  0. You just DO WHAT THE FUCK YOU WANT TO.
 
 * * *
