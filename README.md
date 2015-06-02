@@ -60,10 +60,11 @@
 
    - Cadastrar Emprestimo:
 
-            load "nomedolivro" to "nomeusuario";
+            lend "nomedolivro" to "nomeusuario";
     *Onde "nomedolivro" e "nomeusuario" pode ter caracteres alfanumericos(exceto \, / e , (virgula)).*
 
    - Cadastrar Devolucao:
+
             return "nomedolivro";
     *Onde "nomedolivro" pode ter caracteres alfanumericos(exceto \, | e , (virgula)).*
 
@@ -93,30 +94,16 @@
 
 <h2 id="copyright">Copyright</h2>
 
+            DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
+                    Version 2, December 2004
+
+            DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
+   TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
+
+  0. You just DO WHAT THE FUCK YOU WANT TO.
+
+
 * * *
-
-## Still to be done:
-
-### *Formatter*
-* Loan listings
-
-### *Shell*
-* Change "loan" and "return" commands grammar to something more practical
-
-### *Shell*
-* Show help message, which shows how to use the commands
-
-### *Shell*
-* Show message for wrong commands.
-
-### *Shell*
-* User can change the actual date of the system (time-travel feature)
-
-### *Shell*
-* Show verbose messages (including date)
-
-### *Database* and *Tables*
-* Propagate naming convention from *Shell* commands to attributes and methods
 
 **Actual README file with command grammar instructions!**
 
