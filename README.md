@@ -87,8 +87,8 @@
             list loans;
         *Ira mostrar uma lista de emprestismos, classificados por status.*
 
-+ Sair
-       exit;
++ Sair:   
+            exit;
 
 + Viagem do Tempo:
 
