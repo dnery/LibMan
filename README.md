@@ -23,11 +23,12 @@
 * * *
 <h2 id="comando">Comandos</h2>
 
-<h3>Lista de comando</h3>
+<h3>Lista de comandos</h3>
 <h5> ATENCAO </h5>
 **Os comandos sao case insensitive.**
 **Em todo comando e preciso inserir o ; (ponto e virgula) no final.**
-**Insira (aspas) em todos comandos, por ex: "nomelivro" aspas inclusas."**
+**Insira (aspas) em todos comandos, por ex: "nomelivro" aspas inclusas."**i
+**Sempre utilize o comando exit; para sair do programa, assim garante a gravacao das informacoes no arquivo**
 
 + Execucao:
 
@@ -85,10 +86,14 @@
 
             list loans;
         *Ira mostrar uma lista de emprestismos, classificados por status.*
+
++ Sair
+       exit;
+
 + Viagem do Tempo:
 
     Passe uma data no formato MM/DD/YYYY como argumento no programa. Logo na sua execucao, ele ira imprimir essa data(confirme),
-    caso ele nao consiga analisar e pegar essa data, pega-se a data atual do sistema.
+   caso ele nao consiga analisar e pegar essa data, pega-se a data atual do sistema.
 
     Assim, voce pode viajar ate o futuro e ver toda a magica acontecer
 
