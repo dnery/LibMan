@@ -4,7 +4,6 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 // Database level attribute validity
 class DatabaseException extends Exception
@@ -68,7 +67,6 @@ public class Database
         if (users.stream().noneMatch(user -> user.getName().equals(userName))) {
             users.add(new User(userName, userType));
 
-            //Todo: erase debugs...
             if (userType == UserType.TUTOR)
                 System.out.println("Tutor " + userName + " has been added!");
             else if (userType == UserType.STUDENT)
@@ -85,7 +83,6 @@ public class Database
         if (books.stream().noneMatch(book -> book.getName().equals(bookName))) {
             books.add(new Book(bookName, bookType));
 
-            //Todo: erase debugs...
             if (bookType == BookType.TEXT)
                 System.out.println("Textbook " + bookName + " has been catalogued!");
             else
@@ -113,10 +110,6 @@ public class Database
                                    .filter(book -> book.getName().equals(bookName))
                                    .findFirst()
                                    .get();
-
-            // Evaluate the collection result
-            System.out.println("User found: " + userObject.toString());
-            System.out.println("Book found: " + bookObject.toString());
 
             // Permission check, 1st step
             if (userObject.getSuspendedTill().after(date))
@@ -146,6 +139,8 @@ public class Database
             loans.add(new Loan(userName, bookName, date, userObject.getLoanDuration()));
             userObject.setCurBooks(userObject.getCurBooks() + 1);
             bookObject.setAvail(false);
+
+            System.out.println("> " + bookObject.getName() + " lent to " + userObject.getName());
 
         } else throw new DatabaseException("User or book not found!");
     }
@@ -178,14 +173,13 @@ public class Database
                                                            .equals(loanObject.getUserName()))
                                        .findFirst()
                                        .get();
-                // Evaluate the collection result
-                System.out.println("Loan found: " + loanObject.toString());
-                System.out.println("User found: " + userObject.toString());
 
                 // Actual processing
                 bookObject.setAvail(true);
                 loanObject.setRealCID(date);
                 userObject.setCurBooks(userObject.getCurBooks() - 1);
+
+                System.out.println("> " + bookObject.getName() + " has been returned");
 
                 // Set suspension date if needed
                 if (date.after(loanObject.getCheckInDate())) {

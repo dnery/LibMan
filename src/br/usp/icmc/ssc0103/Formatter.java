@@ -7,12 +7,12 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Formatter: Class used to handle the output and list the data to terminal
+ * Formatter: Handles output by formatting streams to user-readable information
  */
 public class Formatter
 {
     /**
-     * const values for colors used
+     * Pretty terminal color constants (Yay!)
      */
     public static final String ANSI_RESET  = "\u001B[0m";
     public static final String ANSI_BLACK  = "\u001B[30m";
@@ -25,11 +25,11 @@ public class Formatter
     public static final String ANSI_WHITE  = "\u001B[37m";
 
     /**
-     * outputUsers: show all users in the database
+     * Outputs users in database, formatted
      *
-     * @param users List<user> which will be printed
-     * @param loans List<loan> for validation of loans
-     * @param date  Date used for validation of loan
+     * @param users List<user> to be scanned through
+     * @param loans List<loan> to be scanned through
+     * @param date  Date for validations
      */
     public static void outputUsers(List<User> users, List<Loan> loans, Date date)
     {
@@ -43,14 +43,12 @@ public class Formatter
                      System.out.print("# " + ANSI_RED + user.getName() + " (" +
                                       getDateDiff(date, user.getSuspendedTill(), TimeUnit.DAYS) +
                                       " days suspended)" + ANSI_RESET);
-
                      // Has any pending suspensions?
                  else if (user.getCurBooks() > 0 &&
                           loans.stream()
                                .filter(loan -> loan.getUserName().equals(user.getName()))
                                .anyMatch(loan -> date.after(loan.getCheckInDate())))
                      System.out.print("# " + ANSI_RED + user.getName() + " (Pending suspension)");
-
                      // If not just print username
                  else System.out.print("# " + user.getName());
 
@@ -73,14 +71,12 @@ public class Formatter
                      System.out.print("# " + ANSI_RED + user.getName() + " (" +
                                       getDateDiff(date, user.getSuspendedTill(), TimeUnit.DAYS) +
                                       " days suspended)" + ANSI_RESET);
-
                      // Has any pending suspensions?
                  else if (user.getCurBooks() > 0 &&
                           loans.stream()
                                .filter(loan -> loan.getUserName().equals(user.getName()))
                                .anyMatch(loan -> date.after(loan.getCheckInDate())))
                      System.out.print("# " + ANSI_RED + user.getName() + " (Pending suspension)");
-
                      // If not just print username
                  else System.out.print("# " + user.getName());
 
@@ -125,9 +121,9 @@ public class Formatter
     }
 
     /**
-     * outputBooks(): show all the books in the database
+     * Outputs books in database, formatted
      *
-     * @param books List<Book> which will be printed
+     * @param books List<Book> to be scanned through
      */
     public static void outputBooks(List<Book> books)
     {
@@ -159,7 +155,8 @@ public class Formatter
     /**
      * outputLoans(): show all the loans in the database
      *
-     * @param loans List<Loans> which will be printed
+     * @param loans List<Loans> to be scanned through
+     * @param date  Date for validation
      */
     public static void outputLoans(List<Loan> loans, Date date)
     {
@@ -184,7 +181,7 @@ public class Formatter
     }
 
     /**
-     * Show a error message
+     * Display an error message, formatted
      *
      * @param message error message
      */
@@ -194,12 +191,12 @@ public class Formatter
     }
 
     /**
-     * Diff between two date
+     * Get difference between two date units
      *
-     * @param date1    first date
-     * @param date2    second date
-     * @param timeUnit unit of time
-     * @return difference between the first and second date
+     * @param date1    Date to diff from
+     * @param date2    Date to diff from
+     * @param timeUnit Time unit sets the return format
+     * @return difference between date1 and date2 as a specified 'TimeUnit'
      */
     public static long getDateDiff(Date date1, Date date2, TimeUnit timeUnit)
     {
