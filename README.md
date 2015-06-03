@@ -47,7 +47,7 @@ data referencia.**
     Tambem supondo caminho definido para `java`, onde `<caminho absoluto para o diretorio raiz do projeto>`
     e exatamente o que sugere e `<argumento>` idem (Se existir). **Observe a orientacao do caractere `/`
     (barra) que aqui e demonstrado no padrao de sistemas *NIX. Em Windows/DOS a mesma e invertida.**
-    
+
 
 * Execucao a partir do pacote:
 
@@ -57,7 +57,7 @@ data referencia.**
     ```
     Novamente, supondo que o caminho para jdk e definido e o nome do pacote jar seja de fato 
     "trabalho3.jar", como no padrao do projeto.
-    
+
 * * *
 
 <h2 id="comandos">Comandos</h2>
@@ -66,7 +66,7 @@ data referencia.**
 `"<nomedolivro>"` inclui as aspas literalmente. Sempre utilize o comando `exit;` 
 para finalizar o programa, pois o mesmo garante a atualizacao das tabelas `.csv`.**
 
-+ Cadastramendo de novos usuarios e livros:
+* Cadastramendo de novos usuarios e livros:
 
     - Cadastrar usuario:
         ```
@@ -86,7 +86,7 @@ para finalizar o programa, pois o mesmo garante a atualizacao das tabelas `.csv`
         + `text` *(livro texto)*
         + `general` *(livro literario)*
         + Nulo: assume-se `general` como padrao.
-        
+
     - Exemplos de uso:
         ```
         user add "Danilo" tutor;
@@ -106,7 +106,7 @@ para finalizar o programa, pois o mesmo garante a atualizacao das tabelas `.csv`
         *Cadastra um novo livro de titulo "Brave new world" como livro literario.*
 
 
-+ Realizacao e devolucao de emprestimos:
+* Realizacao e devolucao de emprestimos:
 
     - Registrar emprestimo:
         ```
@@ -129,30 +129,42 @@ para finalizar o programa, pois o mesmo garante a atualizacao das tabelas `.csv`
         return "Brave new world";
         ```
         *Registra a devolucao do livro de titulo "Brave new world".*
-        
-        
-+ Listagem de tabelas:
+
+
+* Listagem de tabelas:
 
     - Listagem de Usuarios:
         ```
         list users;
         ```
+
         *Lista todos usuarios cadastrados classificados por tipo e com auxilio de 
-        cores e mensagens apropriadas para melhor visualizacao.*
+        cores e mensagens apropriadas para melhor visualização.*
     - Listagem de Livros:
         ```
         list books;
         ```
+
         *Lista todos livros cadastrados classificados por tipo e com auxilio de 
-        cores e mensagens apropriadas para melhor visualizacao.*
+        cores e mensagens apropriadas para melhor visualização.*
     - Listagem de Emprestimos:
         ```
         list loans;
         ```
-        *Lista todos emprestimos registrados classificados por estado (entregue, nao entregue ou
-        overdue) e com auxilio de  cores e mensagens apropriadas para melhor visualizacao.*
 
-+ Finalizar aplicacao:     
+        *Lista todos emprestimos registrados classificados por estado (entregue, nao entregue ou
+        overdue) e com auxilio de  cores e mensagens apropriadas para melhor visualização.*
+
+    O comando `list` aceita, inicialmente, um único argumento não-nulo. Porém podem ser concatenados
+    indefinidamente. Praticamente o comando é simplesmente repetido para vários argumentos.
+    Por exemplo, o seguinte comando:
+    ```
+    list users books loans;
+    ```
+    Listará, consecutivamente, as tabelas `users`, `books` e `loans`, na ordem em que os
+    respectivos argumentos foram fornecidos. Podem ser repetidos. **Indefinidamente.**
+
+* Finalizar aplicacao:     
     ```
     exit;
     ```
@@ -162,7 +174,7 @@ para finalizar o programa, pois o mesmo garante a atualizacao das tabelas `.csv`
 
 <h2 id="consideracoes">Consideracoes</h2>
 
-+ Sintaxe dos comandos:
+* Sintaxe dos comandos:
 
     Inicialmente, o input do usuario e avaliado contra o padrao `"^(.*[^\\\\];)$"` que basicamente
     casa com qualquer input que seja finalizado por `;` e nao contenha `\` ou `,` em seu interim.
@@ -180,7 +192,7 @@ para finalizar o programa, pois o mesmo garante a atualizacao das tabelas `.csv`
     - [Registra devolucao](https://regex101.com/r/rT4hC9/3)
     - [Lista tabela](https://regex101.com/r/qI7wF9/10)
 
-+ Viagem no tempo:
+* Viagem no tempo:
 
     Na implementacao escolhida, como e possivel entrar com uma data para operar a aplicacao,
     o tempo e tratado como absolutamente linear. Nessa condicao, eis as duas situacoes
@@ -196,8 +208,7 @@ para finalizar o programa, pois o mesmo garante a atualizacao das tabelas `.csv`
         que se um usuario possui um emprestimo *pendente* e *vencido* numa certa data, uma
         listagem pode acusa-lo como suspenso agora mas nao numa data anterior, uma vez que
         uma devolucao nao foi registrada para que uma data de "suspenso ate" fosse estabelecida.
-        **Um usuario que nunca foi suspenso perde a oportunidade de ser incluido na
-        situacao descrita acima.**
+        **Um usuario que nunca foi suspenso perde a oportunidade de ser incluido em tal situação.**
         
     - Emprestimos em aberto, talvez extrapolados:
     
@@ -206,7 +217,7 @@ para finalizar o programa, pois o mesmo garante a atualizacao das tabelas `.csv`
         listado como aberto mesmo numa data anterior a do emprestimo em si, dado que o livro
         nao tenha sido devolvido ainda.** Isso *tambem* significa que um mesmo emprestimo
         pode ser listado como aberto ou como aberto e extrapolado em consultas realizadas
-        em diferentes datas. **Um emprestimo fechado nao participa do dilema acima."
+        em diferentes datas. **Um emprestimo fechado nao faz parte de tal situação.**
         
     ### Hilaridade segue.
 
