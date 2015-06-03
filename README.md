@@ -68,7 +68,7 @@ data referência.**
     ```
     Onde `<resultante.jar>` é obviamente o nome do arquivo `.jar` resultante, `<manifest>` o nome
     do arquivo com conteúdo a ser adicionado no *manifest*, `Manifest.MD` no nosso caso, e
-    <diretoriodopacote> é o diretório contendo o *output* da compilação. No padrão do projeto
+    `<diretoriodopacote>` é o diretório contendo o *output* da compilação. No padrão do projeto
     *IntelliJ IDEA*, que é o usado, este seria `out/`, e o resultado da compilação é a árvore
     `br/usp/icmc/ssc0103/` onde `ssc0103` contém todos os `.class` do projeto. A flag `-C` sinaliza
     a inclusão de um diretório, oposto a inclusão de um arquivo que seria o padrão.
