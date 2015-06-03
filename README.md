@@ -46,27 +46,28 @@ data referencia.**
     ```
     Tambem supondo caminho definido para `java`, onde `<caminho absoluto para o diretorio raiz do projeto>`
     e exatamente o que sugere e `<argumento>` idem (Se existir). **Observe a orientacao do caractere `/`
-    (barra) que aqui e demonstrado no padrao de sistemas *NIX. Em Windows/DOS a mesma e invertida.**
+    que aqui e demonstrado no padrao de sistemas *NIX. Em Windows/DOS a mesma e invertida.**
+    
 
 
 * Execucao a partir do pacote:
 
-    Simplesmente va ate o diretorio do pacote `.jar` (`package` no padrao do projeto) e execute:
+    Simplesmente vá ate o diretorio do pacote `.jar` (`package` no padrão do projeto) e execute:
     ```
     java -jar trabalho3.jar
     ```
-    Novamente, supondo que o caminho para jdk e definido e o nome do pacote jar seja de fato 
-    "trabalho3.jar", como no padrao do projeto.
-
+    Ou simplesmente duplo-clique no `.jar`, novamente, supondo que o caminho para jre é definido
+    e o nome do pacote jar seja de fato "trabalho3.jar", como no padrao do projeto.
+    
 * * *
 
 <h2 id="comandos">Comandos</h2>
-**A validacao de entrada e _case insensitive_. Ao final de todo comando e preciso inserir o `;`
-(ponto e virgula) Insira `"` (aspas) nos comandos, onde indicado. por ex: a ocorrencia
+**A validacao de entrada e _case insensitive_. Ao final de todo comando e preciso 
+inferir um `;`. Mantenha `"` nos comandos, onde indicado. por ex: a ocorrencia
 `"<nomedolivro>"` inclui as aspas literalmente. Sempre utilize o comando `exit;` 
 para finalizar o programa, pois o mesmo garante a atualizacao das tabelas `.csv`.**
 
-* Cadastramendo de novos usuarios e livros:
+* Cadastramento de novos usuarios e livros:
 
     - Cadastrar usuario:
         ```
