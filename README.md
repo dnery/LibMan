@@ -3,7 +3,7 @@
 ## Sumario
 
 * [Introducao](#introducao)
-* [Execucao](#execucao)
+* [Execução](#execucao)
 * [Comandos](#comandos)
 * [Consideracoes](#consideracoes)
 * [Contribuidores](#contribuidores)
@@ -15,61 +15,100 @@
 
 Aplicativo de Biblioteca implementado no formato de uma Shell interativa.
 
-Suporte para as seguintes funcionalidades diretas e oferecido:
+Suporte para as seguintes funcionalidades diretas é oferecido:
 
-* Cadastramento de usuarios e livros
-* Cadastramento de emprestimo
-* Atualizacao de emprestimo (retorno)
-* Listagem de usuarios, livros e emprestimos
+* Cadastramento de usuários e livros
+* Cadastramento de empréstimo
+* Atualizacao de empréstimo (retorno)
+* Listagem de usuários, livros e empréstimos
 * Finalizacao da *Shell*
 
 Adicionalmente, todas operacoes sao realizadas sob uma determinada data referencial, **que pode ser
-configurada**: A data e estabelecida com base no argumento de entrada unico que o programa recebe,
-no formato `MM/dd/yyyy`. **Se nenhum argumento e oferecido, o programa toma a data atual como a
-data referencia.**
+configurada**: A data é estabelecida com base no argumento de entrada único que o programa recebe,
+no formato `MM/dd/yyyy`. **Se nenhum argumento é oferecido, o programa toma a data atual como a
+data referência.**
 
 * * *
 
-<h2 id="execucao">Execucao</h2>
+<h2 id="execucao">Execução</h2>
 
-* Compilacao e execucao manual:
+* Compilando e executando manualmente:
 
-    Do diretorio raiz do projeto, execute para compilar:
+    Do diretorio raiz do projeto, execute o seguinte comando para fazer a compilação:
     ```
     javac -d out src/br/usp/icmc/ssc0103/*.java 
     ```
-    Supondo que o caminho para o `javac` esteja incluso na variavel `PATH` do seu sistema.
+    Supondo que o caminho para o `javac` esteja incluso na variável `PATH` do seu sistema.
     Caso contrario, o caminho completo para o JDK tera que ser especificado no lugar.
-    Para rodar o programa, execute:
+    A flag `-d` sinaliza um caminho para o output da compilação; Não precisa necessariamente ser
+    `out` mas **precisa** ser especificado para que o output da compilação inclua a árvore de 
+    diretórios do pacote (`-d .` geraria a árvore a partir do diretório atual, por exemplo).
+    Execute o programa com:
     ```
     java -cp <caminho absoluto para o diretorio raiz do projeto>/out br.usp.icmc.ssc0103.Main <argumento>
     ```
     Tambem supondo caminho definido para `java`, onde `<caminho absoluto para o diretorio raiz do projeto>`
-    e exatamente o que sugere e `<argumento>` idem (Se existir). **Observe a orientacao do caractere `/`
-    que aqui e demonstrado no padrao de sistemas *NIX. Em Windows/DOS a mesma e invertida.**
+    é exatamente o que sugere e `<argumento>` idem (Se existir). **Observe a orientacao do caractere `/`
+    que aqui é demonstrado no padrão de sistemas *NIX. Em Windows/DOS a mesma é invertida.**
+
+* Gerando e executando um pacote manualmente:
+
+    Considerando que o projeto está todo contido num pacote, será necessário criar um arquivo
+    com no mínimo o seguinte conteúdo:
     
+        Main-Class: br.usp.icmc.ssc0103.Main
 
+    **Terminando com uma linha em branco _ou_ carriage return.** O nome desse arquivo será passado
+    como argumento para a ferramenta `jar` e seu conteúdo será adicionado ao `META-INF/MANIFEST.MD`
+    automaticamente gerado e incluído no pacote pela ferramenta. Suponha que nosso arquivo tenha
+    o nome `Manifest.MD`. Geraremos um pacote, então, com o seguinte comando (levando em conta
+    um caminho definido para a ferramenta `jar`):
+    ```
+    jar cfm <resultante.jar> <manifest> -C <diretoriodopacote>
+    ```
+    Onde `<resultante.jar>` é obviamente o nome do arquivo `.jar` resultante, `<manifest>` o nome
+    do arquivo com conteúdo a ser adicionado no *manifest*, `Manifest.MD` no nosso caso, e
+    <diretoriodopacote> é o diretório contendo o *output* da compilação. No padrão do projeto
+    *IntelliJ IDEA*, que é o usado, este seria `out/`, e o resultado da compilação é a árvore
+    `br/usp/icmc/ssc0103/` onde `ssc0103` contém todos os `.class` do projeto. A flag `-C` sinaliza
+    a inclusão de um diretório, oposto a inclusão de um arquivo que seria o padrão.
+    
+    Com o nosso `.jar` gerado, basta executá-lo com:
+    ```
+    java -jar <resultante.jar> <argumento>
+    ```
+    Onde `<resultante.jar>` é exatamente o que sugere e `<argumento>` igem (Se existir).
 
-* Execucao a partir do pacote:
+* Executando a partir do pacote pronto:
 
-    Simplesmente vá ate o diretorio do pacote `.jar` (`package` no padrão do projeto) e execute:
+    Simplesmente vá até o diretorio do pacote `.jar` (`pkg` no padrão do projeto) e execute:
     ```
     java -jar trabalho3.jar
     ```
     Ou simplesmente duplo-clique no `.jar`, novamente, supondo que o caminho para jre é definido
-    e o nome do pacote jar seja de fato "trabalho3.jar", como no padrao do projeto.
-    
+    e o nome do pacote jar seja de fato "trabalho3.jar", como no padrão do projeto. O diretório
+    `pkg` já inclui uma database razoavelmente populada para conveniência. Vale informar que
+    o pacote foi gerado e testado com JDK/JRE Oracle versão *1.8.0_45*. Do `release`:
+    ```
+    JAVA_VERSION="1.8.0_45"
+    OS_NAME="Windows"
+    OS_VERSION="5.2"
+    OS_ARCH="amd64"
+    SOURCE=" .:d195213dc77e corba:681b5c54c9a8 deploy:8ceddb02649f hotspot:13990387b643 hotspot/make/closed:05aa2680eb9f hotspot/src/closed:91caea42673b hotspot/test/closed:60b47b8c1721 install:4318d1f7b3a5 jaxp:1c4cdf942059 jaxws:1a0139074296 jdk:d177c684b874 jdk/make/closed:137c6a750834 jdk/src/closed:f47229507b9a jdk/test/closed:42d53147784b langtools:3c7d5e1ec7e5 nashorn:7a2d26de1826 pubs:b60ba41c22d2 sponsors:9a5a318d7ca6"
+    BUILD_TYPE="commercial"
+    ```
+
 * * *
 
 <h2 id="comandos">Comandos</h2>
-**A validacao de entrada e _case insensitive_. Ao final de todo comando e preciso 
+**A validação de entrada é _case insensitive_. Ao final de todo comando é preciso 
 inferir um `;`. Mantenha `"` nos comandos, onde indicado. por ex: a ocorrencia
 `"<nomedolivro>"` inclui as aspas literalmente. Sempre utilize o comando `exit;` 
 para finalizar o programa, pois o mesmo garante a atualizacao das tabelas `.csv`.**
 
-* Cadastramento de novos usuarios e livros:
+* Cadastramento de novos usuários e livros:
 
-    - Cadastrar usuario:
+    - Cadastrar usuário:
         ```
         user add "<nomedousuario>" <tipo>;
         ```
@@ -77,7 +116,7 @@ para finalizar o programa, pois o mesmo garante a atualizacao das tabelas `.csv`
         + `tutor` *(professor)*
         + `student` *(estudante)*
         + `community` *(comunidade)*
-        + Nulo: assume-se `community` como padrao.
+        + Nulo: assume-se `community` como padrão.
 
     - Cadastrar livro:
         ```
@@ -86,17 +125,17 @@ para finalizar o programa, pois o mesmo garante a atualizacao das tabelas `.csv`
         Onde `<nomedolivro>` suporta caracteres alfanumericos somente e `<tipo>` pode ser:
         + `text` *(livro texto)*
         + `general` *(livro literario)*
-        + Nulo: assume-se `general` como padrao.
+        + Nulo: assume-se `general` como padrão.
 
     - Exemplos de uso:
         ```
         user add "Danilo" tutor;
         ```
-        *Cadastra um novo usuario de nome "Danilo" como professor.*
+        *Cadastra um novo usuário de nome "Danilo" como professor.*
         ```
         user add "Cristiano";
         ```
-        *Cadastra um novo usuario de nome "Cristiano" como da comunidade.*
+        *Cadastra um novo usuário de nome "Cristiano" como da comunidade.*
         ```
         catalog add "Calculus" text;
         ```
@@ -107,15 +146,15 @@ para finalizar o programa, pois o mesmo garante a atualizacao das tabelas `.csv`
         *Cadastra um novo livro de titulo "Brave new world" como livro literario.*
 
 
-* Realizacao e devolucao de emprestimos:
+* Realizacao e devolução de empréstimos:
 
-    - Registrar emprestimo:
+    - Registrar empréstimo:
         ```
         lend "<nomedolivro>" to "<nomedousuario>";
         ```
         Onde ambos `<nomedolivro>` e `<nomedousuario>` suportam caracteres alfanumericos somente.
 
-    - Registrar devolucao:
+    - Registrar devolução:
         ```
         return "<nomedolivro>";
         ```
@@ -125,21 +164,21 @@ para finalizar o programa, pois o mesmo garante a atualizacao das tabelas `.csv`
         ```
         lend "Brave new world" to "Danilo";
         ```
-        *Registra o emprestimo de "Brave new world" para "Danilo".*
+        *Registra o empréstimo de "Brave new world" para "Danilo".*
         ```
         return "Brave new world";
         ```
-        *Registra a devolucao do livro de titulo "Brave new world".*
+        *Registra a devolução do livro de titulo "Brave new world".*
 
 
 * Listagem de tabelas:
 
-    - Listagem de Usuarios:
+    - Listagem de Usuários:
         ```
         list users;
         ```
 
-        *Lista todos usuarios cadastrados classificados por tipo e com auxilio de 
+        *Lista todos usuários cadastrados classificados por tipo e com auxilio de 
         cores e mensagens apropriadas para melhor visualização.*
     - Listagem de Livros:
         ```
@@ -148,12 +187,12 @@ para finalizar o programa, pois o mesmo garante a atualizacao das tabelas `.csv`
 
         *Lista todos livros cadastrados classificados por tipo e com auxilio de 
         cores e mensagens apropriadas para melhor visualização.*
-    - Listagem de Emprestimos:
+    - Listagem de Empréstimos:
         ```
         list loans;
         ```
 
-        *Lista todos emprestimos registrados classificados por estado (entregue, nao entregue ou
+        *Lista todos empréstimos registrados classificados por estado (entregue, não entregue ou
         overdue) e com auxilio de  cores e mensagens apropriadas para melhor visualização.*
 
     O comando `list` aceita, inicialmente, um único argumento não-nulo. Porém podem ser concatenados
@@ -165,11 +204,11 @@ para finalizar o programa, pois o mesmo garante a atualizacao das tabelas `.csv`
     Listará, consecutivamente, as tabelas `users`, `books` e `loans`, na ordem em que os
     respectivos argumentos foram fornecidos. Podem ser repetidos. **Indefinidamente.**
 
-* Finalizar aplicacao:     
+* Finalizar aplicação:     
     ```
     exit;
     ```
-    *Serializa todas entradas nas tabelas `.csv`, atualiza os arquivos e encerra a execucao.*
+    *Serializa todas entradas nas tabelas `.csv`, atualiza os arquivos e encerra a execução.*
 
 * * *
 
@@ -177,48 +216,48 @@ para finalizar o programa, pois o mesmo garante a atualizacao das tabelas `.csv`
 
 * Sintaxe dos comandos:
 
-    Inicialmente, o input do usuario e avaliado contra o padrao `"^(.*[^\\\\];)$"` que basicamente
-    casa com qualquer input que seja finalizado por `;` e nao contenha `\` ou `,` em seu interim.
+    Inicialmente, o input do usuário é avaliado contra o padrão `"^(.*[^\\\\];)$"` que basicamente
+    casa com qualquer input que seja finalizado por `;` e não contenha `\` ou `,` em seu interim.
     
-    O input, se valido, e entao avaliado contra uma expressao regular mais geral de algum comando; 
-    Se houver casamento, o comando e estabelecido e ha uma tentativa de processamento do input contra 
-    a expressao regular compilada para dado comando. Se ate entao nao houverem erros de sintaxe,
-    o comando real de manipulacao da database e lancado usando as informacoes extraidas do input.
+    O input, se valido, é avaliado contra uma expressao regular mais geral de algum comando; 
+    Se houver casamento, o comando é estabelecido e há uma tentativa de processamento do input contra 
+    a expressao regular compilada para dado comando. Se até então não houverem erros de sintaxe,
+    o comando real de manipulacao da database é lancado usando as informacoes extraidas do input.
     
-    Veja as expressoes regulares usadas para validacao final dos comandos usados:
+    Veja as expressões regulares usadas para validação final dos comandos usados:
     
-    - [Cadastra usuario](https://regex101.com/r/cZ7lK1/8)
+    - [Cadastra usuário](https://regex101.com/r/cZ7lK1/8)
     - [Cadastra livro](https://regex101.com/r/nU9qD4/2)
-    - [Registra emprestimo](https://regex101.com/r/lV3vI3/2)
-    - [Registra devolucao](https://regex101.com/r/rT4hC9/3)
+    - [Registra empréstimo](https://regex101.com/r/lV3vI3/2)
+    - [Registra devolução](https://regex101.com/r/rT4hC9/3)
     - [Lista tabela](https://regex101.com/r/qI7wF9/10)
 
 * Viagem no tempo:
 
-    Na implementacao escolhida, como e possivel entrar com uma data para operar a aplicacao,
-    o tempo e tratado como absolutamente linear. Nessa condicao, eis as duas situacoes
-    particularmente questionaveis e como elas sao tratadas:
+    Na implementação escolhida, como é possivel entrar com uma data para operar a aplicação,
+    o tempo é tratado como absolutamente linear. Nessa condição, eis as duas situações
+    particularmente questionáveis e como elas são tratadas:
     
-    - Usuarios suspensos ou com emprestimos pendentes:
+    - Usuários suspensos ou com empréstimos pendentes:
     
-        Uma data de "suspenso ate" so e estabelecida para o usuario se ele de fato entregou
-        algum livro apos a data de devolucao maxima. **Isso significa que, se o usuario foi
-        marcado como suspenso em algum dado momento, uma listagem de usuarios num tempo
+        Uma data de "suspenso até" so é estabelecida para o usuário se ele de fato entregou
+        algum livro apos a data de devolução maxima. **Isso significa que, se o usuário foi
+        marcado como suspenso em algum dado momento, uma listagem de usuários num tempo
         anterior ao atual o acusara como suspenso por um periodo ainda maior, pois a data
-        de suspensao e sempre avaliada contra a data de consulta**. Isso *tambem* significa
-        que se um usuario possui um emprestimo *pendente* e *vencido* numa certa data, uma
-        listagem pode acusa-lo como suspenso agora mas nao numa data anterior, uma vez que
-        uma devolucao nao foi registrada para que uma data de "suspenso ate" fosse estabelecida.
-        **Um usuario que nunca foi suspenso perde a oportunidade de ser incluido em tal situação.**
+        de suspensao é sempre avaliada contra a data de consulta**. Isso *tambem* significa
+        que se um usuário possui um empréstimo *pendente* e *vencido* numa certa data, uma
+        listagem pode acusa-lo como suspenso agora mas não numa data anterior, uma vez que
+        uma devolução não foi registrada para que uma data de "suspenso até" fosse estabelecida.
+        **Um usuário que nunca foi suspenso perde a oportunidade de ser incluido em tal situação.**
         
-    - Emprestimos em aberto, talvez extrapolados:
+    - Empréstimos em aberto, talvez extrapolados:
     
-        Um emprestimo em aberto sempre e avaliado contra a data de consulta e so e de fato 
-        fechado quando a devolucao e registrada. **Isso significa que um emprestimo pode ser
-        listado como aberto mesmo numa data anterior a do emprestimo em si, dado que o livro
-        nao tenha sido devolvido ainda.** Isso *tambem* significa que um mesmo emprestimo
+        Um empréstimo em aberto sempre é avaliado contra a data de consulta e so é de fato 
+        fechado quando a devolução é registrada. **Isso significa que um empréstimo pode ser
+        listado como aberto mesmo numa data anterior a do empréstimo em si, dado que o livro
+        não tenha sido devolvido ainda.** Isso *tambem* significa que um mesmo empréstimo
         pode ser listado como aberto ou como aberto e extrapolado em consultas realizadas
-        em diferentes datas. **Um emprestimo fechado nao faz parte de tal situação.**
+        em diferentes datas. **Um empréstimo fechado não faz parte de tal situação.**
         
     ### Hilaridade segue.
 

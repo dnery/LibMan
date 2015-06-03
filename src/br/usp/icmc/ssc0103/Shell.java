@@ -32,16 +32,21 @@ public class Shell
      * @param args arguments
      * @throws ParseException exception for wrong args
      */
-    public Shell(String[] args) throws ParseException
+    public Shell(String[] args) throws ParseException, IOException
     {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
-        if (args.length != 1) {
+        // Set reference date
+        if (args.length != 1)
             date = new Date();
-        } else {
-            date = dateFormat.parse(args[0]);
-        }
-        command = Command.NOOP;
+        else date = new SimpleDateFormat("MM/dd/yyyy").parse(args[0]);
 
+        // Probe the database
+        Database.getInstance().serializeAndUpdate();
+
+        // Set watchdog service
+        Watchdog.getInstance().start();
+
+        // Set starting command
+        command = Command.NOOP;
         System.out.println(date.toString());
     }
 
@@ -57,7 +62,9 @@ public class Shell
         while (command != Command.EXIT) {
             System.out.print("> ");
             line = userInput.readLine();
-            if (checkCommand()) triggerCommand();
+
+            if (checkCommand())
+                triggerCommand();
         }
     }
 
@@ -88,21 +95,21 @@ public class Shell
             }
             return true;
         } else {
-            System.out.println("\n\n> Try one of the following syntaxes: \n" +
+            System.out.println("\n> Try one of the following syntaxes: \n" +
                                "ADD USER:\n" +
-                               "user add \"username\" type;" +
+                               "user add \"username\" <type>;" +
                                "\n\n" +
                                "ADD BOOK:\n" +
-                               "catalog add \"bookname\" type;" +
+                               "catalog add \"bookname\" <type>;" +
                                "\n\n" +
                                "LEND BOOK:\n" +
                                "lend \"bookname\" to \"username;" +
                                "\n\n" +
                                "RETURN BOOK:\n" +
-                               "return \"bookname\" type;" +
+                               "return \"bookname\";" +
                                "\n\n" +
-                               "EXIT:\n" +
-                               "exit;");
+                               "CLOSE APP:\n" +
+                               "exit;\n");
             return false;
         }
     }
@@ -121,7 +128,6 @@ public class Shell
         // Simple switch
         switch (command) {
 
-            // add a new user
             case USERADD:
                 //https://regex101.com/r/cZ7lK1/8
                 pattern = Pattern.compile("^(?i)\\s*user\\s+add\\s+\\\"\\s*" +
@@ -143,7 +149,6 @@ public class Shell
                     Formatter.outputError("Invalid syntax...");
                 return true;
 
-            // add a new book
             case CATALOGADD:
                 //https://regex101.com/r/nU9qD4/2
                 pattern = Pattern.compile("^(?i)\\s*catalog\\s+add\\s+\\\"\\s*" +
@@ -163,7 +168,6 @@ public class Shell
                     Formatter.outputError("Invalid syntax...");
                 return true;
 
-            // register a loan
             case CHECKOUT:
                 //https://regex101.com/r/lV3vI3/2
                 pattern = Pattern.compile(
@@ -181,7 +185,6 @@ public class Shell
                     Formatter.outputError("Invalid syntax...");
                 return true;
 
-            // return a book
             case CHECKIN:
                 //https://regex101.com/r/rT4hC9/3
                 pattern = Pattern.compile(
@@ -198,7 +201,6 @@ public class Shell
                     Formatter.outputError("Invalid syntax...");
                 return true;
 
-            // list book|user|loan
             case LIST:
                 //https://regex101.com/r/qI7wF9/10
                 if (line.matches("^(?i)\\s*list(?:\\s+(?:users|books|loans))+\\s*;\\s*$")) {
@@ -218,12 +220,13 @@ public class Shell
                 }
                 return true;
 
-            // flatten database
             case EXIT:
                 try {
+                    // Stop watchdog service
+                    Watchdog.getInstance().stop();
+                    // Update the database and quit app
                     Database.getInstance().serializeAndUpdate();
-                    System.out.println();
-                } catch (IOException e) {
+                } catch (Exception e) {
                     Formatter.outputError(e.getMessage());
                 }
                 return true;

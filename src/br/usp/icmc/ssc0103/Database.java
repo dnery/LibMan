@@ -38,7 +38,7 @@ public class Database
     private String     bookFileName;
     private String     loanFileName;
 
-    // Fix root directory name and build it atomically
+    // Fix database directory name and build it atomically
     private static final File databaseDir = new File("database");
 
     // Static initializer is always run before class is used by any thread

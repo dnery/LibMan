@@ -3,8 +3,8 @@
 #*.iml
 out
 #gen
-src/META-INF
 
 ### Locally generated
 /database
 #package
+META-INF
