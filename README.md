@@ -109,8 +109,11 @@ data referência.**
   da expressão regular diminui, ocasionalmente, o número de passos que a mesma toma para tentar casar 
   com uma string de entrada).**
   
-* **Sempre utilize o comando `exit;` para finalizar o programa, pois o mesmo garante a atualizacao das 
-  tabelas `.csv`.**
+* **Sempre utilize o comando `exit;` para finalizar o programa, pois o mesmo garante uma atualização
+  final da database em disco com as tabelas `csv` virtualizadas. Um serviço _watchdog_ faz uma
+  atualização de database a cada 15 segundos e é nativamente ativo com o intuito de prevenir
+  uma má finalização do programa. Modificações que perduram por menos de 15 segundos serão
+  irremediavelmente perdidas.**
 
 * Cadastramento de novos usuários e livros:
 
