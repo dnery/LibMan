@@ -101,10 +101,16 @@ data referência.**
 * * *
 
 <h2 id="comandos">Comandos</h2>
-**A validação de entrada é _case insensitive_. Ao final de todo comando é preciso 
-inferir um `;`. Mantenha `"` nos comandos, onde indicado. por ex: a ocorrencia
-`"<nomedolivro>"` inclui as aspas literalmente. Sempre utilize o comando `exit;` 
-para finalizar o programa, pois o mesmo garante a atualizacao das tabelas `.csv`.**
+* **A validação de entrada é _case insensitive_ e tolerante a espaços em branco indevidos e repetidos
+  por _entre_ as palavras. Mantenha `"` nos comandos, onde indicado. Por exemplo: a ocorrência
+  `"<nomedolivro>"` inclui as aspas literalmente.**
+
+* **Lembre-se de sempre inferir um `;` ao final do comando (Asseverar um caractere único para o fim 
+  da expressão regular diminui, ocasionalmente, o número de passos que a mesma toma para tentar casar 
+  com uma string de entrada).**
+  
+* **Sempre utilize o comando `exit;` para finalizar o programa, pois o mesmo garante a atualizacao das 
+  tabelas `.csv`.**
 
 * Cadastramento de novos usuários e livros:
 
