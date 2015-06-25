@@ -1,9 +1,9 @@
-# SCC0103 - Trabaho 3 - Aplicativo de Biblioteca
+# SCC0103 - Trabaho 3 - Library Management Interactive CLI Application
 
 ## Sumario
 
 * [Introducao](#introducao)
-* [ExecuÁ„o](#execucao)
+* [Execu√ß√£o](#execucao)
 * [Comandos](#comandos)
 * [Consideracoes](#consideracoes)
 * [Contribuidores](#contribuidores)
@@ -15,80 +15,80 @@
 
 Aplicativo de Biblioteca implementado no formato de uma Shell interativa.
 
-Suporte para as seguintes funcionalidades diretas È oferecido:
+Suporte para as seguintes funcionalidades diretas √© oferecido:
 
-* Cadastramento de usu·rios e livros
-* Cadastramento de emprÈstimo
-* Atualizacao de emprÈstimo (retorno)
-* Listagem de usu·rios, livros e emprÈstimos
+* Cadastramento de usu√°rios e livros
+* Cadastramento de empr√©stimo
+* Atualizacao de empr√©stimo (retorno)
+* Listagem de usu√°rios, livros e empr√©stimos
 * Finalizacao da *Shell*
 
 Adicionalmente, todas operacoes sao realizadas sob uma determinada data referencial, **que pode ser
-configurada**: A data È estabelecida com base no argumento de entrada ˙nico que o programa recebe,
-no formato `MM/dd/yyyy`. **Se nenhum argumento È oferecido, o programa toma a data atual como a
-data referÍncia.**
+configurada**: A data √© estabelecida com base no argumento de entrada √∫nico que o programa recebe,
+no formato `MM/dd/yyyy`. **Se nenhum argumento √© oferecido, o programa toma a data atual como a
+data refer√™ncia.**
 
 * * *
 
-<h2 id="execucao">ExecuÁ„o</h2>
+<h2 id="execucao">Execu√ß√£o</h2>
 
 * Compilando e executando manualmente:
 
-    Do diretorio raiz do projeto, execute o seguinte comando para fazer a compilaÁ„o:
+    Do diretorio raiz do projeto, execute o seguinte comando para fazer a compila√ß√£o:
     ```
     javac -d out src/br/usp/icmc/ssc0103/*.java 
     ```
-    Supondo que o caminho para o `javac` esteja incluso na vari·vel `PATH` do seu sistema.
+    Supondo que o caminho para o `javac` esteja incluso na vari√°vel `PATH` do seu sistema.
     Caso contrario, o caminho completo para o JDK tera que ser especificado no lugar.
-    A flag `-d` sinaliza um caminho para o output da compilaÁ„o; N„o precisa necessariamente ser
-    `out` mas **precisa** ser especificado para que o output da compilaÁ„o inclua a ·rvore de 
-    diretÛrios do pacote (`-d .` geraria a ·rvore a partir do diretÛrio atual, por exemplo).
+    A flag `-d` sinaliza um caminho para o output da compila√ß√£o; N√£o precisa necessariamente ser
+    `out` mas **precisa** ser especificado para que o output da compila√ß√£o inclua a √°rvore de 
+    diret√≥rios do pacote (`-d .` geraria a √°rvore a partir do diret√≥rio atual, por exemplo).
     Execute o programa com:
     ```
     java -cp <caminho absoluto para o diretorio raiz do projeto>/out br.usp.icmc.ssc0103.Main <argumento>
     ```
     Tambem supondo caminho definido para `java`, onde `<caminho absoluto para o diretorio raiz do projeto>`
-    È exatamente o que sugere e `<argumento>` idem (Se existir). **Observe a orientacao do caractere `/`
-    que aqui È demonstrado no padr„o de sistemas *NIX. Em Windows/DOS a mesma È invertida.**
+    √© exatamente o que sugere e `<argumento>` idem (Se existir). **Observe a orientacao do caractere `/`
+    que aqui √© demonstrado no padr√£o de sistemas *NIX. Em Windows/DOS a mesma √© invertida.**
 
 * Gerando e executando um pacote manualmente:
 
-    Considerando que o projeto est· todo contido num pacote, ser· necess·rio criar um arquivo
-    com no mÌnimo o seguinte conte˙do:
+    Considerando que o projeto est√° todo contido num pacote, ser√° necess√°rio criar um arquivo
+    com no m√≠nimo o seguinte conte√∫do:
     
         Main-Class: br.usp.icmc.ssc0103.Main
 
-    **Terminando com uma linha em branco _ou_ carriage return.** O nome desse arquivo ser· passado
-    como argumento para a ferramenta `jar` e seu conte˙do ser· adicionado ao `META-INF/MANIFEST.MD`
-    automaticamente gerado e incluÌdo no pacote pela ferramenta. Suponha que nosso arquivo tenha
-    o nome `Manifest.MD`. Geraremos um pacote, ent„o, com o seguinte comando (levando em conta
+    **Terminando com uma linha em branco _ou_ carriage return.** O nome desse arquivo ser√° passado
+    como argumento para a ferramenta `jar` e seu conte√∫do ser√° adicionado ao `META-INF/MANIFEST.MD`
+    automaticamente gerado e inclu√≠do no pacote pela ferramenta. Suponha que nosso arquivo tenha
+    o nome `Manifest.MD`. Geraremos um pacote, ent√£o, com o seguinte comando (levando em conta
     um caminho definido para a ferramenta `jar`):
     ```
     jar cfm <resultante.jar> <manifest> -C <diretoriodopacote>
     ```
-    Onde `<resultante.jar>` È obviamente o nome do arquivo `.jar` resultante, `<manifest>` o nome
-    do arquivo com conte˙do a ser adicionado no *manifest*, `Manifest.MD` no nosso caso, e
-    `<diretoriodopacote>` È o diretÛrio contendo o *output* da compilaÁ„o. No padr„o do projeto
-    *IntelliJ IDEA*, que È o usado, este seria `out/`, e o resultado da compilaÁ„o È a ·rvore
-    `br/usp/icmc/ssc0103/` onde `ssc0103` contÈm todos os `.class` do projeto. A flag `-C` sinaliza
-    a inclus„o de um diretÛrio, oposto a inclus„o de um arquivo que seria o padr„o.
+    Onde `<resultante.jar>` √© obviamente o nome do arquivo `.jar` resultante, `<manifest>` o nome
+    do arquivo com conte√∫do a ser adicionado no *manifest*, `Manifest.MD` no nosso caso, e
+    `<diretoriodopacote>` √© o diret√≥rio contendo o *output* da compila√ß√£o. No padr√£o do projeto
+    *IntelliJ IDEA*, que √© o usado, este seria `out/`, e o resultado da compila√ß√£o √© a √°rvore
+    `br/usp/icmc/ssc0103/` onde `ssc0103` cont√©m todos os `.class` do projeto. A flag `-C` sinaliza
+    a inclus√£o de um diret√≥rio, oposto a inclus√£o de um arquivo que seria o padr√£o.
     
-    Com o nosso `.jar` gerado, basta execut·-lo com:
+    Com o nosso `.jar` gerado, basta execut√°-lo com:
     ```
     java -jar <resultante.jar> <argumento>
     ```
-    Onde `<resultante.jar>` È exatamente o que sugere e `<argumento>` igem (Se existir).
+    Onde `<resultante.jar>` √© exatamente o que sugere e `<argumento>` igem (Se existir).
 
 * Executando a partir do pacote pronto:
 
-    Simplesmente v· atÈ o diretorio do pacote `.jar` (`pkg` no padr„o do projeto) e execute:
+    Simplesmente v√° at√© o diretorio do pacote `.jar` (`pkg` no padr√£o do projeto) e execute:
     ```
     java -jar trabalho3.jar
     ```
-    Ou simplesmente duplo-clique no `.jar`, novamente, supondo que o caminho para jre È definido
-    e o nome do pacote jar seja de fato "trabalho3.jar", como no padr„o do projeto. O diretÛrio
-    `pkg` j· inclui uma database razoavelmente populada para conveniÍncia. Vale informar que
-    o pacote foi gerado e testado com JDK/JRE Oracle vers„o *1.8.0_45*. Do `release`:
+    Ou simplesmente duplo-clique no `.jar`, novamente, supondo que o caminho para jre √© definido
+    e o nome do pacote jar seja de fato "trabalho3.jar", como no padr√£o do projeto. O diret√≥rio
+    `pkg` j√° inclui uma database razoavelmente populada para conveni√™ncia. Vale informar que
+    o pacote foi gerado e testado com JDK/JRE Oracle vers√£o *1.8.0_45*. Do `release`:
     ```
     JAVA_VERSION="1.8.0_45"
     OS_NAME="Windows"
@@ -101,23 +101,23 @@ data referÍncia.**
 * * *
 
 <h2 id="comandos">Comandos</h2>
-* **A validaÁ„o de entrada È _case insensitive_ e tolerante a espaÁos em branco indevidos e repetidos
-  por _entre_ as palavras. Mantenha `"` nos comandos, onde indicado. Por exemplo: a ocorrÍncia
+* **A valida√ß√£o de entrada √© _case insensitive_ e tolerante a espa√ßos em branco indevidos e repetidos
+  por _entre_ as palavras. Mantenha `"` nos comandos, onde indicado. Por exemplo: a ocorr√™ncia
   `"<nomedolivro>"` inclui as aspas literalmente.**
 
-* **Lembre-se de sempre inferir um `;` ao final do comando (Asseverar um caractere ˙nico para o fim 
-  da express„o regular diminui, ocasionalmente, o n˙mero de passos que a mesma toma para tentar casar 
+* **Lembre-se de sempre inferir um `;` ao final do comando (Asseverar um caractere √∫nico para o fim 
+  da express√£o regular diminui, ocasionalmente, o n√∫mero de passos que a mesma toma para tentar casar 
   com uma string de entrada).**
   
-* **Sempre utilize o comando `exit;` para finalizar o programa, pois o mesmo garante uma atualizaÁ„o
-  final da database em disco com as tabelas `csv` virtualizadas. Um serviÁo _watchdog_ faz uma
-  atualizaÁ„o de database a cada 15 segundos e È nativamente ativo com o intuito de prevenir
-  uma m· finalizaÁ„o do programa. ModificaÁıes que perduram por menos de 15 segundos ser„o
+* **Sempre utilize o comando `exit;` para finalizar o programa, pois o mesmo garante uma atualiza√ß√£o
+  final da database em disco com as tabelas `csv` virtualizadas. Um servi√ßo _watchdog_ faz uma
+  atualiza√ß√£o de database a cada 15 segundos e √© nativamente ativo com o intuito de prevenir
+  uma m√° finaliza√ß√£o do programa. Modifica√ß√µes que perduram por menos de 15 segundos ser√£o
   irremediavelmente perdidas.**
 
-* Cadastramento de novos usu·rios e livros:
+* Cadastramento de novos usu√°rios e livros:
 
-    - Cadastrar usu·rio:
+    - Cadastrar usu√°rio:
         ```
         user add "<nomedousuario>" <tipo>;
         ```
@@ -125,7 +125,7 @@ data referÍncia.**
         + `tutor` *(professor)*
         + `student` *(estudante)*
         + `community` *(comunidade)*
-        + Nulo: assume-se `community` como padr„o.
+        + Nulo: assume-se `community` como padr√£o.
 
     - Cadastrar livro:
         ```
@@ -134,17 +134,17 @@ data referÍncia.**
         Onde `<nomedolivro>` suporta caracteres alfanumericos somente e `<tipo>` pode ser:
         + `text` *(livro texto)*
         + `general` *(livro literario)*
-        + Nulo: assume-se `general` como padr„o.
+        + Nulo: assume-se `general` como padr√£o.
 
     - Exemplos de uso:
         ```
         user add "Danilo" tutor;
         ```
-        *Cadastra um novo usu·rio de nome "Danilo" como professor.*
+        *Cadastra um novo usu√°rio de nome "Danilo" como professor.*
         ```
         user add "Cristiano";
         ```
-        *Cadastra um novo usu·rio de nome "Cristiano" como da comunidade.*
+        *Cadastra um novo usu√°rio de nome "Cristiano" como da comunidade.*
         ```
         catalog add "Calculus" text;
         ```
@@ -155,15 +155,15 @@ data referÍncia.**
         *Cadastra um novo livro de titulo "Brave new world" como livro literario.*
 
 
-* Realizacao e devoluÁ„o de emprÈstimos:
+* Realizacao e devolu√ß√£o de empr√©stimos:
 
-    - Registrar emprÈstimo:
+    - Registrar empr√©stimo:
         ```
         lend "<nomedolivro>" to "<nomedousuario>";
         ```
         Onde ambos `<nomedolivro>` e `<nomedousuario>` suportam caracteres alfanumericos somente.
 
-    - Registrar devoluÁ„o:
+    - Registrar devolu√ß√£o:
         ```
         return "<nomedolivro>";
         ```
@@ -173,51 +173,51 @@ data referÍncia.**
         ```
         lend "Brave new world" to "Danilo";
         ```
-        *Registra o emprÈstimo de "Brave new world" para "Danilo".*
+        *Registra o empr√©stimo de "Brave new world" para "Danilo".*
         ```
         return "Brave new world";
         ```
-        *Registra a devoluÁ„o do livro de titulo "Brave new world".*
+        *Registra a devolu√ß√£o do livro de titulo "Brave new world".*
 
 
 * Listagem de tabelas:
 
-    - Listagem de Usu·rios:
+    - Listagem de Usu√°rios:
         ```
         list users;
         ```
 
-        *Lista todos usu·rios cadastrados classificados por tipo e com auxilio de 
-        cores e mensagens apropriadas para melhor visualizaÁ„o.*
+        *Lista todos usu√°rios cadastrados classificados por tipo e com auxilio de 
+        cores e mensagens apropriadas para melhor visualiza√ß√£o.*
     - Listagem de Livros:
         ```
         list books;
         ```
 
         *Lista todos livros cadastrados classificados por tipo e com auxilio de 
-        cores e mensagens apropriadas para melhor visualizaÁ„o.*
-    - Listagem de EmprÈstimos:
+        cores e mensagens apropriadas para melhor visualiza√ß√£o.*
+    - Listagem de Empr√©stimos:
         ```
         list loans;
         ```
 
-        *Lista todos emprÈstimos registrados classificados por estado (entregue, n„o entregue ou
-        overdue) e com auxilio de  cores e mensagens apropriadas para melhor visualizaÁ„o.*
+        *Lista todos empr√©stimos registrados classificados por estado (entregue, n√£o entregue ou
+        overdue) e com auxilio de  cores e mensagens apropriadas para melhor visualiza√ß√£o.*
 
-    O comando `list` aceita, inicialmente, um ˙nico argumento n„o-nulo. PorÈm podem ser concatenados
-    indefinidamente. Praticamente o comando È simplesmente repetido para v·rios argumentos.
+    O comando `list` aceita, inicialmente, um √∫nico argumento n√£o-nulo. Por√©m podem ser concatenados
+    indefinidamente. Praticamente o comando √© simplesmente repetido para v√°rios argumentos.
     Por exemplo, o seguinte comando:
     ```
     list users books loans;
     ```
-    Listar·, consecutivamente, as tabelas `users`, `books` e `loans`, na ordem em que os
+    Listar√°, consecutivamente, as tabelas `users`, `books` e `loans`, na ordem em que os
     respectivos argumentos foram fornecidos. Podem ser repetidos. **Indefinidamente.**
 
-* Finalizar aplicaÁ„o:     
+* Finalizar aplica√ß√£o:     
     ```
     exit;
     ```
-    *Serializa todas entradas nas tabelas `.csv`, atualiza os arquivos e encerra a execuÁ„o.*
+    *Serializa todas entradas nas tabelas `.csv`, atualiza os arquivos e encerra a execu√ß√£o.*
 
 * * *
 
@@ -225,48 +225,48 @@ data referÍncia.**
 
 * Sintaxe dos comandos:
 
-    Inicialmente, o input do usu·rio È avaliado contra o padr„o `"^(.*[^\\\\];)$"` que basicamente
-    casa com qualquer input que seja finalizado por `;` e n„o contenha `\` ou `,` em seu interim.
+    Inicialmente, o input do usu√°rio √© avaliado contra o padr√£o `"^(.*[^\\\\];)$"` que basicamente
+    casa com qualquer input que seja finalizado por `;` e n√£o contenha `\` ou `,` em seu interim.
     
-    O input, se valido, È avaliado contra uma expressao regular mais geral de algum comando; 
-    Se houver casamento, o comando È estabelecido e h· uma tentativa de processamento do input contra 
-    a expressao regular compilada para dado comando. Se atÈ ent„o n„o houverem erros de sintaxe,
-    o comando real de manipulacao da database È lancado usando as informacoes extraidas do input.
+    O input, se valido, √© avaliado contra uma expressao regular mais geral de algum comando; 
+    Se houver casamento, o comando √© estabelecido e h√° uma tentativa de processamento do input contra 
+    a expressao regular compilada para dado comando. Se at√© ent√£o n√£o houverem erros de sintaxe,
+    o comando real de manipulacao da database √© lancado usando as informacoes extraidas do input.
     
-    Veja as expressıes regulares usadas para validaÁ„o final dos comandos usados:
+    Veja as express√µes regulares usadas para valida√ß√£o final dos comandos usados:
     
-    - [Cadastra usu·rio](https://regex101.com/r/cZ7lK1/8)
+    - [Cadastra usu√°rio](https://regex101.com/r/cZ7lK1/8)
     - [Cadastra livro](https://regex101.com/r/nU9qD4/2)
-    - [Registra emprÈstimo](https://regex101.com/r/lV3vI3/2)
-    - [Registra devoluÁ„o](https://regex101.com/r/rT4hC9/3)
+    - [Registra empr√©stimo](https://regex101.com/r/lV3vI3/2)
+    - [Registra devolu√ß√£o](https://regex101.com/r/rT4hC9/3)
     - [Lista tabela](https://regex101.com/r/qI7wF9/10)
 
 * Viagem no tempo:
 
-    Na implementaÁ„o escolhida, como È possivel entrar com uma data para operar a aplicaÁ„o,
-    o tempo È tratado como absolutamente linear. Nessa condiÁ„o, eis as duas situaÁıes
-    particularmente question·veis e como elas s„o tratadas:
+    Na implementa√ß√£o escolhida, como √© possivel entrar com uma data para operar a aplica√ß√£o,
+    o tempo √© tratado como absolutamente linear. Nessa condi√ß√£o, eis as duas situa√ß√µes
+    particularmente question√°veis e como elas s√£o tratadas:
     
-    - Usu·rios suspensos ou com emprÈstimos pendentes:
+    - Usu√°rios suspensos ou com empr√©stimos pendentes:
     
-        Uma data de "suspenso atÈ" so È estabelecida para o usu·rio se ele de fato entregou
-        algum livro apos a data de devoluÁ„o maxima. **Isso significa que, se o usu·rio foi
-        marcado como suspenso em algum dado momento, uma listagem de usu·rios num tempo
+        Uma data de "suspenso at√©" so √© estabelecida para o usu√°rio se ele de fato entregou
+        algum livro apos a data de devolu√ß√£o maxima. **Isso significa que, se o usu√°rio foi
+        marcado como suspenso em algum dado momento, uma listagem de usu√°rios num tempo
         anterior ao atual o acusara como suspenso por um periodo ainda maior, pois a data
-        de suspensao È sempre avaliada contra a data de consulta**. Isso *tambem* significa
-        que se um usu·rio possui um emprÈstimo *pendente* e *vencido* numa certa data, uma
-        listagem pode acusa-lo como suspenso agora mas n„o numa data anterior, uma vez que
-        uma devoluÁ„o n„o foi registrada para que uma data de "suspenso atÈ" fosse estabelecida.
-        **Um usu·rio que nunca foi suspenso perde a oportunidade de ser incluido em tal situaÁ„o.**
+        de suspensao √© sempre avaliada contra a data de consulta**. Isso *tambem* significa
+        que se um usu√°rio possui um empr√©stimo *pendente* e *vencido* numa certa data, uma
+        listagem pode acusa-lo como suspenso agora mas n√£o numa data anterior, uma vez que
+        uma devolu√ß√£o n√£o foi registrada para que uma data de "suspenso at√©" fosse estabelecida.
+        **Um usu√°rio que nunca foi suspenso perde a oportunidade de ser incluido em tal situa√ß√£o.**
         
-    - EmprÈstimos em aberto, talvez extrapolados:
+    - Empr√©stimos em aberto, talvez extrapolados:
     
-        Um emprÈstimo em aberto sempre È avaliado contra a data de consulta e so È de fato 
-        fechado quando a devoluÁ„o È registrada. **Isso significa que um emprÈstimo pode ser
-        listado como aberto mesmo numa data anterior a do emprÈstimo em si, dado que o livro
-        n„o tenha sido devolvido ainda.** Isso *tambem* significa que um mesmo emprÈstimo
+        Um empr√©stimo em aberto sempre √© avaliado contra a data de consulta e so √© de fato 
+        fechado quando a devolu√ß√£o √© registrada. **Isso significa que um empr√©stimo pode ser
+        listado como aberto mesmo numa data anterior a do empr√©stimo em si, dado que o livro
+        n√£o tenha sido devolvido ainda.** Isso *tambem* significa que um mesmo empr√©stimo
         pode ser listado como aberto ou como aberto e extrapolado em consultas realizadas
-        em diferentes datas. **Um emprÈstimo fechado n„o faz parte de tal situaÁ„o.**
+        em diferentes datas. **Um empr√©stimo fechado n√£o faz parte de tal situa√ß√£o.**
         
     ### Hilaridade segue.
 
