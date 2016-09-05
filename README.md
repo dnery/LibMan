@@ -1,4 +1,6 @@
-# LibMan: Library record management CLI application (SCC0103)
+# LibMan
+A Library record management CLI application. Object oriented
+programming class assignment 3 (SCC0103).
 
 <h2>Sumário</h2>
 
