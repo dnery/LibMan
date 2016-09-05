@@ -32,12 +32,12 @@ data referência.**
 
     Do diretorio raiz do projeto, execute o seguinte comando para fazer a compilação:
     ```
-    javac -d out src/br/usp/icmc/ssc0103/*.java 
+    javac -d out src/br/usp/icmc/ssc0103/*.java
     ```
     Supondo que o caminho para o `javac` esteja incluso na variável `PATH` do seu sistema.
     Caso contrario, o caminho completo para o JDK tera que ser especificado no lugar.
     A flag `-d` sinaliza um caminho para o output da compilação; Não precisa necessariamente ser
-    `out` mas **precisa** ser especificado para que o output da compilação inclua a árvore de 
+    `out` mas **precisa** ser especificado para que o output da compilação inclua a árvore de
     diretórios do pacote (`-d .` geraria a árvore a partir do diretório atual, por exemplo).
     Execute o programa com:
     ```
@@ -99,8 +99,8 @@ data referência.**
   por _entre_ as palavras. Mantenha `"` nos comandos, onde indicado. Por exemplo: a ocorrência
   `"<nomedolivro>"` inclui as aspas literalmente.**
 
-* **Lembre-se de sempre inferir um `;` ao final do comando (Asseverar um caractere único para o fim 
-  da expressão regular diminui, ocasionalmente, o número de passos que a mesma toma para tentar casar 
+* **Lembre-se de sempre inferir um `;` ao final do comando (Asseverar um caractere único para o fim
+  da expressão regular diminui, ocasionalmente, o número de passos que a mesma toma para tentar casar
   com uma string de entrada).**
 
 * **Sempre utilize o comando `exit;` para finalizar o programa, pois o mesmo garante uma atualização
@@ -181,14 +181,14 @@ data referência.**
         list users;
         ```
 
-        *Lista todos usuários cadastrados classificados por tipo e com auxilio de 
+        *Lista todos usuários cadastrados classificados por tipo e com auxilio de
         cores e mensagens apropriadas para melhor visualização.*
     - Listagem de Livros:
         ```
         list books;
         ```
 
-        *Lista todos livros cadastrados classificados por tipo e com auxilio de 
+        *Lista todos livros cadastrados classificados por tipo e com auxilio de
         cores e mensagens apropriadas para melhor visualização.*
     - Listagem de Empréstimos:
         ```
@@ -220,8 +220,8 @@ data referência.**
     Inicialmente, o input do usuário é avaliado contra o padrão `"^(.*[^\\\\];)$"` que basicamente
     casa com qualquer input que seja finalizado por `;` e não contenha `\` ou `,` em seu interim.
 
-    O input, se valido, é avaliado contra uma expressao regular mais geral de algum comando; 
-    Se houver casamento, o comando é estabelecido e há uma tentativa de processamento do input contra 
+    O input, se valido, é avaliado contra uma expressao regular mais geral de algum comando;
+    Se houver casamento, o comando é estabelecido e há uma tentativa de processamento do input contra
     a expressao regular compilada para dado comando. Se até então não houverem erros de sintaxe,
     o comando real de manipulacao da database é lancado usando as informacoes extraidas do input.
 
@@ -253,7 +253,7 @@ data referência.**
 
     - Empréstimos em aberto, talvez extrapolados:
 
-        Um empréstimo em aberto sempre é avaliado contra a data de consulta e so é de fato 
+        Um empréstimo em aberto sempre é avaliado contra a data de consulta e so é de fato
         fechado quando a devolução é registrada. **Isso significa que um empréstimo pode ser
         listado como aberto mesmo numa data anterior a do empréstimo em si, dado que o livro
         não tenha sido devolvido ainda.** Isso *tambem* significa que um mesmo empréstimo
