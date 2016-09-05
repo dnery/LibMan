@@ -1,17 +1,15 @@
-# SCC0103 - Trabaho 3 - Library Management Interactive CLI Application
+# LibMan: Library record management CLI application (SCC0103)
 
-## Sumario
+<h2>Sumário</h2>
 
 * [Introducao](#introducao)
 * [Execução](#execucao)
 * [Comandos](#comandos)
 * [Consideracoes](#consideracoes)
 * [Contribuidores](#contribuidores)
-* [Copyright](#copyright)
+* [Copyright](#licensing)
 
-* * *
-
-<h2 id="introducao">Introducao</h2>
+<h2 id="introducao">Introdução</h2>
 
 Aplicativo de Biblioteca implementado no formato de uma Shell interativa.
 
@@ -19,16 +17,14 @@ Suporte para as seguintes funcionalidades diretas é oferecido:
 
 * Cadastramento de usuários e livros
 * Cadastramento de empréstimo
-* Atualizacao de empréstimo (retorno)
+* Atualização de empréstimo (retorno)
 * Listagem de usuários, livros e empréstimos
-* Finalizacao da *Shell*
+* Finalização da *Shell*
 
-Adicionalmente, todas operacoes sao realizadas sob uma determinada data referencial, **que pode ser
+Adicionalmente, todas operações são realizadas sob uma determinada data referencial, **que pode ser
 configurada**: A data é estabelecida com base no argumento de entrada único que o programa recebe,
 no formato `MM/dd/yyyy`. **Se nenhum argumento é oferecido, o programa toma a data atual como a
 data referência.**
-
-* * *
 
 <h2 id="execucao">Execução</h2>
 
@@ -55,7 +51,7 @@ data referência.**
 
     Considerando que o projeto está todo contido num pacote, será necessário criar um arquivo
     com no mínimo o seguinte conteúdo:
-    
+
         Main-Class: br.usp.icmc.ssc0103.Main
 
     **Terminando com uma linha em branco _ou_ carriage return.** O nome desse arquivo será passado
@@ -72,7 +68,7 @@ data referência.**
     *IntelliJ IDEA*, que é o usado, este seria `out/`, e o resultado da compilação é a árvore
     `br/usp/icmc/ssc0103/` onde `ssc0103` contém todos os `.class` do projeto. A flag `-C` sinaliza
     a inclusão de um diretório, oposto a inclusão de um arquivo que seria o padrão.
-    
+
     Com o nosso `.jar` gerado, basta executá-lo com:
     ```
     java -jar <resultante.jar> <argumento>
@@ -98,8 +94,6 @@ data referência.**
     BUILD_TYPE="commercial"
     ```
 
-* * *
-
 <h2 id="comandos">Comandos</h2>
 * **A validação de entrada é _case insensitive_ e tolerante a espaços em branco indevidos e repetidos
   por _entre_ as palavras. Mantenha `"` nos comandos, onde indicado. Por exemplo: a ocorrência
@@ -108,7 +102,7 @@ data referência.**
 * **Lembre-se de sempre inferir um `;` ao final do comando (Asseverar um caractere único para o fim 
   da expressão regular diminui, ocasionalmente, o número de passos que a mesma toma para tentar casar 
   com uma string de entrada).**
-  
+
 * **Sempre utilize o comando `exit;` para finalizar o programa, pois o mesmo garante uma atualização
   final da database em disco com as tabelas `csv` virtualizadas. Um serviço _watchdog_ faz uma
   atualização de database a cada 15 segundos e é nativamente ativo com o intuito de prevenir
@@ -155,7 +149,7 @@ data referência.**
         *Cadastra um novo livro de titulo "Brave new world" como livro literario.*
 
 
-* Realizacao e devolução de empréstimos:
+* Realização de empréstimos e devoluções:
 
     - Registrar empréstimo:
         ```
@@ -213,28 +207,26 @@ data referência.**
     Listará, consecutivamente, as tabelas `users`, `books` e `loans`, na ordem em que os
     respectivos argumentos foram fornecidos. Podem ser repetidos. **Indefinidamente.**
 
-* Finalizar aplicação:     
+* Finalizar aplicação:
     ```
     exit;
     ```
     *Serializa todas entradas nas tabelas `.csv`, atualiza os arquivos e encerra a execução.*
 
-* * *
-
-<h2 id="consideracoes">Consideracoes</h2>
+<h2 id="consideracoes">Considerações</h2>
 
 * Sintaxe dos comandos:
 
     Inicialmente, o input do usuário é avaliado contra o padrão `"^(.*[^\\\\];)$"` que basicamente
     casa com qualquer input que seja finalizado por `;` e não contenha `\` ou `,` em seu interim.
-    
+
     O input, se valido, é avaliado contra uma expressao regular mais geral de algum comando; 
     Se houver casamento, o comando é estabelecido e há uma tentativa de processamento do input contra 
     a expressao regular compilada para dado comando. Se até então não houverem erros de sintaxe,
     o comando real de manipulacao da database é lancado usando as informacoes extraidas do input.
-    
+
     Veja as expressões regulares usadas para validação final dos comandos usados:
-    
+
     - [Cadastra usuário](https://regex101.com/r/cZ7lK1/8)
     - [Cadastra livro](https://regex101.com/r/nU9qD4/2)
     - [Registra empréstimo](https://regex101.com/r/lV3vI3/2)
@@ -246,9 +238,9 @@ data referência.**
     Na implementação escolhida, como é possivel entrar com uma data para operar a aplicação,
     o tempo é tratado como absolutamente linear. Nessa condição, eis as duas situações
     particularmente questionáveis e como elas são tratadas:
-    
+
     - Usuários suspensos ou com empréstimos pendentes:
-    
+
         Uma data de "suspenso até" so é estabelecida para o usuário se ele de fato entregou
         algum livro apos a data de devolução maxima. **Isso significa que, se o usuário foi
         marcado como suspenso em algum dado momento, uma listagem de usuários num tempo
@@ -258,19 +250,17 @@ data referência.**
         listagem pode acusa-lo como suspenso agora mas não numa data anterior, uma vez que
         uma devolução não foi registrada para que uma data de "suspenso até" fosse estabelecida.
         **Um usuário que nunca foi suspenso perde a oportunidade de ser incluido em tal situação.**
-        
+
     - Empréstimos em aberto, talvez extrapolados:
-    
+
         Um empréstimo em aberto sempre é avaliado contra a data de consulta e so é de fato 
         fechado quando a devolução é registrada. **Isso significa que um empréstimo pode ser
         listado como aberto mesmo numa data anterior a do empréstimo em si, dado que o livro
         não tenha sido devolvido ainda.** Isso *tambem* significa que um mesmo empréstimo
         pode ser listado como aberto ou como aberto e extrapolado em consultas realizadas
         em diferentes datas. **Um empréstimo fechado não faz parte de tal situação.**
-        
-    ### Hilaridade segue.
 
-* * *
+    ### Hilaridade segue.
 
 <h2 id="contribuidores">Contribuidores</h2>
 
@@ -280,12 +270,25 @@ data referência.**
 
 [Marcos Vinicius Junqueira](https://github.com/mvjunq) - No. USP: 8922393
 
-* * *
-
-<h2 id="copyright">Copyright</h2>
-            DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
-                    Version 2, December 2004
-
-            DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
-
-* * *
+<h2 id="licensing">Licença de uso</h2>
+  MIT License
+  
+  Copyright (c) 2015 Danilo Nery
+  
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to deal
+  in the Software without restriction, including without limitation the rights
+  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+  
+  The above copyright notice and this permission notice shall be included in all
+  copies or substantial portions of the Software.
+  
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  SOFTWARE.
