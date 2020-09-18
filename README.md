@@ -4,10 +4,10 @@ programming class assignment 3 (SCC0103).
 
 <h2>Sumário</h2>
 
-* [Introducao](#introducao)
+* [Introdução](#introducao)
 * [Execução](#execucao)
 * [Comandos](#comandos)
-* [Consideracoes](#consideracoes)
+* [Considerações](#consideracoes)
 * [Contribuidores](#contribuidores)
 * [Copyright](#licensing)
 
@@ -97,19 +97,20 @@ data referência.**
     ```
 
 <h2 id="comandos">Comandos</h2>
-* **A validação de entrada é _case insensitive_ e tolerante a espaços em branco indevidos e repetidos
-  por _entre_ as palavras. Mantenha `"` nos comandos, onde indicado. Por exemplo: a ocorrência
-  `"<nomedolivro>"` inclui as aspas literalmente.**
 
-* **Lembre-se de sempre inferir um `;` ao final do comando (Asseverar um caractere único para o fim
-  da expressão regular diminui, ocasionalmente, o número de passos que a mesma toma para tentar casar
-  com uma string de entrada).**
+*   **A validação de entrada é _case insensitive_ e tolerante a espaços em branco indevidos e repetidos
+    por _entre_ as palavras. Mantenha `"` nos comandos, onde indicado. Por exemplo: a ocorrência
+    `"<nomedolivro>"` inclui as aspas literalmente.**
 
-* **Sempre utilize o comando `exit;` para finalizar o programa, pois o mesmo garante uma atualização
-  final da database em disco com as tabelas `csv` virtualizadas. Um serviço _watchdog_ faz uma
-  atualização de database a cada 15 segundos e é nativamente ativo com o intuito de prevenir
-  uma má finalização do programa. Modificações que perduram por menos de 15 segundos serão
-  irremediavelmente perdidas.**
+*   **Lembre-se de sempre inferir um `;` ao final do comando (Asseverar um caractere único para o fim
+    da expressão regular diminui, ocasionalmente, o número de passos que a mesma toma para tentar casar
+    com uma string de entrada).**
+
+*   **Sempre utilize o comando `exit;` para finalizar o programa, pois o mesmo garante uma atualização
+    final da database em disco com as tabelas `csv` virtualizadas. Um serviço _watchdog_ faz uma
+    atualização de database a cada 15 segundos e é nativamente ativo com o intuito de prevenir
+    uma má finalização do programa. Modificações que perduram por menos de 15 segundos serão
+    irremediavelmente perdidas.**
 
 * Cadastramento de novos usuários e livros:
 
@@ -229,11 +230,12 @@ data referência.**
 
     Veja as expressões regulares usadas para validação final dos comandos usados:
 
-    - [Cadastra usuário](https://regex101.com/r/cZ7lK1/8)
-    - [Cadastra livro](https://regex101.com/r/nU9qD4/2)
-    - [Registra empréstimo](https://regex101.com/r/lV3vI3/2)
-    - [Registra devolução](https://regex101.com/r/rT4hC9/3)
-    - [Lista tabela](https://regex101.com/r/qI7wF9/10)
+    => [Cadastra livro](https://regex101.com/r/nU9qD4/2) <br>
+    => [Cadastra usuário](https://regex101.com/r/cZ7lK1/8) <br>
+    => [Registra empréstimo](https://regex101.com/r/lV3vI3/2) <br>
+    => [Registra devolução](https://regex101.com/r/rT4hC9/3) <br>
+    => [Lista tabela](https://regex101.com/r/qI7wF9/10) <br>
+
 
 * Viagem no tempo:
 
